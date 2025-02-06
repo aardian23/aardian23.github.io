@@ -1,3 +1,5 @@
 portfolio
 
-ini bari 1
+ini baris 1
+
+ini baris 2
