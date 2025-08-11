@@ -63,6 +63,35 @@
         </div>
     </nav>
     <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight || 0;
+                    const isMobile = window.innerWidth <= 768;
+
+                    // Offset proporsional
+                    const offset = isMobile
+                        ? window.innerHeight * 0.2   // 20% tinggi layar di mobile
+                        : 20;                         // 20px saja di desktop
+
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                    const offsetPosition = elementPosition - navbarHeight + offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script>
         const menuBtn = document.getElementById('menu-btn');
         const menu = document.getElementById('menu');
         const menuIcon = document.getElementById('menu-icon');
