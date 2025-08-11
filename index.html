@@ -67,29 +67,46 @@
         const menu = document.getElementById('menu');
         const menuIcon = document.getElementById('menu-icon');
 
+        // Fungsi untuk menutup menu
+        function closeMenu() {
+            menu.style.maxHeight = "0px";
+            menuBtn.classList.remove('menu-open');
+            menuIcon.innerHTML = `
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            `;
+        }
+        // Fungsi untuk toggle menu
         menuBtn.addEventListener('click', () => {
             // Toggle visibility of the menu
             if (menu.style.maxHeight && menu.style.maxHeight !== "0px") {
-                menu.style.maxHeight = "0px";
+                closeMenu();
             } else {
                 menu.style.maxHeight = `${menu.scrollHeight}px`;
-            }
-
-            menuBtn.classList.toggle('menu-open');
-
-            // Switch icon between hamburger and "X"
-            if (menuBtn.classList.contains('menu-open')) {
+                menuBtn.classList.add('menu-open');
+                
+                // Switch icon to "X"
                 menuIcon.innerHTML = `
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 `;
-            } else {
-                menuIcon.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                `;
+            }
+        });
+
+        // Menutup menu saat klik link di mobile menu
+        const mobileMenuLinks = document.querySelectorAll('#menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
+
+        // Menutup menu saat klik di luar menu (opsional)
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                closeMenu();
             }
         });
     </script>
