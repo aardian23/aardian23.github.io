@@ -63,30 +63,6 @@
         </div>
     </nav>
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(link => {
-            link.addEventListener('mouseenter', function (e) {
-                const targetId = this.getAttribute('href');
-
-                if (targetId && targetId !== '#' && document.querySelector(targetId)) {
-                    const navbar = document.querySelector('nav');
-                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
-
-                    // Extra offset untuk mobile
-                    const mobileExtraOffset = window.innerWidth <= 768 ? 15 : 0;
-
-                    const targetElement = document.querySelector(targetId);
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight - mobileExtraOffset;
-
-                    // Scroll cepat tanpa delay panjang
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
-    </script>
-    <script>
         const menuBtn = document.getElementById('menu-btn');
         const menu = document.getElementById('menu');
         const menuIcon = document.getElementById('menu-icon');
