@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project 1 - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animasi fade-in */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-blue-100 text-gray-900 font-sans">
+
+    <!-- Navbar Sederhana -->
+    <nav class="fixed w-full bg-blue-700 shadow-lg z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-white font-bold text-lg">My Portfolio</a>
+            <a href="../index.html#projects" 
+               class="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-lg transition">
+                ← Back to Projects
+            </a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <section class="max-w-6xl mx-auto px-6 pt-24 pb-16">
+        <!-- Title -->
+        <h1 class="text-4xl font-extrabold text-blue-700 mb-4 fade-in-up">Website coffeshop</h1>
+        <p class="text-gray-600 mb-10 fade-in-up" style="animation-delay: 0.2s">
+            Website coffeshop modern yang dibangun menggunakan HTML, CSS, dan JavaScript dengan desain responsif dan pengalaman pengguna yang nyaman.
+        </p>
+
+        <!-- Image & Details -->
+        <div class="grid md:grid-cols-2 gap-10 items-start">
+            <!-- Project Image -->
+            <div class="bg-white/70 backdrop-blur-md rounded-xl shadow-lg overflow-hidden border border-blue-100 hover:scale-[1.02] transition duration-300 fade-in-up">
+                <img src="images/projects1.png" alt="Project Screenshot" class="w-full object-cover">
+            </div>
+
+            <!-- Project Details -->
+            <div class="fade-in-up" style="animation-delay: 0.4s">
+                <h2 class="text-2xl font-semibold text-blue-600 mb-4">Fitur Utama</h2>
+                <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                    <li>Desain responsif untuk desktop & mobile</li>
+                    <li>Efek animasi interaktif yang halus</li>
+                    <li>Optimasi kecepatan loading</li>
+                </ul>
+
+                <!-- Buttons -->
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <a href="https://aardian.my.id/coffeshop" target="_blank" 
+                       class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition flex items-center gap-2">
+                        🔗 Lihat Demo
+                    </a>
+                    <a href="https://github.com/aardian23/coffeshop" target="_blank" 
+                       class="px-6 py-3 bg-gradient-to-r from-blue-300 to-blue-500 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition flex items-center gap-2">
+                        📄 Lihat Dokumen
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="mt-16 fade-in-up" style="animation-delay: 0.6s">
+            <h2 class="text-2xl font-semibold text-blue-600 mb-6">Teknologi yang Digunakan</h2>
+            <div class="flex flex-wrap gap-4">
+                <span class="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-5 py-2 rounded-full shadow hover:scale-105 transition">HTML</span>
+                <span class="bg-gradient-to-r from-blue-400 to-blue-600 text-white px-5 py-2 rounded-full shadow hover:scale-105 transition">CSS</span>
+                <span class="bg-gradient-to-r from-blue-300 to-blue-500 text-white px-5 py-2 rounded-full shadow hover:scale-105 transition">JavaScript</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-500 text-sm py-6 bg-white/70 backdrop-blur-md border-t border-blue-100">
+        © 2025 My Portfolio. All rights reserved.
+    </footer>
+
+</body>
+</html>
