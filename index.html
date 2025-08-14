@@ -8,153 +8,26 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-</head>
+    <script src="https://unpkg.com/feather-icons"></script>
 
-<body class="bg-gray-50">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-50">
-        <div class="container mx-auto flex justify-between items-center p-4">
-            <div class="flex items-center space-x-3">
-                <img src="images/logonav.png" alt="Logo" class="w-10 h-10 rounded-full" />
-                <span class="text-2xl font-semibold text-blue-600">Ardian's Portfolio</span>
-            </div>
-
-            <ul class="hidden md:flex space-x-8 font-medium">
-                <li><a href="#home" class="text-gray-700 hover:text-blue-600">Home</a></li>
-                <li><a href="#about" class="text-gray-700 hover:text-blue-600">About</a></li>
-                <li><a href="#Skills" class="text-gray-700 hover:text-blue-600">Skills</a></li>
-                <li><a href="#projects" class="text-gray-700 hover:text-blue-600">Projects</a></li>
-                <li><a href="#certification" class="text-gray-700 hover:text-blue-600">Certification</a></li>
-                <li><a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a></li>
-            </ul>
-
-            <div class="md:hidden flex items-center">
-                <button id="menu-btn" class="text-gray-700 focus:outline-none">
-                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <div id="menu" class="max-h-0 overflow-hidden bg-white border-t border-gray-200 transition-all duration-300">
-            <ul class="flex flex-col space-y-4 p-4 font-medium">
-                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100">
-                    <a href="#home" class="text-gray-700 hover:text-blue-600">Home</a>
-                </li>
-                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100">
-                    <a href="#about" class="text-gray-700 hover:text-blue-600">About</a>
-                </li>
-                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100">
-                    <a href="#Skills" class="text-gray-700 hover:text-blue-600">Skills</a>
-                </li>
-                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100">
-                    <a href="#projects" class="text-gray-700 hover:text-blue-600">Projects</a>
-                </li>
-                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100">
-                    <a href="#certification" class="text-gray-700 hover:text-blue-600">Certification</a>
-                </li>
-                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100">
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const menu = document.getElementById('menu');
-        const menuIcon = document.getElementById('menu-icon');
-
-        // Fungsi untuk menutup menu
-        function closeMenu() {
-            menu.style.maxHeight = "0px";
-            menuBtn.classList.remove('menu-open');
-            menuIcon.innerHTML = `
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            `;
-        }
-        // Fungsi untuk toggle menu
-        menuBtn.addEventListener('click', () => {
-            // Toggle visibility of the menu
-            if (menu.style.maxHeight && menu.style.maxHeight !== "0px") {
-                closeMenu();
-            } else {
-                menu.style.maxHeight = `${menu.scrollHeight}px`;
-                menuBtn.classList.add('menu-open');
-
-                // Switch icon to "X"
-                menuIcon.innerHTML = `
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                `;
-            }
-        });
-
-        // Menutup menu saat klik link di mobile menu
-        const mobileMenuLinks = document.querySelectorAll('#menu a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                closeMenu();
-            });
-        });
-
-        // Menutup menu saat klik di luar menu (opsional)
-        document.addEventListener('click', (e) => {
-            if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
-                closeMenu();
-            }
-        });
-    </script>
-
-    <!-- Awal Section home -->
-    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center p-10">
-        <div class="w-full md:w-1/2 flex flex-col items-center mb-10 md:mb-0">
-            <img src="images/imghome.png" alt="Profile Image" class="profile-img shadow-lg mt-24 md:mt-0" />
-
-            <!-- Curved Blue Divider Line -->
-            <div class="curved-line mt-10"></div>
-
-            <!-- Social Media Icons -->
-            <div class="flex space-x-6 mt-4">
-                <a href="https://www.instagram.com/ardrhmnn?igsh=MXRscjVyZTdxbDlrOA==" target="_blank"
-                    aria-label="Instagram">
-                    <i class="ph ph-instagram-logo social-icon"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/arvxianxianardianrahman23" target="_blank" aria-label="LinkedIn">
-                    <i class="ph ph-linkedin-logo social-icon"></i>
-                </a>
-                <a href="https://www.facebook.com/share/1632f66pGN/" target="_blank" aria-label="Facebook">
-                    <i class="ph ph-facebook-logo social-icon"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="w-full md:w-1/2 text-center md:text-left">
-            <h1 class="text-4xl font-bold text-gray-800 mb-6">Ardian Rahman</h1>
-            <p class="mt-4 text-lg text-gray-600 mb-12">
-                Hi, I'm a student at SMKN 1 Jakarta, majoring in Computer and Network Engineering. I truly enjoy
-                learning about technological advancements and innovations.
-            </p>
-
-            <p class="text-xl italic font-semibold glow-text -mt-6">
-                <span>J</span><span>u</span><span>n</span><span>i</span><span>o</span><span>r</span>
-                <span>F</span><span>r</span><span>o</span><span>n</span><span>t</span>
-                <span>E</span><span>n</span><span>d</span>
-                <span>D</span><span>e</span><span>v</span><span>e</span><span>l</span><span>o</span><span>p</span><span>e</span><span>r</span>
-            </p>
-
-            <a href="#contact"
-                class="mt-12 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700">
-                Contact Me
-            </a>
-        </div>
-    </section>
     <style>
+        html {
+            scroll-behavior: smooth;
+            /* Biar smooth saat klik menu */
+        }
+
+        body {
+            scroll-snap-type: y mandatory;
+            /* Snap scroll secara vertikal */
+        }
+
+        section {
+            scroll-snap-align: start;
+            /* Berhenti di awal section */
+            scroll-margin-top: 90px;
+            /* Jarak supaya judul tidak ketutup navbar */
+        }
+
         /* Animasi Glow */
         @keyframes glow {
 
@@ -169,7 +42,6 @@
                 text-shadow: 0 0 10px rgba(0, 153, 255, 1),
                     0 0 20px rgba(0, 153, 255, 0.9);
                 color: #00ccff;
-                /* Ganti putih jadi biru terang */
             }
         }
 
@@ -239,13 +111,138 @@
             animation-delay: 1.4s;
         }
     </style>
-    <!-- Akhir section home -->
+</head>
 
-    <!-- Awal Section About -->
-    <section class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200 py-16 px-8 md:px-20 lg:px-36 mt-20"
-        id="about">
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <div class="flex items-center space-x-3">
+                <img src="images/logonav.png" alt="Logo" class="w-10 h-10 rounded-full" />
+                <span class="text-2xl font-semibold text-blue-600">Ardian's Portfolio</span>
+            </div>
+            <ul class="hidden md:flex space-x-8 font-medium">
+                <li><a href="#home" class="text-gray-700 hover:text-blue-600">Home</a></li>
+                <li><a href="#about" class="text-gray-700 hover:text-blue-600">About</a></li>
+                <li><a href="#Skills" class="text-gray-700 hover:text-blue-600">Skills</a></li>
+                <li><a href="#projects" class="text-gray-700 hover:text-blue-600">Projects</a></li>
+                <li><a href="#certification" class="text-gray-700 hover:text-blue-600">Certification</a></li>
+                <li><a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a></li>
+            </ul>
+            <div class="md:hidden flex items-center">
+                <button id="menu-btn" class="text-gray-700 focus:outline-none">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="menu" class="max-h-0 overflow-hidden bg-white border-t border-gray-200 transition-all duration-300">
+            <ul class="flex flex-col space-y-4 p-4 font-medium">
+                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100"><a href="#home"
+                        class="text-gray-700 hover:text-blue-600">Home</a></li>
+                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100"><a href="#about"
+                        class="text-gray-700 hover:text-blue-600">About</a></li>
+                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100"><a href="#Skills"
+                        class="text-gray-700 hover:text-blue-600">Skills</a></li>
+                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100"><a href="#projects"
+                        class="text-gray-700 hover:text-blue-600">Projects</a></li>
+                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100"><a href="#certification"
+                        class="text-gray-700 hover:text-blue-600">Certification</a></li>
+                <li class="bg-blue-50 rounded-lg p-3 hover:bg-blue-100"><a href="#contact"
+                        class="text-gray-700 hover:text-blue-600">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        function closeMenu() {
+            menu.style.maxHeight = "0px";
+            menuBtn.classList.remove('menu-open');
+            menuIcon.innerHTML = `
+        <svg class="w-6 h-6" fill="none" stroke="currentColor"
+             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      `;
+        }
+
+        menuBtn.addEventListener('click', () => {
+            if (menu.style.maxHeight && menu.style.maxHeight !== "0px") {
+                closeMenu();
+            } else {
+                menu.style.maxHeight = `${menu.scrollHeight}px`;
+                menuBtn.classList.add('menu-open');
+                menuIcon.innerHTML = `
+          <svg class="w-6 h-6" fill="none" stroke="currentColor"
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        `;
+            }
+        });
+
+        const mobileMenuLinks = document.querySelectorAll('#menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !menuBtn.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        feather.replace();
+    </script>
+
+    <!-- Section Home -->
+    <section id="home" class="min-h-screen flex flex-col md:flex-row items-center justify-center p-10">
+        <div class="w-full md:w-1/2 flex flex-col items-center mb-10 md:mb-0">
+            <img src="images/imghome.png" alt="Profile Image" class="profile-img shadow-lg mt-24 md:mt-0" />
+            <div class="curved-line mt-10"></div>
+            <div class="flex space-x-6 mt-4">
+                <a href="https://www.instagram.com/ardrhmnn" target="_blank"><i
+                        class="ph ph-instagram-logo social-icon"></i></a>
+                <a href="https://www.linkedin.com/in/arvxianxianardianrahman23" target="_blank"><i
+                        class="ph ph-linkedin-logo social-icon"></i></a>
+                <a href="https://www.facebook.com/share/1632f66pGN/" target="_blank"><i
+                        class="ph ph-facebook-logo social-icon"></i></a>
+            </div>
+        </div>
+        <div class="w-full md:w-1/2 text-center md:text-left">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6">Ardian Rahman</h1>
+            <p class="mt-4 text-lg text-gray-600 mb-12">
+                Hi, I'm a student at SMKN 1 Jakarta, majoring in Computer and Network Engineering. I truly enjoy
+                learning about technological advancements and innovations.
+            </p>
+            <p class="text-xl italic font-semibold glow-text -mt-6">
+                <span>J</span><span>u</span><span>n</span><span>i</span><span>o</span><span>r</span>
+                <span>F</span><span>r</span><span>o</span><span>n</span><span>t</span>
+                <span>E</span><span>n</span><span>d</span>
+                <span>D</span><span>e</span><span>v</span><span>e</span><span>l</span><span>o</span><span>p</span><span>e</span><span>r</span>
+            </p>
+            <a href="#contact"
+                class="mt-12 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700">Contact
+                Me</a>
+        </div>
+    </section>
+
+    <!-- Section About -->
+    <section id="about"
+        class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200 py-16 px-8 md:px-20 lg:px-36 mt-20">
         <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-12">
-            <!-- Teks Section -->
             <div class="md:w-1/2 mt-8 md:mt-0">
                 <h2 class="text-4xl font-extrabold text-gray-800 mb-6 leading-tight">Hello, I'm Ardian Rahman!</h2>
                 <p class="text-gray-700 text-lg leading-relaxed mb-8">
@@ -257,8 +254,6 @@
                     class="inline-block bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-3 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-transform duration-300">View
                     My Projects</a>
             </div>
-
-            <!-- Gambar Section -->
             <div class="md:w-1/2 flex justify-center relative">
                 <img src="images/profile1.jpg" alt="Profile Image"
                     class="w-72 h-72 object-cover rounded-full border-8 border-white shadow-lg hover:scale-105 transition-transform duration-500 relative z-10 mt-12 md:mt-0" />
@@ -266,10 +261,9 @@
             </div>
         </div>
     </section>
-    <!-- Akhir Section About -->
 
-    <!-- Skills Section -->
-    <section class="bg-white text-gray-900 py-16 px-4 sm:px-8 md:px-16 lg:px-24" id="Skills">
+    <!-- Section Skills -->
+    <section id="Skills" class="bg-white text-gray-900 py-16 px-4 sm:px-8 md:px-16 lg:px-24">
         <div class="max-w-5xl mx-auto text-center">
             <h2 class="text-4xl font-extrabold mb-12">My Technical Skills</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -312,19 +306,14 @@
             </div>
         </div>
     </section>
-    <!--  Section -->
 
-    <!-- Projects Section -->
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
-    <section class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200 py-16 px-8 md:px-20 lg:px-36 mt-20"
-        id="projects">
+    <!-- Section Projects -->
+    <section id="projects"
+        class="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200 py-16 px-8 md:px-20 lg:px-36 mt-20">
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-center text-blue-800 mb-10">My Projects</h2>
-
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- Card Reusable -->
-                <!-- CARD TEMPLATE -->
+                <!-- Card Example -->
                 <div
                     class="border-4 border-blue-600 rounded-2xl overflow-hidden bg-white transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_5px_rgba(59,130,246,0.6)]">
                     <img src="images/projects1.png" alt="Project 1" class="w-full h-40 object-cover">
@@ -337,7 +326,6 @@
                         </a>
                     </div>
                 </div>
-
                 <!-- Duplicate for 5 more cards -->
                 <div
                     class="border-4 border-blue-600 rounded-2xl overflow-hidden bg-white transform transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-[0_0_25px_5px_rgba(59,130,246,0.6)]">
@@ -403,13 +391,13 @@
                         </a>
                     </div>
                 </div>
+                <!-- Tambah card lainnya sesuai kebutuhan -->
             </div>
         </div>
     </section>
-    <script>
+     <script>
         feather.replace();
     </script>
-    <!-- akhir Section -->
 </body>
 
 </html>
