@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ardian Rahman | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0ea5e9',
+                        secondary: '#6366f1',
+                        accent: '#8b5cf6',
+                        dark: '#0f172a',
+                        darker: '#020617',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+
+        /* Global Background */
+        .global-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #020617;
+        }
+
+        .network-bg {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.15) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+
+        /* Glassmorphism Base */
+        .glass {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navbar Scroll Effect - Blur Transparent (Dark) */
+        .navbar-scrolled {
+            background: rgba(15, 23, 42, 0.85) !important;
+            backdrop-filter: blur(25px) !important;
+            -webkit-backdrop-filter: blur(25px) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(30, 41, 59, 0.6);
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Particle Canvas */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Terminal Effect */
+        .terminal-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Skill Tags */
+        .skill-tag {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .skill-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Morphing Blob */
+        .blob {
+            position: absolute;
+            filter: blur(40px);
+            opacity: 0.4;
+            animation: morph 8s ease-in-out infinite;
+        }
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+        }
+
+        /* Timeline Styles */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #0ea5e9, #6366f1, #8b5cf6);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #0ea5e9;
+            border: 4px solid #0f172a;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .timeline-card {
+            transition: all 0.4s ease;
+        }
+        .timeline-card:hover {
+            transform: translateX(10px);
+            border-color: rgba(14, 165, 233, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+
+        /* Mobile Menu Styles - Fixed Position */
+        .mobile-menu-wrapper {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            z-index: 40;
+        }
+
+        .mobile-menu-item {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, rgba(14, 165, 233, 0.2), transparent);
+            transition: width 0.3s ease;
+        }
+
+        .mobile-menu-item:hover::before,
+        .mobile-menu-item.active::before {
+            width: 100%;
+        }
+
+        .mobile-menu-item.active {
+            background: rgba(14, 165, 233, 0.15);
+            color: #0ea5e9;
+            border-left: 3px solid #0ea5e9;
+        }
+
+        /* Hamburger Animation */
+        .hamburger-line {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger-open .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-open .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-open .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Certification Card */
+        .cert-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cert-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
+        }
+
+        /* Section relative for z-index */
+        section {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Prevent body scroll when menu open */
+        body.menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-darker text-gray-100 font-sans overflow-x-hidden">
+
+    <!-- Global Background -->
+    <div class="global-bg">
+        <div class="network-bg"></div>
+        <canvas id="particles-canvas"></canvas>
+        <div class="blob bg-primary w-96 h-96 top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="blob bg-secondary w-96 h-96 top-1/3 right-0 translate-x-1/2" style="animation-delay: 2s;"></div>
+        <div class="blob bg-accent w-64 h-64 bottom-0 left-1/3" style="animation-delay: 4s;"></div>
+        <div class="blob bg-primary w-80 h-80 bottom-1/4 right-1/4" style="animation-delay: 6s;"></div>
+    </div>
+
+    <!-- Fixed Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 top-0 left-0 transition-all duration-300 py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="nav-container" class="glass rounded-full px-6 py-2.5 flex justify-between items-center transition-all duration-300">
+                <a href="#" class="font-display font-bold text-xl gradient-text">
+                    AR<span class="text-white">.</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Home</a>
+                    <a href="#about" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">About</a>
+                    <a href="#experience" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Experience</a>
+                    <a href="#skills" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Skills</a>
+                    <a href="#projects" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Projects</a>
+                    <a href="#certifications" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Certifications</a>
+                </div>
+
+                <!-- Hamburger Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-1 relative w-8 h-8 flex flex-col justify-center items-center gap-1.5 z-50">
+                    <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
+                    <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
+                    <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu - Inside nav, fixed position -->
+            <div id="mobile-menu" class="hidden md:hidden mobile-menu-wrapper mt-2">
+                <div class="glass rounded-2xl p-3 space-y-1 mx-auto max-w-7xl">
+                    <a href="#home" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="home">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="home" class="w-4 h-4"></i>
+                            Home
+                        </span>
+                    </a>
+                    <a href="#about" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="about">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                            About
+                        </span>
+                    </a>
+                    <a href="#experience" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="experience">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            Experience
+                        </span>
+                    </a>
+                    <a href="#skills" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="skills">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="code" class="w-4 h-4"></i>
+                            Skills
+                        </span>
+                    </a>
+                    <a href="#projects" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="projects">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="folder" class="w-4 h-4"></i>
+                            Projects
+                        </span>
+                    </a>
+                    <a href="#certifications" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="certifications">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            Certifications
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Spacer for fixed navbar -->
+    <div class="h-20"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center -mt-20 pt-20">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-4 leading-tight">
+                <span class="block text-white">Ardian Rahman</span>
+            </h1>
+            
+            <div class="h-8 md:h-10 mb-8">
+                <span class="text-lg md:text-xl lg:text-2xl text-primary font-medium terminal-cursor" id="typewriter"></span>
+            </div>
+
+            <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Specializing in <span class="text-primary font-semibold">Network Operations</span> and <span class="text-secondary font-semibold">Front-End Development</span>. 
+                Building reliable network infrastructure and stunning user interfaces.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#projects" class="group relative px-6 py-3 bg-primary rounded-full text-sm font-semibold text-white overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
+                    <span class="relative z-10 flex items-center gap-2">
+                        View Projects <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </a>
+                <a href="#" class="px-6 py-3 glass rounded-full text-sm font-semibold text-white hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    Curriculum Vitae
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
+            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal flex justify-center">
+                    <div class="relative w-full max-w-xs">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl"></div>
+                        <div class="relative glass-card rounded-2xl p-5">
+                            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i data-lucide="user" class="w-20 h-20 text-gray-600 mx-auto mb-3"></i>
+                                    <p class="text-gray-500 text-xs">Profile Photo</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute -top-3 -right-3 glass-card rounded-lg p-2 animate-float shadow-lg">
+                            <i data-lucide="network" class="w-5 h-5 text-primary"></i>
+                        </div>
+                        <div class="absolute -bottom-3 -left-3 glass-card rounded-lg p-2 animate-float shadow-lg" style="animation-delay: 1s;">
+                            <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h2 class="font-display font-bold text-3xl md:text-4xl mb-6">
+                        About <span class="gradient-text">Me</span>
+                    </h2>
+                    <div class="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base">
+                        <p>
+                            I am an IT professional with a passion for two fields: <strong class="text-white">Network Operations</strong> and <strong class="text-white">Front-End Development</strong>. 
+                            This unique combination allows me to understand technical infrastructure from the server side to the user interface.
+                        </p>
+                        <p>
+                            On the network side, I have experience in Cisco & MikroTik configuration, infrastructure troubleshooting, 
+                            and ensuring 99.9% system availability. On the development side, I create modern web applications 
+                            using React, Vue, and the latest technologies.
+                        </p>
+                    </div>
+
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span class="px-3 py-1.5 rounded-full glass text-xs text-primary border border-primary/20">Network Operation Center</span>
+                        <span class="px-3 py-1.5 rounded-full glass text-xs text-secondary border border-secondary/20">Front-End</span>
+                        <span class="px-3 py-1.5 rounded-full glass text-xs text-accent border border-accent/20">System Admin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline Section -->
+    <section id="experience" class="py-20 md:py-32 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                    My <span class="gradient-text">Experience</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
+                    A timeline of my educational background and professional experience
+                </p>
+            </div>
+
+            <div class="relative">
+                <div class="timeline-line"></div>
+
+                <!-- Education 1 -->
+                <div class="relative mb-12 reveal">
+                    <div class="timeline-dot" style="top: 24px;"></div>
+                    <div class="md:flex items-center justify-between">
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
+                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
+                                        <i data-lucide="graduation-cap" class="w-3 h-3"></i>
+                                        Education
+                                    </span>
+                                </div>
+                                <h3 class="font-display font-bold text-lg mb-1">Bachelor of Information Systems</h3>
+                                <p class="text-primary text-sm mb-2 flex items-center gap-1">
+                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                    Telkom University
+                                </p>
+                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                                    <span>2025 - Present</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education 2 -->
+                <div class="relative mb-12 reveal">
+                    <div class="timeline-dot" style="top: 24px;"></div>
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
+                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4">
+                                <div class="flex items-center gap-2 mb-3 md:justify-end">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1">
+                                        <i data-lucide="graduation-cap" class="w-3 h-3"></i>
+                                        Education
+                                    </span>
+                                </div>
+                                <h3 class="font-display font-bold text-lg mb-1">Vocational High School in Software Engineering</h3>
+                                <p class="text-secondary text-sm mb-2 flex items-center gap-1 md:justify-end">
+                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                    SMK Telkom Jakarta
+                                </p>
+                                <div class="flex items-center gap-2 text-xs text-gray-500 md:justify-end">
+                                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                                    <span>2022 - 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+                </div>
+
+                <!-- Work Experience 1 -->
+                <div class="relative mb-12 reveal">
+                    <div class="timeline-dot" style="top: 24px;"></div>
+                    <div class="md:flex items-center justify-between">
+                        <div class="hidden md:block md:w-5/12"></div>
+                        <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
+                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-accent">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1">
+                                        <i data-lucide="briefcase" class="w-3 h-3"></i>
+                                        Work
+                                    </span>
+                                </div>
+                                <h3 class="font-display font-bold text-lg mb-1">Network Operations Center</h3>
+                                <p class="text-accent text-sm mb-2 flex items-center gap-1">
+                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                    PT. XYZ Telecom
+                                </p>
+                                <p class="text-gray-400 text-xs mb-3">Monitoring network infrastructure, troubleshooting, and maintaining 99.9% uptime.</p>
+                                <div class="flex items-center gap-2 text-xs text-gray-500">
+                                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                                    <span>2023 - Present</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience 2 -->
+                <div class="relative reveal">
+                    <div class="timeline-dot" style="top: 24px;"></div>
+                    <div class="md:flex items-center justify-between">
+                        <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
+                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4">
+                                <div class="flex items-center gap-2 mb-3 md:justify-end">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
+                                        <i data-lucide="briefcase" class="w-3 h-3"></i>
+                                        Work
+                                    </span>
+                                </div>
+                                <h3 class="font-display font-bold text-lg mb-1">Front-End Developer</h3>
+                                <p class="text-primary text-sm mb-2 flex items-center gap-1 md:justify-end">
+                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                    Freelance
+                                </p>
+                                <p class="text-gray-400 text-xs mb-3">Building responsive web applications and user interfaces for various clients.</p>
+                                <div class="flex items-center gap-2 text-xs text-gray-500 md:justify-end">
+                                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                                    <span>2022 - 2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden md:block md:w-5/12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                    Technical <span class="gradient-text">Skills</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
+                    Technologies and tools I use to build network infrastructure and web applications
+                </p>
+            </div>
+
+            <!-- Network Skills -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-3 mb-6 justify-center">
+                    <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
+                        <i data-lucide="network" class="w-5 h-5 text-primary"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl">Network Operations</h3>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        Cisco Routing & Switching
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        MikroTik Configuration
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        Network Security
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        Firewall & VPN
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        Linux Server
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        TCP/IP Protocol
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        VLAN & Subnetting
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                        Network Monitoring
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend Skills -->
+            <div class="mb-12 reveal">
+                <div class="flex items-center gap-3 mb-6 justify-center">
+                    <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center">
+                        <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-xl">Front-End Development</h3>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        React.js / Next.js
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        HTML5 / CSS3
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        Tailwind CSS
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        Bootstrap 5
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        JavaScript / jQuery
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        Responsive Design
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        Git / GitHub
+                    </div>
+                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                        REST API Integration
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Technologies -->
+            <div class="reveal">
+                <p class="text-center text-gray-400 mb-6 text-sm">Tools & Technologies</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
+                        <i data-lucide="globe" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    </div>
+                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
+                        <i data-lucide="server" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    </div>
+                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
+                        <i data-lucide="shield" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    </div>
+                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
+                        <i data-lucide="layout" class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    </div>
+                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
+                        <i data-lucide="box" class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                    Featured <span class="gradient-text">Projects</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
+                    Portfolio of network infrastructure and web applications I've worked on
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
+                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="network" class="w-12 h-12 text-gray-600"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded-full text-xs bg-primary/20 text-primary">Network</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">Enterprise Network Infrastructure</h3>
+                        <p class="text-gray-400 text-xs mb-3">Network redesign with VLAN, OSPF, and link redundancy implementation.</p>
+                    </div>
+                </div>
+
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
+                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="monitor" class="w-12 h-12 text-gray-600"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">Web App</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">Network Monitoring Dashboard</h3>
+                        <p class="text-gray-400 text-xs mb-3">Real-time dashboard for network traffic monitoring and alerting.</p>
+                    </div>
+                </div>
+
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
+                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="shield-check" class="w-12 h-12 text-gray-600"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">Security</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">Secure VPN Gateway</h3>
+                        <p class="text-gray-400 text-xs mb-3">Site-to-Site and Remote Access VPN with high-security configuration.</p>
+                    </div>
+                </div>
+
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
+                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="shopping-cart" class="w-12 h-12 text-gray-600"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">E-Commerce</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-xs mb-3">Complete e-commerce with payment gateway and inventory management.</p>
+                    </div>
+                </div>
+
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
+                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="wifi" class="w-12 h-12 text-gray-600"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded-full text-xs bg-primary/20 text-primary">Wireless</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">Managed WiFi System</h3>
+                        <p class="text-gray-400 text-xs mb-3">Enterprise WiFi management with captive portal and voucher system.</p>
+                    </div>
+                </div>
+
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
+                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="bar-chart-3" class="w-12 h-12 text-gray-600"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">Analytics</span>
+                        </div>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">Network Analytics Tool</h3>
+                        <p class="text-gray-400 text-xs mb-3">Network traffic analysis tool with real-time data visualization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                    Certifications & <span class="gradient-text">Awards</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
+                    Professional certifications obtained to enhance credibility and expertise
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-primary">
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="award" class="w-6 h-6 text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-base mb-0.5">CCNA</h3>
+                            <p class="text-primary text-xs font-medium mb-1">Cisco Certified Network Associate</p>
+                            <p class="text-gray-400 text-xs mb-2">Global networking certification covering routing, switching, and security fundamentals.</p>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>2023</span>
+                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                <span class="text-green-400">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-secondary">
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="shield" class="w-6 h-6 text-secondary"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-base mb-0.5">MTCNA</h3>
+                            <p class="text-secondary text-xs font-medium mb-1">MikroTik Certified Network Associate</p>
+                            <p class="text-gray-400 text-xs mb-2">RouterOS basic configuration, static routing, and bandwidth management.</p>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>2022</span>
+                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                <span class="text-green-400">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-accent">
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="code" class="w-6 h-6 text-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-base mb-0.5">Meta Front-End</h3>
+                            <p class="text-accent text-xs font-medium mb-1">Meta Front-End Developer Professional</p>
+                            <p class="text-gray-400 text-xs mb-2">Modern front-end development including React, UI/UX, and version control.</p>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>2024</span>
+                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                <span class="text-green-400">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-yellow-500">
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="cloud" class="w-6 h-6 text-yellow-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-base mb-0.5">AWS Cloud</h3>
+                            <p class="text-yellow-500 text-xs font-medium mb-1">AWS Cloud Practitioner</p>
+                            <p class="text-gray-400 text-xs mb-2">Cloud computing fundamentals, AWS services, and cloud security architecture.</p>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>2023</span>
+                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                <span class="text-green-400">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-pink-500">
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="layout" class="w-6 h-6 text-pink-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-base mb-0.5">Responsive Web</h3>
+                            <p class="text-pink-500 text-xs font-medium mb-1">FreeCodeCamp Certification</p>
+                            <p class="text-gray-400 text-xs mb-2">Responsive web design with HTML5, CSS3, Flexbox, and CSS Grid.</p>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>2022</span>
+                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                <span class="text-green-400">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-cyan-500">
+                    <div class="flex items-start gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="terminal" class="w-6 h-6 text-cyan-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-base mb-0.5">Linux Essentials</h3>
+                            <p class="text-cyan-500 text-xs font-medium mb-1">LPI Linux Essentials</p>
+                            <p class="text-gray-400 text-xs mb-2">Linux OS fundamentals, command line, and basic administration.</p>
+                            <div class="flex items-center gap-2 text-xs text-gray-500">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                <span>2023</span>
+                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                                <span class="text-green-400">Valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 border-t border-gray-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-display font-bold text-lg gradient-text">AR.</span>
+                <span class="text-gray-500 text-xs">© 2024 Ardian Rahman. All rights reserved.</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                    <i data-lucide="linkedin" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                    <i data-lucide="twitter" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                    <i data-lucide="instagram" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Typewriter Effect
+        const roles = ['Network Operation Enthusiast', 'Front-End Developer'];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function typeWriter() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 30 : 80;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        
+        setTimeout(typeWriter, 1000);
+
+        // Global Particle Animation
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+        let isActive = true;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(14, 165, 233, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const particleCount = Math.min(Math.floor(canvas.width / 20), 60);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        initParticles();
+
+        function animateParticles() {
+            if (!isActive) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach((particle, i) => {
+                particle.update();
+                particle.draw();
+                
+                particles.slice(i + 1).forEach(other => {
+                    const dx = particle.x - other.x;
+                    const dy = particle.y - other.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(14, 165, 233, ${0.1 * (1 - distance / 100)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(other.x, other.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            animationId = requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isActive = false;
+                cancelAnimationFrame(animationId);
+            } else {
+                isActive = true;
+                animateParticles();
+            }
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Navbar Scroll Effect - Blur Transparent (Dark)
+        const navbar = document.getElementById('navbar');
+        const navContainer = document.getElementById('nav-container');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navContainer.classList.add('navbar-scrolled');
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-3');
+            } else {
+                navContainer.classList.remove('navbar-scrolled');
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2');
+            }
+        });
+
+        // Mobile Menu Toggle with X Animation
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuItems = document.querySelectorAll('.mobile-menu-item');
+        const body = document.body;
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenuBtn.classList.add('hamburger-open');
+                mobileMenu.classList.remove('hidden');
+                body.classList.add('menu-open');
+            } else {
+                mobileMenuBtn.classList.remove('hamburger-open');
+                mobileMenu.classList.add('hidden');
+                body.classList.remove('menu-open');
+            }
+        });
+
+        // Mobile Menu Item Click Effect
+        mobileMenuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                mobileMenuItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                setTimeout(() => {
+                    isMenuOpen = false;
+                    mobileMenuBtn.classList.remove('hamburger-open');
+                    mobileMenu.classList.add('hidden');
+                    body.classList.remove('menu-open');
+                }, 300);
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                isMenuOpen = false;
+                mobileMenuBtn.classList.remove('hamburger-open');
+                mobileMenu.classList.add('hidden');
+                body.classList.remove('menu-open');
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active menu based on scroll position
+        const sections = document.querySelectorAll('section[id]');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            mobileMenuItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.classList.remove('hamburger-open');
+                body.classList.remove('menu-open');
+                isMenuOpen = false;
+            }
+        });
+    </script>
+</body>
+</html>
