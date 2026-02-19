@@ -67,45 +67,58 @@
             height: 100%;
             z-index: -1;
             background: #020617;
+            overflow: hidden;
         }
 
+        /* Static Grid Background */
         .network-bg {
             position: absolute;
             inset: 0;
             background-image:
-                radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.15) 1px, transparent 0);
+                radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.12) 1px, transparent 0);
             background-size: 40px 40px;
+        }
+
+        /* STATIC BLOBS - No animation, perfect circles */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.35;
+            /* No animation applied */
+            transition: none;
+            will-change: auto;
         }
 
         /* Glassmorphism Base */
         .glass {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Navbar Scroll Effect - Blur Transparent (Dark) */
+        /* Navbar Scroll Effect */
         .navbar-scrolled {
-            background: rgba(15, 23, 42, 0.85) !important;
-            backdrop-filter: blur(25px) !important;
-            -webkit-backdrop-filter: blur(25px) !important;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(15, 23, 42, 0.9) !important;
+            backdrop-filter: blur(30px) !important;
+            -webkit-backdrop-filter: blur(30px) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            background: rgba(30, 41, 59, 0.45);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(14, 165, 233, 0.3);
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.1);
+            background: rgba(30, 41, 59, 0.65);
+            border-color: rgba(14, 165, 233, 0.25);
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.15);
         }
 
         /* Gradient Text */
@@ -116,7 +129,7 @@
             background-clip: text;
         }
 
-        /* Particle Canvas */
+        /* Particle Canvas - Optimized */
         #particles-canvas {
             position: absolute;
             top: 0;
@@ -124,13 +137,14 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            opacity: 0.6;
         }
 
         /* Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .reveal.active {
@@ -145,59 +159,35 @@
         }
 
         @keyframes blink {
-
-            0%,
-            50% {
-                opacity: 1;
-            }
-
-            51%,
-            100% {
-                opacity: 0;
-            }
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         /* Skill Tags */
         .skill-tag {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-tag:hover::before {
+            left: 100%;
         }
 
         .skill-tag:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.3);
-        }
-
-        /* Morphing Blob - FIXED: Always circular from start */
-        .blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: 0.4;
-            border-radius: 50% !important; /* Force circular from start */
-            animation: morph 8s ease-in-out infinite;
-        }
-
-        /* Fixed morph animation - always maintain circular shape with subtle morphing */
-        @keyframes morph {
-            0% {
-                border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
-                transform: scale(1) rotate(0deg);
-            }
-            25% {
-                border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
-                transform: scale(1.02) rotate(2deg);
-            }
-            50% {
-                border-radius: 50% 55% 45% 50% / 55% 50% 50% 45%;
-                transform: scale(1) rotate(0deg);
-            }
-            75% {
-                border-radius: 45% 50% 55% 50% / 50% 45% 55% 50%;
-                transform: scale(1.02) rotate(-2deg);
-            }
-            100% {
-                border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
-                transform: scale(1) rotate(0deg);
-            }
         }
 
         /* Timeline Styles */
@@ -235,13 +225,12 @@
             .timeline-line {
                 left: 20px;
             }
-
             .timeline-dot {
                 left: 20px;
             }
         }
 
-        /* Mobile Menu Styles - Fixed Position */
+        /* Mobile Menu Styles */
         .mobile-menu-wrapper {
             position: absolute;
             top: 100%;
@@ -306,7 +295,7 @@
             box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
         }
 
-        /* Section relative for z-index */
+        /* Section z-index */
         section {
             position: relative;
             z-index: 1;
@@ -316,147 +305,329 @@
         body.menu-open {
             overflow: hidden;
         }
+
+        /* Project Card Image Overlay */
+        .project-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .group:hover .project-overlay {
+            opacity: 1;
+        }
+
+        /* Button Glow Effect */
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.5s;
+        }
+
+        .btn-glow:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: rgba(14, 165, 233, 0.3);
+            color: white;
+        }
     </style>
 </head>
 
-<body class="bg-darker text-gray-100 font-sans overflow-x-hidden">
+<body class="bg-darker text-gray-100 font-sans overflow-x-hidden antialiased">
 
-    <!-- Global Background -->
+    <!-- Global Background - STATIC BLOBS -->
     <div class="global-bg">
         <div class="network-bg"></div>
         <canvas id="particles-canvas"></canvas>
-        <!-- BLOBS: Added inline border-radius: 50% to ensure circular from start -->
-        <div class="blob bg-primary w-96 h-96 top-0 left-0 -translate-x-1/2 -translate-y-1/2" style="border-radius: 50%;"></div>
-        <div class="blob bg-secondary w-96 h-96 top-1/3 right-0 translate-x-1/2" style="animation-delay: 2s; border-radius: 50%;"></div>
-        <div class="blob bg-accent w-64 h-64 bottom-0 left-1/3" style="animation-delay: 4s; border-radius: 50%;"></div>
-        <div class="blob bg-primary w-80 h-80 bottom-1/4 right-1/4" style="animation-delay: 6s; border-radius: 50%;"></div>
+        
+        <!-- STATIC BLOBS - No animation, perfect circles, fixed positions -->
+        <div class="blob bg-primary w-[500px] h-[500px] top-[-100px] left-[-100px]"></div>
+        <div class="blob bg-secondary w-[400px] h-[400px] top-[20%] right-[-100px]"></div>
+        <div class="blob bg-accent w-[350px] h-[350px] bottom-[10%] left-[10%]"></div>
+        <div class="blob bg-primary w-[300px] h-[300px] bottom-[20%] right-[20%] opacity-25"></div>
+        <div class="blob bg-secondary w-[450px] h-[450px] top-[60%] left-[40%] opacity-20"></div>
     </div>
 
+    <!-- Fixed Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 top-0 left-0 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="nav-container"
+                class="glass rounded-full px-6 py-3 flex justify-between items-center transition-all duration-300">
+                <a href="#" class="font-display font-bold text-xl gradient-text hover:scale-105 transition-transform">
+                    AR<span class="text-white">.</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                        About
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#experience" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                        Experience
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#skills" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                        Skills
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                        Projects
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#certifications" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                        Certifications
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Hamburger Menu Button -->
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2 relative w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-50 rounded-lg hover:bg-white/5 transition-colors">
+                    <span class="hamburger-line w-5 h-0.5 bg-current block rounded-full"></span>
+                    <span class="hamburger-line w-5 h-0.5 bg-current block rounded-full"></span>
+                    <span class="hamburger-line w-5 h-0.5 bg-current block rounded-full"></span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mobile-menu-wrapper mt-3">
+                <div class="glass rounded-2xl p-4 space-y-1 mx-auto max-w-7xl shadow-2xl">
+                    <a href="#home" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="home">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="home" class="w-4 h-4"></i>
+                            Home
+                        </span>
+                    </a>
+                    <a href="#about" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="about">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                            About
+                        </span>
+                    </a>
+                    <a href="#experience" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="experience">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            Experience
+                        </span>
+                    </a>
+                    <a href="#skills" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="skills">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="code" class="w-4 h-4"></i>
+                            Skills
+                        </span>
+                    </a>
+                    <a href="#projects" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="projects">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="folder" class="w-4 h-4"></i>
+                            Projects
+                        </span>
+                    </a>
+                    <a href="#certifications" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="certifications">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i data-lucide="award" class="w-4 h-4"></i>
+                            Certifications
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <!-- Spacer for fixed navbar -->
-    <div class="h-20"></div>
+    <div class="h-24"></div>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center -mt-20 pt-20">
+    <section id="home" class="relative min-h-screen flex items-center justify-center -mt-24 pt-24 pb-20">
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-4 leading-tight">
-                <span class="block text-white">Ardian Rahman</span>
+            <div class="mb-6 reveal">
+                <span class="inline-block px-4 py-1.5 rounded-full glass text-xs font-medium text-primary border border-primary/20 mb-4">
+                    Keep learning
+                </span>
+            </div>
+            
+            <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-6 leading-tight reveal">
+                <span class="block text-white mb-2">Ardian Rahman</span>
             </h1>
 
-            <div class="h-8 md:h-10 mb-8">
-                <span class="text-lg md:text-xl lg:text-2xl text-primary font-medium terminal-cursor"
+            <div class="h-10 md:h-12 mb-8 reveal">
+                <span class="text-xl md:text-2xl lg:text-3xl text-primary font-medium terminal-cursor"
                     id="typewriter"></span>
             </div>
 
-            <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed reveal">
                 Specializing in <span class="text-primary font-semibold">Network Operations</span> and <span
                     class="text-secondary font-semibold">Front-End Development</span>.
-                Building reliable network infrastructure and stunning user interfaces.
+                Building reliable network infrastructure and stunning user interfaces with modern technologies.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal">
                 <a href="#projects"
-                    class="group relative px-6 py-3 bg-primary rounded-full text-sm font-semibold text-white overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
+                    class="btn-glow group relative px-8 py-4 bg-primary rounded-full text-sm font-semibold text-white overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
                     <span class="relative z-10 flex items-center gap-2">
-                        View Projects <i data-lucide="arrow-right"
-                            class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        View Projects 
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </span>
                 </a>
-                <a href="#"
-                    class="px-6 py-3 glass rounded-full text-sm font-semibold text-white hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2">
-                    <i data-lucide="file-text" class="w-4 h-4"></i>
-                    Curriculum Vitae
+                <a href="#contact"
+                    class="px-8 py-4 glass rounded-full text-sm font-semibold text-white hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2 border border-white/10">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    Contact Me
                 </a>
             </div>
-        </div>
 
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-10">
-            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400"></i>
+            <!-- Stats -->
+            <!-- <div class="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto reveal">
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">3+</div>
+                    <div class="text-xs text-gray-500">Years Experience</div>
+                </div>
+                <div class="text-center border-x border-gray-800">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">20+</div>
+                    <div class="text-xs text-gray-500">Projects Done</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-bold text-white mb-1">6+</div>
+                    <div class="text-xs text-gray-500">Certifications</div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-500"></i>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 md:py-32 relative">
+    <section id="about" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="reveal flex justify-center">
-                    <div class="relative w-full max-w-xs">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal flex justify-center order-2 md:order-1">
+                    <div class="relative w-full max-w-sm">
                         <!-- Glow Effect -->
-                        <div
-                            class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl">
-                        </div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-3xl opacity-20 blur-2xl animate-pulse-slow"></div>
 
-                        <!-- Card Container dengan ukuran fixed -->
-                        <div class="relative glass-card rounded-2xl p-5">
-                            <!-- Image Container dengan aspect ratio tetap -->
-                            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 relative">
-                                <!-- Ganti src dengan path image Anda -->
-                                <img src="assets/img/maintenance.png" alt="Ardian Rahman"
-                                    class="w-full h-full object-cover object-center"
+                        <!-- Card Container -->
+                        <div class="relative glass-card rounded-3xl p-6 shadow-2xl">
+                            <!-- Image Container -->
+                            <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 relative shadow-inner">
+                                <img src="assets/img/test.jpeg" 
+                                    alt="Ardian Rahman"
+                                    class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-110"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <!-- Fallback jika image error -->
-                                <div class="hidden absolute inset-0 items-center justify-center">
+                                <!-- Fallback -->
+                                <div class="hidden absolute inset-0 items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
                                     <div class="text-center">
-                                        <i data-lucide="user" class="w-20 h-20 text-gray-600 mx-auto mb-3"></i>
-                                        <p class="text-gray-500 text-xs">Profile Photo</p>
+                                        <i data-lucide="user" class="w-24 h-24 text-gray-700 mx-auto mb-4"></i>
+                                        <p class="text-gray-600 text-sm">Profile Photo</p>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Decorative Elements -->
+                            <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary/20 rounded-full blur-xl"></div>
+                            <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary/20 rounded-full blur-xl"></div>
                         </div>
 
                         <!-- Floating Cards -->
-                        <div class="absolute -top-3 -right-3 glass-card rounded-lg p-2 animate-float shadow-lg">
-                            <i data-lucide="network" class="w-5 h-5 text-primary"></i>
+                        <div class="absolute -top-6 -right-6 glass-card rounded-2xl p-3 animate-float shadow-lg border border-primary/20">
+                            <i data-lucide="network" class="w-6 h-6 text-primary"></i>
                         </div>
-                        <div class="absolute -bottom-3 -left-3 glass-card rounded-lg p-2 animate-float shadow-lg"
-                            style="animation-delay: 1s;">
-                            <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
+                        <div class="absolute -bottom-6 -left-6 glass-card rounded-2xl p-3 animate-float shadow-lg border border-secondary/20" style="animation-delay: 1s;">
+                            <i data-lucide="code-2" class="w-6 h-6 text-secondary"></i>
+                        </div>
+                        <div class="absolute top-1/2 -right-8 glass-card rounded-2xl p-3 animate-float shadow-lg border border-accent/20" style="animation-delay: 2s;">
+                            <i data-lucide="shield" class="w-6 h-6 text-accent"></i>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal">
-                    <h2 class="font-display font-bold text-3xl md:text-4xl mb-6">
-                        About <span class="gradient-text">Me</span>
+                <div class="reveal order-1 md:order-2">
+                    <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 border border-primary/20">
+                        About Me
+                    </div>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 leading-tight">
+                        Bridging <span class="gradient-text">Networks</span> & <span class="gradient-text">Code</span>
                     </h2>
-                    <div class="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base">
+                    <div class="space-y-4 text-gray-400 leading-relaxed text-base">
                         <p>
-                            I am an IT professional with a passion for two fields: <strong class="text-white">Network
-                                Operations</strong> and <strong class="text-white">Front-End Development</strong>.
-                            This unique combination allows me to understand technical infrastructure from the server
-                            side to the user interface.
+                            I am an IT professional with a unique dual expertise in <strong class="text-white">Network Operations</strong> 
+                            and <strong class="text-white">Front-End Development</strong>. This rare combination allows me to 
+                            architect solutions that span from core infrastructure to pixel-perfect user interfaces.
                         </p>
                         <p>
-                            On the network side, I have experience in Cisco & MikroTik configuration, infrastructure
-                            troubleshooting,
-                            and ensuring 99.9% system availability. On the development side, I create modern web
-                            applications
-                            using React, Vue, and the latest technologies.
+                            On the infrastructure side, I design and maintain enterprise-grade networks using Cisco & MikroTik, 
+                            ensuring 99.9% uptime and robust security. On the creative side, I craft modern web experiences 
+                            using React, Vue, and cutting-edge technologies.
+                        </p>
+                        <p>
+                            My approach combines technical precision with creative problem-solving, delivering solutions that 
+                            are not only functional but also visually compelling and user-friendly.
                         </p>
                     </div>
 
                     <div class="mt-8 flex flex-wrap gap-3">
-                        <span
-                            class="px-3 py-1.5 rounded-full glass text-xs text-primary border border-primary/20">Network
-                            Operation Center</span>
-                        <span
-                            class="px-3 py-1.5 rounded-full glass text-xs text-secondary border border-secondary/20">Front-End</span>
-                        <span class="px-3 py-1.5 rounded-full glass text-xs text-accent border border-accent/20">System
-                            Admin</span>
+                        <span class="px-4 py-2 rounded-full glass text-sm text-primary border border-primary/20 flex items-center gap-2">
+                            <i data-lucide="server" class="w-4 h-4"></i>
+                            Network Operation Center
+                        </span>
+                        <span class="px-4 py-2 rounded-full glass text-sm text-secondary border border-secondary/20 flex items-center gap-2">
+                            <i data-lucide="layout" class="w-4 h-4"></i>
+                            Front-End Developer
+                        </span>
+                        <span class="px-4 py-2 rounded-full glass text-sm text-accent border border-accent/20 flex items-center gap-2">
+                            <i data-lucide="settings" class="w-4 h-4"></i>
+                            System Administrator
+                        </span>
                     </div>
+
+                    <!-- <div class="mt-8 flex gap-4">
+                        <a href="#contact" class="text-primary hover:text-white transition-colors text-sm font-medium flex items-center gap-2 group">
+                            Let's Talk 
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div> -->
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Timeline Section -->
-    <section id="experience" class="py-20 md:py-32 relative">
+    <section id="experience" class="py-24 md:py-32 relative">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                <div class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold mb-4 border border-secondary/20">
+                    Journey
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
                     My <span class="gradient-text">Experience</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
-                    A timeline of my educational background and professional experience
+                <p class="text-gray-400 max-w-2xl mx-auto text-base">
+                    A timeline of my educational background and professional milestones
                 </p>
             </div>
 
@@ -464,57 +635,53 @@
                 <div class="timeline-line"></div>
 
                 <!-- Education 1 -->
-                <div class="relative mb-12 reveal">
+                <div class="relative mb-16 reveal">
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="hidden md:block md:w-5/12"></div>
                         <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
-                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary">
+                            <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-primary shadow-xl">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1 border border-primary/20">
                                         <i data-lucide="graduation-cap" class="w-3 h-3"></i>
                                         Education
                                     </span>
+                                    <span class="text-xs text-gray-500">Present</span>
                                 </div>
-                                <h3 class="font-display font-bold text-lg mb-1">Bachelor of Information Systems</h3>
-                                <p class="text-primary text-sm mb-2 flex items-center gap-1">
-                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                <h3 class="font-display font-bold text-xl mb-2">Bachelor of Information Systems</h3>
+                                <p class="text-primary text-sm mb-3 flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
                                     Telkom University
                                 </p>
-                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                    <i data-lucide="calendar" class="w-3 h-3"></i>
-                                    <span>2025 - Present</span>
-                                </div>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    Focusing on enterprise system architecture, database management, and information security.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Education 2 -->
-                <div class="relative mb-12 reveal">
+                <div class="relative mb-16 reveal">
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
-                            <div
-                                class="timeline-card glass-card rounded-xl p-5 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4">
+                            <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4 shadow-xl">
                                 <div class="flex items-center gap-2 mb-3 md:justify-end">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1">
+                                    <span class="text-xs text-gray-500">2022 - 2025</span>
+                                    <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1 border border-secondary/20">
                                         <i data-lucide="graduation-cap" class="w-3 h-3"></i>
                                         Education
                                     </span>
                                 </div>
-                                <h3 class="font-display font-bold text-lg mb-1">Vocational High School in Software
-                                    Engineering</h3>
-                                <p class="text-secondary text-sm mb-2 flex items-center gap-1 md:justify-end">
-                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                <h3 class="font-display font-bold text-xl mb-2">Software Engineering</h3>
+                                <p class="text-secondary text-sm mb-3 flex items-center gap-2 md:justify-end">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
                                     SMK Telkom Jakarta
                                 </p>
-                                <div class="flex items-center gap-2 text-xs text-gray-500 md:justify-end">
-                                    <i data-lucide="calendar" class="w-3 h-3"></i>
-                                    <span>2022 - 2025</span>
-                                </div>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    Vocational high school with specialization in software development and network fundamentals.
+                                </p>
                             </div>
                         </div>
                         <div class="hidden md:block md:w-5/12"></div>
@@ -522,29 +689,31 @@
                 </div>
 
                 <!-- Work Experience 1 -->
-                <div class="relative mb-12 reveal">
+                <div class="relative mb-16 reveal">
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="hidden md:block md:w-5/12"></div>
                         <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
-                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-accent">
+                            <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-accent shadow-xl">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1">
+                                    <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1 border border-accent/20">
                                         <i data-lucide="briefcase" class="w-3 h-3"></i>
                                         Work
                                     </span>
+                                    <span class="text-xs text-gray-500">2023 - Present</span>
                                 </div>
-                                <h3 class="font-display font-bold text-lg mb-1">Network Operations Center</h3>
-                                <p class="text-accent text-sm mb-2 flex items-center gap-1">
-                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                <h3 class="font-display font-bold text-xl mb-2">Network Operations Center</h3>
+                                <p class="text-accent text-sm mb-3 flex items-center gap-2">
+                                    <i data-lucide="building" class="w-4 h-4"></i>
                                     PT. XYZ Telecom
                                 </p>
-                                <p class="text-gray-400 text-xs mb-3">Monitoring network infrastructure,
-                                    troubleshooting, and maintaining 99.9% uptime.</p>
-                                <div class="flex items-center gap-2 text-xs text-gray-500">
-                                    <i data-lucide="calendar" class="w-3 h-3"></i>
-                                    <span>2023 - Present</span>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-3">
+                                    Monitoring enterprise network infrastructure, troubleshooting complex issues, and maintaining 99.9% uptime SLA.
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-2 py-1 rounded bg-accent/10 text-accent text-xs">Cisco</span>
+                                    <span class="px-2 py-1 rounded bg-accent/10 text-accent text-xs">MikroTik</span>
+                                    <span class="px-2 py-1 rounded bg-accent/10 text-accent text-xs">Monitoring</span>
                                 </div>
                             </div>
                         </div>
@@ -556,25 +725,26 @@
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
-                            <div
-                                class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4">
+                            <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4 shadow-xl">
                                 <div class="flex items-center gap-2 mb-3 md:justify-end">
-                                    <span
-                                        class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
+                                    <span class="text-xs text-gray-500">2022 - 2023</span>
+                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1 border border-primary/20">
                                         <i data-lucide="briefcase" class="w-3 h-3"></i>
                                         Work
                                     </span>
                                 </div>
-                                <h3 class="font-display font-bold text-lg mb-1">Front-End Developer</h3>
-                                <p class="text-primary text-sm mb-2 flex items-center gap-1 md:justify-end">
-                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                <h3 class="font-display font-bold text-xl mb-2">Front-End Developer</h3>
+                                <p class="text-primary text-sm mb-3 flex items-center gap-2 md:justify-end">
+                                    <i data-lucide="laptop" class="w-4 h-4"></i>
                                     Freelance
                                 </p>
-                                <p class="text-gray-400 text-xs mb-3">Building responsive web applications and user
-                                    interfaces for various clients.</p>
-                                <div class="flex items-center gap-2 text-xs text-gray-500 md:justify-end">
-                                    <i data-lucide="calendar" class="w-3 h-3"></i>
-                                    <span>2022 - 2023</span>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-3">
+                                    Building responsive web applications and user interfaces for various clients using modern frameworks.
+                                </p>
+                                <div class="flex flex-wrap gap-2 md:justify-end">
+                                    <span class="px-2 py-1 rounded bg-primary/10 text-primary text-xs">React</span>
+                                    <span class="px-2 py-1 rounded bg-primary/10 text-primary text-xs">Vue</span>
+                                    <span class="px-2 py-1 rounded bg-primary/10 text-primary text-xs">Tailwind</span>
                                 </div>
                             </div>
                         </div>
@@ -586,130 +756,139 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 md:py-32 relative">
+    <section id="skills" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 border border-primary/20">
+                    Expertise
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
                     Technical <span class="gradient-text">Skills</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
-                    Technologies and tools I use to build network infrastructure and web applications
+                <p class="text-gray-400 max-w-2xl mx-auto text-base">
+                    Technologies and tools I use to build robust network infrastructure and elegant web applications
                 </p>
             </div>
 
-            <!-- Network Skills -->
-            <div class="mb-12 reveal">
-                <div class="flex items-center gap-3 mb-6 justify-center">
-                    <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
-                        <i data-lucide="network" class="w-5 h-5 text-primary"></i>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Network Skills -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
+                            <i data-lucide="network" class="w-7 h-7 text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-2xl">Network Operations</h3>
+                            <p class="text-gray-500 text-sm">Infrastructure & Security</p>
+                        </div>
                     </div>
-                    <h3 class="font-display font-bold text-xl">Network Operations</h3>
+
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="router" class="w-4 h-4"></i>
+                            Cisco Routing & Switching
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="wifi" class="w-4 h-4"></i>
+                            MikroTik Configuration
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="shield" class="w-4 h-4"></i>
+                            Network Security
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                            Firewall & VPN
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-4 h-4"></i>
+                            Linux Server
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="activity" class="w-4 h-4"></i>
+                            TCP/IP Protocol
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="git-branch" class="w-4 h-4"></i>
+                            VLAN & Subnetting
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                            Network Monitoring
+                        </div>
+                    </div>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        Cisco Routing & Switching
+                <!-- Frontend Skills -->
+                <div class="reveal">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center border border-secondary/20 shadow-lg shadow-secondary/10">
+                            <i data-lucide="code-2" class="w-7 h-7 text-secondary"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-2xl">Front-End Development</h3>
+                            <p class="text-gray-500 text-sm">Design & Interaction</p>
+                        </div>
                     </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        MikroTik Configuration
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        Network Security
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        Firewall & VPN
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        Linux Server
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        TCP/IP Protocol
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        VLAN & Subnetting
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
-                        Network Monitoring
+
+                    <div class="flex flex-wrap gap-3">
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="atom" class="w-4 h-4"></i>
+                            React.js / Next.js
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="file-code" class="w-4 h-4"></i>
+                            HTML5 / CSS3
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="wind" class="w-4 h-4"></i>
+                            Tailwind CSS
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                            Bootstrap 5
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                            JavaScript / jQuery
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="smartphone" class="w-4 h-4"></i>
+                            Responsive Design
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="git-commit" class="w-4 h-4"></i>
+                            Git / GitHub
+                        </div>
+                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                            <i data-lucide="plug" class="w-4 h-4"></i>
+                            REST API Integration
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Frontend Skills -->
-            <div class="mb-12 reveal">
-                <div class="flex items-center gap-3 mb-6 justify-center">
-                    <div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center">
-                        <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
-                    </div>
-                    <h3 class="font-display font-bold text-xl">Front-End Development</h3>
-                </div>
-
-                <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        React.js / Next.js
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        HTML5 / CSS3
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        Tailwind CSS
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        Bootstrap 5
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        JavaScript / jQuery
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        Responsive Design
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        Git / GitHub
-                    </div>
-                    <div
-                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
-                        REST API Integration
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tools & Technologies -->
-            <div class="reveal">
-                <p class="text-center text-gray-400 mb-6 text-sm">Tools & Technologies</p>
+            <!-- Tools Section -->
+            <div class="mt-16 reveal">
+                <p class="text-center text-gray-500 mb-8 text-sm uppercase tracking-wider font-medium">Tools & Technologies</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="globe"
-                            class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="VS Code">
+                        <i data-lucide="code" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="server"
-                            class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Figma">
+                        <i data-lucide="pen-tool" class="w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="shield"
-                            class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Docker">
+                        <i data-lucide="container" class="w-8 h-8 text-gray-400 group-hover:text-accent transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="layout"
-                            class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="AWS">
+                        <i data-lucide="cloud" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="box"
-                            class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Linux">
+                        <i data-lucide="terminal-square" class="w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    </div>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Postman">
+                        <i data-lucide="send" class="w-8 h-8 text-gray-400 group-hover:text-accent transition-colors"></i>
                     </div>
                 </div>
             </div>
@@ -717,166 +896,198 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 md:py-32 relative">
+    <section id="projects" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                <div class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold mb-4 border border-secondary/20">
+                    Portfolio
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
                     Featured <span class="gradient-text">Projects</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
-                    Portfolio of network infrastructure and web applications I've worked on
+                <p class="text-gray-400 max-w-2xl mx-auto text-base">
+                    Selected works showcasing network infrastructure and web development expertise
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-primary/30">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="network" class="w-12 h-12 text-gray-600"></i>
+                            <i data-lucide="network" class="w-16 h-16 text-gray-700 group-hover:text-primary/30 transition-colors duration-500"></i>
                         </div>
-                        <div
-                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button
-                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="project-overlay absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl hover:shadow-2xl">
                                 View Details
                             </button>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-primary/20 text-primary">Network</span>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary border border-primary/20">Network</span>
+                            <span class="text-xs text-gray-500">Enterprise</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">
-                            Enterprise Network Infrastructure</h3>
-                        <p class="text-gray-400 text-xs mb-3">Network redesign with VLAN, OSPF, and link redundancy
-                            implementation.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-primary transition-colors">Enterprise Network Infrastructure</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Complete network redesign with VLAN segmentation, OSPF routing, and link redundancy for 99.99% uptime.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs text-gray-500">Cisco</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">VLAN</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">OSPF</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                <!-- Project 2 -->
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-secondary/30">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="monitor" class="w-12 h-12 text-gray-600"></i>
+                            <i data-lucide="monitor" class="w-16 h-16 text-gray-700 group-hover:text-secondary/30 transition-colors duration-500"></i>
                         </div>
-                        <div
-                            class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button
-                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="project-overlay absolute inset-0 bg-secondary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">Web App</span>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary border border-secondary/20">Web App</span>
+                            <span class="text-xs text-gray-500">Dashboard</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">
-                            Network Monitoring Dashboard</h3>
-                        <p class="text-gray-400 text-xs mb-3">Real-time dashboard for network traffic monitoring and
-                            alerting.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-secondary transition-colors">Network Monitoring Dashboard</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Real-time dashboard for monitoring network traffic, device status, and automated alerting system.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs text-gray-500">React</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">D3.js</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">WebSocket</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                <!-- Project 3 -->
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-accent/30">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="shield-check" class="w-12 h-12 text-gray-600"></i>
+                            <i data-lucide="shield-check" class="w-16 h-16 text-gray-700 group-hover:text-accent/30 transition-colors duration-500"></i>
                         </div>
-                        <div
-                            class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button
-                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="project-overlay absolute inset-0 bg-accent/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">Security</span>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent border border-accent/20">Security</span>
+                            <span class="text-xs text-gray-500">VPN</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">Secure
-                            VPN Gateway</h3>
-                        <p class="text-gray-400 text-xs mb-3">Site-to-Site and Remote Access VPN with high-security
-                            configuration.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-accent transition-colors">Secure VPN Gateway</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Enterprise VPN solution with site-to-site and remote access capabilities, featuring MFA integration.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs text-gray-500">IPsec</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">SSL</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">MikroTik</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                <!-- Project 4 -->
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-secondary/30">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="shopping-cart" class="w-12 h-12 text-gray-600"></i>
+                            <i data-lucide="shopping-cart" class="w-16 h-16 text-gray-700 group-hover:text-secondary/30 transition-colors duration-500"></i>
                         </div>
-                        <div
-                            class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button
-                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="project-overlay absolute inset-0 bg-secondary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span
-                                class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">E-Commerce</span>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary border border-secondary/20">E-Commerce</span>
+                            <span class="text-xs text-gray-500">Full Stack</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">
-                            E-Commerce Platform</h3>
-                        <p class="text-gray-400 text-xs mb-3">Complete e-commerce with payment gateway and inventory
-                            management.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-secondary transition-colors">E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Complete e-commerce solution with payment gateway integration, inventory management, and analytics.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs text-gray-500">Next.js</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">Stripe</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">PostgreSQL</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                <!-- Project 5 -->
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-primary/30">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="wifi" class="w-12 h-12 text-gray-600"></i>
+                            <i data-lucide="wifi" class="w-16 h-16 text-gray-700 group-hover:text-primary/30 transition-colors duration-500"></i>
                         </div>
-                        <div
-                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button
-                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="project-overlay absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-primary/20 text-primary">Wireless</span>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary border border-primary/20">Wireless</span>
+                            <span class="text-xs text-gray-500">Enterprise</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">
-                            Managed WiFi System</h3>
-                        <p class="text-gray-400 text-xs mb-3">Enterprise WiFi management with captive portal and voucher
-                            system.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-primary transition-colors">Managed WiFi System</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Enterprise-grade WiFi management with captive portal, voucher system, and bandwidth allocation.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs text-gray-500">MikroTik</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">RADIUS</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">Hotspot</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal">
-                    <div class="aspect-video bg-gray-800 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-60"></div>
+                <!-- Project 6 -->
+                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-accent/30">
+                    <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="bar-chart-3" class="w-12 h-12 text-gray-600"></i>
+                            <i data-lucide="bar-chart-3" class="w-16 h-16 text-gray-700 group-hover:text-accent/30 transition-colors duration-500"></i>
                         </div>
-                        <div
-                            class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button
-                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div class="project-overlay absolute inset-0 bg-accent/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
-                    <div class="p-5">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">Analytics</span>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent border border-accent/20">Analytics</span>
+                            <span class="text-xs text-gray-500">Visualization</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">
-                            Network Analytics Tool</h3>
-                        <p class="text-gray-400 text-xs mb-3">Network traffic analysis tool with real-time data
-                            visualization.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-accent transition-colors">Network Analytics Tool</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Advanced network traffic analysis with real-time visualization, anomaly detection, and reporting.</p>
+                        <div class="flex gap-2">
+                            <span class="text-xs text-gray-500">Python</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">ELK Stack</span>
+                            <span class="text-xs text-gray-600">•</span>
+                            <span class="text-xs text-gray-500">Grafana</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -884,135 +1095,144 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-20 md:py-32 relative">
+    <section id="certifications" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="font-display font-bold text-3xl md:text-4xl mb-4">
+                <div class="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4 border border-accent/20">
+                    Credentials
+                </div>
+                <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
                     Certifications & <span class="gradient-text">Awards</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto text-sm">
-                    Professional certifications obtained to enhance credibility and expertise
+                <p class="text-gray-400 max-w-2xl mx-auto text-base">
+                    Professional certifications that validate expertise and commitment to continuous learning
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-primary">
-                    <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="award" class="w-6 h-6 text-primary"></i>
+                <!-- CCNA -->
+                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-primary hover:border-l-8 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/20">
+                            <i data-lucide="award" class="w-7 h-7 text-primary"></i>
                         </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base mb-0.5">CCNA</h3>
-                            <p class="text-primary text-xs font-medium mb-1">Cisco Certified Network Associate</p>
-                            <p class="text-gray-400 text-xs mb-2">Global networking certification covering routing,
-                                switching, and security fundamentals.</p>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-display font-bold text-lg">CCNA</h3>
+                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                            </div>
+                            <p class="text-primary text-sm font-medium mb-2">Cisco Certified Network Associate</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Comprehensive networking certification covering routing, switching, wireless, and security fundamentals.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>2023</span>
-                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                                <span class="text-green-400">Valid</span>
+                                <span>Issued 2023</span>
+                                <span class="w-1 h-1 bg-gray-600 rounded-full"></span>
+                                <span>Expires 2026</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-secondary">
-                    <div class="flex items-start gap-3">
-                        <div
-                            class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="shield" class="w-6 h-6 text-secondary"></i>
+                <!-- MTCNA -->
+                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-secondary hover:border-l-8 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center flex-shrink-0 border border-secondary/20">
+                            <i data-lucide="shield" class="w-7 h-7 text-secondary"></i>
                         </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base mb-0.5">MTCNA</h3>
-                            <p class="text-secondary text-xs font-medium mb-1">MikroTik Certified Network Associate</p>
-                            <p class="text-gray-400 text-xs mb-2">RouterOS basic configuration, static routing, and
-                                bandwidth management.</p>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-display font-bold text-lg">MTCNA</h3>
+                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                            </div>
+                            <p class="text-secondary text-sm font-medium mb-2">MikroTik Certified Network Associate</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">RouterOS fundamentals, basic configuration, static routing, and bandwidth management.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>2022</span>
-                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                                <span class="text-green-400">Valid</span>
+                                <span>Issued 2022</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-accent">
-                    <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="code" class="w-6 h-6 text-accent"></i>
+                <!-- Meta Frontend -->
+                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-accent hover:border-l-8 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-accent/20 flex items-center justify-center flex-shrink-0 border border-accent/20">
+                            <i data-lucide="code" class="w-7 h-7 text-accent"></i>
                         </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base mb-0.5">Meta Front-End</h3>
-                            <p class="text-accent text-xs font-medium mb-1">Meta Front-End Developer Professional</p>
-                            <p class="text-gray-400 text-xs mb-2">Modern front-end development including React, UI/UX,
-                                and version control.</p>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-display font-bold text-lg">Meta Front-End</h3>
+                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                            </div>
+                            <p class="text-accent text-sm font-medium mb-2">Meta Front-End Developer Professional</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Modern front-end development including React, advanced CSS, UI/UX principles, and version control.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>2024</span>
-                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                                <span class="text-green-400">Valid</span>
+                                <span>Issued 2024</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-yellow-500">
-                    <div class="flex items-start gap-3">
-                        <div
-                            class="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="cloud" class="w-6 h-6 text-yellow-500"></i>
+                <!-- AWS -->
+                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-yellow-500 hover:border-l-8 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0 border border-yellow-500/20">
+                            <i data-lucide="cloud" class="w-7 h-7 text-yellow-500"></i>
                         </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base mb-0.5">AWS Cloud</h3>
-                            <p class="text-yellow-500 text-xs font-medium mb-1">AWS Cloud Practitioner</p>
-                            <p class="text-gray-400 text-xs mb-2">Cloud computing fundamentals, AWS services, and cloud
-                                security architecture.</p>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-display font-bold text-lg">AWS Cloud</h3>
+                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                            </div>
+                            <p class="text-yellow-500 text-sm font-medium mb-2">AWS Cloud Practitioner</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Cloud computing fundamentals, AWS core services, security architecture, and pricing models.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>2023</span>
-                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                                <span class="text-green-400">Valid</span>
+                                <span>Issued 2023</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-pink-500">
-                    <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-pink-500/20 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="layout" class="w-6 h-6 text-pink-500"></i>
+                <!-- FreeCodeCamp -->
+                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-pink-500 hover:border-l-8 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-pink-500/20 flex items-center justify-center flex-shrink-0 border border-pink-500/20">
+                            <i data-lucide="layout" class="w-7 h-7 text-pink-500"></i>
                         </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base mb-0.5">Responsive Web</h3>
-                            <p class="text-pink-500 text-xs font-medium mb-1">FreeCodeCamp Certification</p>
-                            <p class="text-gray-400 text-xs mb-2">Responsive web design with HTML5, CSS3, Flexbox, and
-                                CSS Grid.</p>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-display font-bold text-lg">Responsive Web</h3>
+                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                            </div>
+                            <p class="text-pink-500 text-sm font-medium mb-2">FreeCodeCamp Certification</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Responsive web design mastery with HTML5, CSS3, Flexbox, CSS Grid, and accessibility.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>2022</span>
-                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                                <span class="text-green-400">Valid</span>
+                                <span>Issued 2022</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-cyan-500">
-                    <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="terminal" class="w-6 h-6 text-cyan-500"></i>
+                <!-- Linux -->
+                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-cyan-500 hover:border-l-8 transition-all">
+                    <div class="flex items-start gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0 border border-cyan-500/20">
+                            <i data-lucide="terminal" class="w-7 h-7 text-cyan-500"></i>
                         </div>
-                        <div>
-                            <h3 class="font-display font-bold text-base mb-0.5">Linux Essentials</h3>
-                            <p class="text-cyan-500 text-xs font-medium mb-1">LPI Linux Essentials</p>
-                            <p class="text-gray-400 text-xs mb-2">Linux OS fundamentals, command line, and basic
-                                administration.</p>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-display font-bold text-lg">Linux Essentials</h3>
+                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                            </div>
+                            <p class="text-cyan-500 text-sm font-medium mb-2">LPI Linux Essentials</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Linux OS fundamentals, command line proficiency, scripting basics, and system administration.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <span>2023</span>
-                                <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
-                                <span class="text-green-400">Valid</span>
+                                <span>Issued 2023</span>
                             </div>
                         </div>
                     </div>
@@ -1022,39 +1242,41 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-6 border-t border-gray-800 relative">
-        <div
-            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-2">
-                <span class="font-display font-bold text-lg gradient-text">AR.</span>
-                <span class="text-gray-500 text-xs">© 2024 Ardian Rahman. All rights reserved.</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <a href="#"
-                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-                <a href="#"
-                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
-                    <i data-lucide="linkedin" class="w-4 h-4"></i>
-                </a>
-                <a href="#"
-                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
-                    <i data-lucide="twitter" class="w-4 h-4"></i>
-                </a>
-                <a href="#"
-                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
-                    <i data-lucide="instagram" class="w-4 h-4"></i>
-                </a>
+    <footer class="py-8 border-t border-gray-800 relative bg-darker/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <span class="font-display font-bold text-2xl gradient-text">AR.</span>
+                    <span class="text-gray-600 text-sm">© 2024 Ardian Rahman. All rights reserved.</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="mailto:contact@example.com" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
+        // Initialize Lucide Icons
         lucide.createIcons();
 
         // Typewriter Effect
-        const roles = ['Network Operation Enthusiast', 'Front-End Developer'];
+        const roles = ['Network Operation Specialist', 'Front-End Developer', 'System Administrator'];
         let roleIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -1071,10 +1293,10 @@
                 charIndex++;
             }
 
-            let typeSpeed = isDeleting ? 30 : 80;
+            let typeSpeed = isDeleting ? 40 : 100;
 
             if (!isDeleting && charIndex === currentRole.length) {
-                typeSpeed = 2000;
+                typeSpeed = 2500;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
@@ -1085,9 +1307,9 @@
             setTimeout(typeWriter, typeSpeed);
         }
 
-        setTimeout(typeWriter, 1000);
+        setTimeout(typeWriter, 1500);
 
-        // Global Particle Animation - FIXED for mobile performance
+        // Optimized Particle Animation
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -1108,10 +1330,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                // Slower speed for smoother mobile experience
-                this.vx = (Math.random() - 0.5) * (isTouchDevice ? 0.15 : 0.3);
-                this.vy = (Math.random() - 0.5) * (isTouchDevice ? 0.15 : 0.3);
-                this.size = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * (isTouchDevice ? 0.2 : 0.4);
+                this.vy = (Math.random() - 0.5) * (isTouchDevice ? 0.2 : 0.4);
+                this.size = Math.random() * 2 + 0.5;
             }
 
             update() {
@@ -1123,7 +1344,7 @@
             }
 
             draw() {
-                ctx.fillStyle = 'rgba(14, 165, 233, 0.5)';
+                ctx.fillStyle = 'rgba(14, 165, 233, 0.4)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -1132,9 +1353,7 @@
 
         function initParticles() {
             particles = [];
-            // Reduced particle count for mobile
-            const baseCount = Math.floor(canvas.width / 20);
-            const particleCount = isTouchDevice ? Math.min(baseCount, 25) : Math.min(baseCount, 60);
+            const particleCount = isTouchDevice ? 20 : 40;
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -1145,7 +1364,6 @@
         function animateParticles() {
             if (!isActive) return;
 
-            // Skip frames on mobile for smoother performance (30fps instead of 60fps)
             frameCount++;
             if (isTouchDevice && frameCount % 2 !== 0) {
                 animationId = requestAnimationFrame(animateParticles);
@@ -1158,8 +1376,7 @@
                 particle.update();
                 particle.draw();
 
-                // Reduced connection distance and fewer connections on mobile
-                const connectionDistance = isTouchDevice ? 80 : 100;
+                const connectionDistance = isTouchDevice ? 70 : 100;
                 const maxConnections = isTouchDevice ? 2 : 3;
                 let connections = 0;
 
@@ -1171,8 +1388,8 @@
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < connectionDistance) {
-                        ctx.strokeStyle = `rgba(14, 165, 233, ${0.1 * (1 - distance / connectionDistance)})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(14, 165, 233, ${0.08 * (1 - distance / connectionDistance)})`;
+                        ctx.lineWidth = 0.8;
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
                         ctx.lineTo(other.x, other.y);
@@ -1187,7 +1404,7 @@
 
         animateParticles();
 
-        // Handle visibility change
+        // Visibility handling
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 isActive = false;
@@ -1199,7 +1416,7 @@
             }
         });
 
-        // Scroll Reveal Animation
+        // Scroll Reveal Animation with Intersection Observer
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1215,12 +1432,11 @@
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Navbar Scroll Effect - Blur Transparent (Dark)
+        // Navbar Scroll Effect with Throttling
         const navbar = document.getElementById('navbar');
         const navContainer = document.getElementById('nav-container');
-
-        // Throttle scroll events for better performance
         let ticking = false;
+
         window.addEventListener('scroll', () => {
             if (!ticking) {
                 window.requestAnimationFrame(() => {
@@ -1228,10 +1444,10 @@
                     if (currentScroll > 50) {
                         navContainer.classList.add('navbar-scrolled');
                         navbar.classList.add('py-2');
-                        navbar.classList.remove('py-3');
+                        navbar.classList.remove('py-4');
                     } else {
                         navContainer.classList.remove('navbar-scrolled');
-                        navbar.classList.add('py-3');
+                        navbar.classList.add('py-4');
                         navbar.classList.remove('py-2');
                     }
                     ticking = false;
@@ -1240,7 +1456,7 @@
             }
         });
 
-        // Mobile Menu Toggle with X Animation
+        // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuItems = document.querySelectorAll('.mobile-menu-item');
@@ -1262,7 +1478,6 @@
             }
         });
 
-        // Mobile Menu Item Click Effect
         mobileMenuItems.forEach(item => {
             item.addEventListener('click', function () {
                 mobileMenuItems.forEach(i => i.classList.remove('active'));
@@ -1277,7 +1492,6 @@
             });
         });
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
             if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                 isMenuOpen = false;
@@ -1293,7 +1507,7 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const offsetTop = target.offsetTop - 80;
+                    const offsetTop = target.offsetTop - 100;
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
@@ -1302,7 +1516,7 @@
             });
         });
 
-        // Update active menu based on scroll position
+        // Active Section Highlight
         const sections = document.querySelectorAll('section[id]');
         let scrollTicking = false;
 
@@ -1312,7 +1526,6 @@
                     let current = '';
                     sections.forEach(section => {
                         const sectionTop = section.offsetTop;
-                        const sectionHeight = section.clientHeight;
                         if (scrollY >= (sectionTop - 200)) {
                             current = section.getAttribute('id');
                         }
@@ -1330,8 +1543,8 @@
             }
         });
 
+        // Resize Handler
         window.addEventListener('resize', () => {
-            // Re-check if touch device on resize
             isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
             if (window.innerWidth >= 768) {
                 mobileMenu.classList.add('hidden');
@@ -1339,7 +1552,6 @@
                 body.classList.remove('menu-open');
                 isMenuOpen = false;
             }
-            // Reinitialize particles with new settings
             initParticles();
         });
     </script>
