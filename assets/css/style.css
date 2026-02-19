@@ -1,0 +1,123 @@
+/* Global Background */
+.global-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #020617;
+    overflow: hidden; /* Mencegah blob keluar dari viewport */
+}
+
+.network-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.15) 1px, transparent 0);
+    background-size: 40px 40px;
+}
+
+/* Blob Container */
+.blob-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Blobs dengan positioning absolute yang benar */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    animation: morph 8s ease-in-out infinite;
+    /* Tidak menggunakan transform untuk positioning */
+    will-change: border-radius;
+}
+
+/* Posisi spesifik untuk setiap blob */
+.blob-1 {
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    top: 30%;
+    right: -10%;
+    animation-delay: 2s;
+}
+
+.blob-3 {
+    bottom: -5%;
+    left: 30%;
+    animation-delay: 4s;
+}
+
+.blob-4 {
+    bottom: 20%;
+    right: 20%;
+    animation-delay: 6s;
+}
+
+@keyframes morph {
+    0%, 100% { 
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% { 
+        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .network-bg {
+        background-size: 30px 30px;
+        opacity: 0.8;
+    }
+    
+    .blob {
+        filter: blur(40px);
+        opacity: 0.3;
+        animation-duration: 12s;
+    }
+    
+    .blob-1 {
+        width: 300px;
+        height: 300px;
+        top: -5%;
+        left: -15%;
+    }
+    
+    .blob-2 {
+        width: 280px;
+        height: 280px;
+        top: 40%;
+        right: -15%;
+    }
+    
+    .blob-3 {
+        width: 200px;
+        height: 200px;
+        bottom: 10%;
+        left: 20%;
+    }
+    
+    .blob-4 {
+        width: 250px;
+        height: 250px;
+        bottom: 30%;
+        right: 10%;
+    }
+    
+    #particles-canvas {
+        opacity: 0.5;
+    }
+}
