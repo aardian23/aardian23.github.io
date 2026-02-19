@@ -167,23 +167,36 @@
             box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.3);
         }
 
-        /* Morphing Blob */
+        /* Morphing Blob - FIXED: Always circular from start */
         .blob {
             position: absolute;
             filter: blur(40px);
             opacity: 0.4;
+            border-radius: 50% !important; /* Force circular from start */
             animation: morph 8s ease-in-out infinite;
         }
 
+        /* Fixed morph animation - always maintain circular shape with subtle morphing */
         @keyframes morph {
-
-            0%,
-            100% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            0% {
+                border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+                transform: scale(1) rotate(0deg);
             }
-
+            25% {
+                border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
+                transform: scale(1.02) rotate(2deg);
+            }
             50% {
-                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+                border-radius: 50% 55% 45% 50% / 55% 50% 50% 45%;
+                transform: scale(1) rotate(0deg);
+            }
+            75% {
+                border-radius: 45% 50% 55% 50% / 50% 45% 55% 50%;
+                transform: scale(1.02) rotate(-2deg);
+            }
+            100% {
+                border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+                transform: scale(1) rotate(0deg);
             }
         }
 
@@ -312,101 +325,12 @@
     <div class="global-bg">
         <div class="network-bg"></div>
         <canvas id="particles-canvas"></canvas>
-        <div class="blob bg-primary w-96 h-96 top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
-        <div class="blob bg-secondary w-96 h-96 top-1/3 right-0 translate-x-1/2" style="animation-delay: 2s;"></div>
-        <div class="blob bg-accent w-64 h-64 bottom-0 left-1/3" style="animation-delay: 4s;"></div>
-        <div class="blob bg-primary w-80 h-80 bottom-1/4 right-1/4" style="animation-delay: 6s;"></div>
+        <!-- BLOBS: Added inline border-radius: 50% to ensure circular from start -->
+        <div class="blob bg-primary w-96 h-96 top-0 left-0 -translate-x-1/2 -translate-y-1/2" style="border-radius: 50%;"></div>
+        <div class="blob bg-secondary w-96 h-96 top-1/3 right-0 translate-x-1/2" style="animation-delay: 2s; border-radius: 50%;"></div>
+        <div class="blob bg-accent w-64 h-64 bottom-0 left-1/3" style="animation-delay: 4s; border-radius: 50%;"></div>
+        <div class="blob bg-primary w-80 h-80 bottom-1/4 right-1/4" style="animation-delay: 6s; border-radius: 50%;"></div>
     </div>
-
-    <!-- Fixed Navigation -->
-    <nav id="navbar" class="fixed w-full z-50 top-0 left-0 transition-all duration-300 py-3">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="nav-container"
-                class="glass rounded-full px-6 py-2.5 flex justify-between items-center transition-all duration-300">
-                <a href="#" class="font-display font-bold text-xl gradient-text">
-                    AR<span class="text-white">.</span>
-                </a>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-6">
-                    <a href="#home"
-                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Home</a>
-                    <a href="#about"
-                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="#experience"
-                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Experience</a>
-                    <a href="#skills"
-                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Skills</a>
-                    <a href="#projects"
-                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Projects</a>
-                    <a href="#certifications"
-                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Certifications</a>
-                </div>
-
-                <!-- Hamburger Menu Button -->
-                <button id="mobile-menu-btn"
-                    class="md:hidden text-gray-300 hover:text-white focus:outline-none p-1 relative w-8 h-8 flex flex-col justify-center items-center gap-1.5 z-50">
-                    <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
-                    <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
-                    <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
-                </button>
-            </div>
-
-            <!-- Mobile Menu - Inside nav, fixed position -->
-            <div id="mobile-menu" class="hidden md:hidden mobile-menu-wrapper mt-2">
-                <div class="glass rounded-2xl p-3 space-y-1 mx-auto max-w-7xl">
-                    <a href="#home"
-                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
-                        data-section="home">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="home" class="w-4 h-4"></i>
-                            Home
-                        </span>
-                    </a>
-                    <a href="#about"
-                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
-                        data-section="about">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="user" class="w-4 h-4"></i>
-                            About
-                        </span>
-                    </a>
-                    <a href="#experience"
-                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
-                        data-section="experience">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="briefcase" class="w-4 h-4"></i>
-                            Experience
-                        </span>
-                    </a>
-                    <a href="#skills"
-                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
-                        data-section="skills">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="code" class="w-4 h-4"></i>
-                            Skills
-                        </span>
-                    </a>
-                    <a href="#projects"
-                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
-                        data-section="projects">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="folder" class="w-4 h-4"></i>
-                            Projects
-                        </span>
-                    </a>
-                    <a href="#certifications"
-                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
-                        data-section="certifications">
-                        <span class="relative z-10 flex items-center gap-3">
-                            <i data-lucide="award" class="w-4 h-4"></i>
-                            Certifications
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <!-- Spacer for fixed navbar -->
     <div class="h-20"></div>
@@ -466,7 +390,7 @@
                             <!-- Image Container dengan aspect ratio tetap -->
                             <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 relative">
                                 <!-- Ganti src dengan path image Anda -->
-                                <img src="assets/img/about.jpeg" alt="Ardian Rahman"
+                                <img src="assets/img/maintenance.png" alt="Ardian Rahman"
                                     class="w-full h-full object-cover object-center"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <!-- Fallback jika image error -->
@@ -1163,12 +1087,14 @@
 
         setTimeout(typeWriter, 1000);
 
-        // Global Particle Animation
+        // Global Particle Animation - FIXED for mobile performance
         const canvas = document.getElementById('particles-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         let animationId;
         let isActive = true;
+        let isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+        let frameCount = 0;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -1182,8 +1108,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
+                // Slower speed for smoother mobile experience
+                this.vx = (Math.random() - 0.5) * (isTouchDevice ? 0.15 : 0.3);
+                this.vy = (Math.random() - 0.5) * (isTouchDevice ? 0.15 : 0.3);
                 this.size = Math.random() * 2 + 1;
             }
 
@@ -1205,7 +1132,9 @@
 
         function initParticles() {
             particles = [];
-            const particleCount = Math.min(Math.floor(canvas.width / 20), 60);
+            // Reduced particle count for mobile
+            const baseCount = Math.floor(canvas.width / 20);
+            const particleCount = isTouchDevice ? Math.min(baseCount, 25) : Math.min(baseCount, 60);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -1216,24 +1145,39 @@
         function animateParticles() {
             if (!isActive) return;
 
+            // Skip frames on mobile for smoother performance (30fps instead of 60fps)
+            frameCount++;
+            if (isTouchDevice && frameCount % 2 !== 0) {
+                animationId = requestAnimationFrame(animateParticles);
+                return;
+            }
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             particles.forEach((particle, i) => {
                 particle.update();
                 particle.draw();
 
+                // Reduced connection distance and fewer connections on mobile
+                const connectionDistance = isTouchDevice ? 80 : 100;
+                const maxConnections = isTouchDevice ? 2 : 3;
+                let connections = 0;
+
                 particles.slice(i + 1).forEach(other => {
+                    if (connections >= maxConnections) return;
+                    
                     const dx = particle.x - other.x;
                     const dy = particle.y - other.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 100) {
-                        ctx.strokeStyle = `rgba(14, 165, 233, ${0.1 * (1 - distance / 100)})`;
+                    if (distance < connectionDistance) {
+                        ctx.strokeStyle = `rgba(14, 165, 233, ${0.1 * (1 - distance / connectionDistance)})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particle.x, particle.y);
                         ctx.lineTo(other.x, other.y);
                         ctx.stroke();
+                        connections++;
                     }
                 });
             });
@@ -1243,12 +1187,14 @@
 
         animateParticles();
 
+        // Handle visibility change
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 isActive = false;
                 cancelAnimationFrame(animationId);
             } else {
                 isActive = true;
+                frameCount = 0;
                 animateParticles();
             }
         });
@@ -1273,17 +1219,24 @@
         const navbar = document.getElementById('navbar');
         const navContainer = document.getElementById('nav-container');
 
+        // Throttle scroll events for better performance
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 50) {
-                navContainer.classList.add('navbar-scrolled');
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-3');
-            } else {
-                navContainer.classList.remove('navbar-scrolled');
-                navbar.classList.add('py-3');
-                navbar.classList.remove('py-2');
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const currentScroll = window.pageYOffset;
+                    if (currentScroll > 50) {
+                        navContainer.classList.add('navbar-scrolled');
+                        navbar.classList.add('py-2');
+                        navbar.classList.remove('py-3');
+                    } else {
+                        navContainer.classList.remove('navbar-scrolled');
+                        navbar.classList.add('py-3');
+                        navbar.classList.remove('py-2');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
 
@@ -1351,32 +1304,43 @@
 
         // Update active menu based on scroll position
         const sections = document.querySelectorAll('section[id]');
+        let scrollTicking = false;
 
         window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
+            if (!scrollTicking) {
+                window.requestAnimationFrame(() => {
+                    let current = '';
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+                        if (scrollY >= (sectionTop - 200)) {
+                            current = section.getAttribute('id');
+                        }
+                    });
 
-            mobileMenuItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('data-section') === current) {
-                    item.classList.add('active');
-                }
-            });
+                    mobileMenuItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('data-section') === current) {
+                            item.classList.add('active');
+                        }
+                    });
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
+            }
         });
 
         window.addEventListener('resize', () => {
+            // Re-check if touch device on resize
+            isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
             if (window.innerWidth >= 768) {
                 mobileMenu.classList.add('hidden');
                 mobileMenuBtn.classList.remove('hamburger-open');
                 body.classList.remove('menu-open');
                 isMenuOpen = false;
             }
+            // Reinitialize particles with new settings
+            initParticles();
         });
     </script>
 </body>
