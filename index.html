@@ -159,8 +159,16 @@
         }
 
         @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
         }
 
         /* Skill Tags */
@@ -177,7 +185,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: left 0.5s;
         }
 
@@ -225,6 +233,7 @@
             .timeline-line {
                 left: 20px;
             }
+
             .timeline-dot {
                 left: 20px;
             }
@@ -329,7 +338,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
             opacity: 0;
             transform: scale(0.5);
             transition: all 0.5s;
@@ -359,7 +368,7 @@
     <div class="global-bg">
         <div class="network-bg"></div>
         <canvas id="particles-canvas"></canvas>
-        
+
         <!-- STATIC BLOBS - No animation, perfect circles, fixed positions -->
         <div class="blob bg-primary w-[500px] h-[500px] top-[-100px] left-[-100px]"></div>
         <div class="blob bg-secondary w-[400px] h-[400px] top-[20%] right-[-100px]"></div>
@@ -379,29 +388,41 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                    <a href="#home"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
                         Home
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                    <a href="#about"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
                         About
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#experience" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                    <a href="#experience"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
                         Experience
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#skills" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                    <a href="#skills"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
                         Skills
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#projects" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                    <a href="#projects"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
                         Projects
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
-                    <a href="#certifications" class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
+                    <a href="#certifications"
+                        class="nav-link text-sm font-medium text-gray-300 hover:text-primary transition-colors relative group">
                         Certifications
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
                     </a>
                 </div>
 
@@ -417,37 +438,49 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mobile-menu-wrapper mt-3">
                 <div class="glass rounded-2xl p-4 space-y-1 mx-auto max-w-7xl shadow-2xl">
-                    <a href="#home" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="home">
+                    <a href="#home"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5"
+                        data-section="home">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="home" class="w-4 h-4"></i>
                             Home
                         </span>
                     </a>
-                    <a href="#about" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="about">
+                    <a href="#about"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5"
+                        data-section="about">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="user" class="w-4 h-4"></i>
                             About
                         </span>
                     </a>
-                    <a href="#experience" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="experience">
+                    <a href="#experience"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5"
+                        data-section="experience">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="briefcase" class="w-4 h-4"></i>
                             Experience
                         </span>
                     </a>
-                    <a href="#skills" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="skills">
+                    <a href="#skills"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5"
+                        data-section="skills">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="code" class="w-4 h-4"></i>
                             Skills
                         </span>
                     </a>
-                    <a href="#projects" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="projects">
+                    <a href="#projects"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5"
+                        data-section="projects">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="folder" class="w-4 h-4"></i>
                             Projects
                         </span>
                     </a>
-                    <a href="#certifications" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5" data-section="certifications">
+                    <a href="#certifications"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-xl transition-all hover:bg-white/5"
+                        data-section="certifications">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="award" class="w-4 h-4"></i>
                             Certifications
@@ -465,11 +498,12 @@
     <section id="home" class="relative min-h-screen flex items-center justify-center -mt-24 pt-24 pb-20">
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="mb-6 reveal">
-                <span class="inline-block px-4 py-1.5 rounded-full glass text-xs font-medium text-primary border border-primary/20 mb-4">
+                <span
+                    class="inline-block px-4 py-1.5 rounded-full glass text-xs font-medium text-primary border border-primary/20 mb-4">
                     Keep learning
                 </span>
             </div>
-            
+
             <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-6 leading-tight reveal">
                 <span class="block text-white mb-2">Ardian Rahman</span>
             </h1>
@@ -489,18 +523,13 @@
                 <a href="#projects"
                     class="btn-glow group relative px-8 py-4 bg-primary rounded-full text-sm font-semibold text-white overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30">
                     <span class="relative z-10 flex items-center gap-2">
-                        View Projects 
+                        View Projects
                         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </span>
                 </a>
-                <a href="#contact"
-                    class="px-8 py-4 glass rounded-full text-sm font-semibold text-white hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2 border border-white/10">
-                    <i data-lucide="mail" class="w-4 h-4"></i>
-                    Contact Me
-                </a>
             </div>
 
-            <!-- Stats -->
+            <!-- Stats - COMMENTED OUT -->
             <!-- <div class="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto reveal">
                 <div class="text-center">
                     <div class="text-2xl md:text-3xl font-bold text-white mb-1">3+</div>
@@ -514,12 +543,10 @@
                     <div class="text-2xl md:text-3xl font-bold text-white mb-1">6+</div>
                     <div class="text-xs text-gray-500">Certifications</div>
                 </div>
-            </div>
-        </div> -->
-
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
-            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-500"></i>
+            </div> -->
         </div>
+
+        <!-- Chevron icon REMOVED as per request -->
     </section>
 
     <!-- About Section -->
@@ -527,47 +554,55 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="reveal flex justify-center order-2 md:order-1">
-                    <div class="relative w-full max-w-sm">
-                        <!-- Glow Effect -->
-                        <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-3xl opacity-20 blur-2xl animate-pulse-slow"></div>
+                    <!-- CARD DIPERKECIL: max-w-sm -> max-w-xs, p-6 -> p-4, dll -->
+                    <div class="relative w-full max-w-xs">
+                        <!-- Glow Effect - Diperkecil -->
+                        <div
+                            class="absolute -inset-3 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl animate-pulse-slow">
+                        </div>
 
-                        <!-- Card Container -->
-                        <div class="relative glass-card rounded-3xl p-6 shadow-2xl">
-                            <!-- Image Container -->
-                            <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-gray-800 relative shadow-inner">
-                                <img src="assets/img/test.jpeg" 
-                                    alt="Ardian Rahman"
-                                    class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-110"
+                        <!-- Card Container - Diperkecil -->
+                        <div class="relative glass-card rounded-2xl p-4 shadow-2xl">
+                            <!-- Image Container - Diperkecil -->
+                            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 relative shadow-inner">
+                                <img src="assets/img/test.jpeg" alt="Ardian Rahman"
+                                    class="w-full h-full object-cover object-center transition-transform duration-700"
                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <!-- Fallback -->
-                                <div class="hidden absolute inset-0 items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+                                <!-- Fallback - Diperkecil -->
+                                <div
+                                    class="hidden absolute inset-0 items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
                                     <div class="text-center">
-                                        <i data-lucide="user" class="w-24 h-24 text-gray-700 mx-auto mb-4"></i>
-                                        <p class="text-gray-600 text-sm">Profile Photo</p>
+                                        <i data-lucide="user" class="w-20 h-20 text-gray-700 mx-auto mb-3"></i>
+                                        <p class="text-gray-600 text-xs">Profile Photo</p>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Decorative Elements -->
-                            <div class="absolute -top-4 -right-4 w-20 h-20 bg-primary/20 rounded-full blur-xl"></div>
-                            <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary/20 rounded-full blur-xl"></div>
+
+                            <!-- Decorative Elements - Diperkecil -->
+                            <div class="absolute -top-3 -right-3 w-16 h-16 bg-primary/20 rounded-full blur-xl"></div>
+                            <div class="absolute -bottom-3 -left-3 w-12 h-12 bg-secondary/20 rounded-full blur-xl">
+                            </div>
                         </div>
 
-                        <!-- Floating Cards -->
-                        <div class="absolute -top-6 -right-6 glass-card rounded-2xl p-3 animate-float shadow-lg border border-primary/20">
-                            <i data-lucide="network" class="w-6 h-6 text-primary"></i>
+                        <!-- Floating Cards - Diperkecil -->
+                        <div
+                            class="absolute -top-4 -right-4 glass-card rounded-xl p-2.5 animate-float shadow-lg border border-primary/20">
+                            <i data-lucide="network" class="w-5 h-5 text-primary"></i>
                         </div>
-                        <div class="absolute -bottom-6 -left-6 glass-card rounded-2xl p-3 animate-float shadow-lg border border-secondary/20" style="animation-delay: 1s;">
-                            <i data-lucide="code-2" class="w-6 h-6 text-secondary"></i>
+                        <div class="absolute -bottom-4 -left-4 glass-card rounded-xl p-2.5 animate-float shadow-lg border border-secondary/20"
+                            style="animation-delay: 1s;">
+                            <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
                         </div>
-                        <div class="absolute top-1/2 -right-8 glass-card rounded-2xl p-3 animate-float shadow-lg border border-accent/20" style="animation-delay: 2s;">
-                            <i data-lucide="shield" class="w-6 h-6 text-accent"></i>
+                        <div class="absolute top-1/2 -right-6 glass-card rounded-xl p-2.5 animate-float shadow-lg border border-accent/20"
+                            style="animation-delay: 2s;">
+                            <i data-lucide="shield" class="w-5 h-5 text-accent"></i>
                         </div>
                     </div>
                 </div>
 
                 <div class="reveal order-1 md:order-2">
-                    <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 border border-primary/20">
+                    <div
+                        class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 border border-primary/20">
                         About Me
                     </div>
                     <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 leading-tight">
@@ -575,36 +610,45 @@
                     </h2>
                     <div class="space-y-4 text-gray-400 leading-relaxed text-base">
                         <p>
-                            I am an IT professional with a unique dual expertise in <strong class="text-white">Network Operations</strong> 
-                            and <strong class="text-white">Front-End Development</strong>. This rare combination allows me to 
+                            I am an IT professional with a unique dual expertise in <strong class="text-white">Network
+                                Operations</strong>
+                            and <strong class="text-white">Front-End Development</strong>. This rare combination allows
+                            me to
                             architect solutions that span from core infrastructure to pixel-perfect user interfaces.
                         </p>
                         <p>
-                            On the infrastructure side, I design and maintain enterprise-grade networks using Cisco & MikroTik, 
-                            ensuring 99.9% uptime and robust security. On the creative side, I craft modern web experiences 
+                            On the infrastructure side, I design and maintain enterprise-grade networks using Cisco &
+                            MikroTik,
+                            ensuring 99.9% uptime and robust security. On the creative side, I craft modern web
+                            experiences
                             using React, Vue, and cutting-edge technologies.
                         </p>
                         <p>
-                            My approach combines technical precision with creative problem-solving, delivering solutions that 
+                            My approach combines technical precision with creative problem-solving, delivering solutions
+                            that
                             are not only functional but also visually compelling and user-friendly.
                         </p>
                     </div>
 
                     <div class="mt-8 flex flex-wrap gap-3">
-                        <span class="px-4 py-2 rounded-full glass text-sm text-primary border border-primary/20 flex items-center gap-2">
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm text-primary border border-primary/20 flex items-center gap-2">
                             <i data-lucide="server" class="w-4 h-4"></i>
                             Network Operation Center
                         </span>
-                        <span class="px-4 py-2 rounded-full glass text-sm text-secondary border border-secondary/20 flex items-center gap-2">
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm text-secondary border border-secondary/20 flex items-center gap-2">
                             <i data-lucide="layout" class="w-4 h-4"></i>
                             Front-End Developer
                         </span>
-                        <span class="px-4 py-2 rounded-full glass text-sm text-accent border border-accent/20 flex items-center gap-2">
+                        <span
+                            class="px-4 py-2 rounded-full glass text-sm text-accent border border-accent/20 flex items-center gap-2">
                             <i data-lucide="settings" class="w-4 h-4"></i>
                             System Administrator
                         </span>
                     </div>
 
+                    <!-- Contact link - COMMENTED OUT -->
                     <!-- <div class="mt-8 flex gap-4">
                         <a href="#contact" class="text-primary hover:text-white transition-colors text-sm font-medium flex items-center gap-2 group">
                             Let's Talk 
@@ -620,7 +664,8 @@
     <section id="experience" class="py-24 md:py-32 relative">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <div class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold mb-4 border border-secondary/20">
+                <div
+                    class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold mb-4 border border-secondary/20">
                     Journey
                 </div>
                 <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
@@ -642,7 +687,8 @@
                         <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
                             <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-primary shadow-xl">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1 border border-primary/20">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1 border border-primary/20">
                                         <i data-lucide="graduation-cap" class="w-3 h-3"></i>
                                         Education
                                     </span>
@@ -654,7 +700,8 @@
                                     Telkom University
                                 </p>
                                 <p class="text-gray-400 text-sm leading-relaxed">
-                                    Focusing on enterprise system architecture, database management, and information security.
+                                    Focusing on enterprise system architecture, database management, and information
+                                    security.
                                 </p>
                             </div>
                         </div>
@@ -666,10 +713,12 @@
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
-                            <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4 shadow-xl">
+                            <div
+                                class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4 shadow-xl">
                                 <div class="flex items-center gap-2 mb-3 md:justify-end">
                                     <span class="text-xs text-gray-500">2022 - 2025</span>
-                                    <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1 border border-secondary/20">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1 border border-secondary/20">
                                         <i data-lucide="graduation-cap" class="w-3 h-3"></i>
                                         Education
                                     </span>
@@ -680,7 +729,8 @@
                                     SMK Telkom Jakarta
                                 </p>
                                 <p class="text-gray-400 text-sm leading-relaxed">
-                                    Vocational high school with specialization in software development and network fundamentals.
+                                    Vocational high school with specialization in software development and network
+                                    fundamentals.
                                 </p>
                             </div>
                         </div>
@@ -696,7 +746,8 @@
                         <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
                             <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-accent shadow-xl">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1 border border-accent/20">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1 border border-accent/20">
                                         <i data-lucide="briefcase" class="w-3 h-3"></i>
                                         Work
                                     </span>
@@ -708,7 +759,8 @@
                                     PT. XYZ Telecom
                                 </p>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-3">
-                                    Monitoring enterprise network infrastructure, troubleshooting complex issues, and maintaining 99.9% uptime SLA.
+                                    Monitoring enterprise network infrastructure, troubleshooting complex issues, and
+                                    maintaining 99.9% uptime SLA.
                                 </p>
                                 <div class="flex flex-wrap gap-2">
                                     <span class="px-2 py-1 rounded bg-accent/10 text-accent text-xs">Cisco</span>
@@ -725,10 +777,12 @@
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
-                            <div class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4 shadow-xl">
+                            <div
+                                class="timeline-card glass-card rounded-2xl p-6 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4 shadow-xl">
                                 <div class="flex items-center gap-2 mb-3 md:justify-end">
                                     <span class="text-xs text-gray-500">2022 - 2023</span>
-                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1 border border-primary/20">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1 border border-primary/20">
                                         <i data-lucide="briefcase" class="w-3 h-3"></i>
                                         Work
                                     </span>
@@ -739,7 +793,8 @@
                                     Freelance
                                 </p>
                                 <p class="text-gray-400 text-sm leading-relaxed mb-3">
-                                    Building responsive web applications and user interfaces for various clients using modern frameworks.
+                                    Building responsive web applications and user interfaces for various clients using
+                                    modern frameworks.
                                 </p>
                                 <div class="flex flex-wrap gap-2 md:justify-end">
                                     <span class="px-2 py-1 rounded bg-primary/10 text-primary text-xs">React</span>
@@ -759,7 +814,8 @@
     <section id="skills" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <div class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 border border-primary/20">
+                <div
+                    class="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4 border border-primary/20">
                     Expertise
                 </div>
                 <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
@@ -774,7 +830,8 @@
                 <!-- Network Skills -->
                 <div class="reveal">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
                             <i data-lucide="network" class="w-7 h-7 text-primary"></i>
                         </div>
                         <div>
@@ -784,35 +841,43 @@
                     </div>
 
                     <div class="flex flex-wrap gap-3">
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="router" class="w-4 h-4"></i>
                             Cisco Routing & Switching
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="wifi" class="w-4 h-4"></i>
                             MikroTik Configuration
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="shield" class="w-4 h-4"></i>
                             Network Security
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="lock" class="w-4 h-4"></i>
                             Firewall & VPN
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="terminal" class="w-4 h-4"></i>
                             Linux Server
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="activity" class="w-4 h-4"></i>
                             TCP/IP Protocol
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="git-branch" class="w-4 h-4"></i>
                             VLAN & Subnetting
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-primary/30 bg-primary/5 text-primary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="eye" class="w-4 h-4"></i>
                             Network Monitoring
                         </div>
@@ -822,7 +887,8 @@
                 <!-- Frontend Skills -->
                 <div class="reveal">
                     <div class="flex items-center gap-4 mb-8">
-                        <div class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center border border-secondary/20 shadow-lg shadow-secondary/10">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center border border-secondary/20 shadow-lg shadow-secondary/10">
                             <i data-lucide="code-2" class="w-7 h-7 text-secondary"></i>
                         </div>
                         <div>
@@ -832,35 +898,43 @@
                     </div>
 
                     <div class="flex flex-wrap gap-3">
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="atom" class="w-4 h-4"></i>
                             React.js / Next.js
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="file-code" class="w-4 h-4"></i>
                             HTML5 / CSS3
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="wind" class="w-4 h-4"></i>
                             Tailwind CSS
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="layout-grid" class="w-4 h-4"></i>
                             Bootstrap 5
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="zap" class="w-4 h-4"></i>
                             JavaScript / jQuery
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="smartphone" class="w-4 h-4"></i>
                             Responsive Design
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="git-commit" class="w-4 h-4"></i>
                             Git / GitHub
                         </div>
-                        <div class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
+                        <div
+                            class="skill-tag px-4 py-2.5 rounded-xl glass border border-secondary/30 bg-secondary/5 text-secondary text-sm font-medium cursor-default flex items-center gap-2">
                             <i data-lucide="plug" class="w-4 h-4"></i>
                             REST API Integration
                         </div>
@@ -870,25 +944,38 @@
 
             <!-- Tools Section -->
             <div class="mt-16 reveal">
-                <p class="text-center text-gray-500 mb-8 text-sm uppercase tracking-wider font-medium">Tools & Technologies</p>
+                <p class="text-center text-gray-500 mb-8 text-sm uppercase tracking-wider font-medium">Tools &
+                    Technologies</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="VS Code">
-                        <i data-lucide="code" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5"
+                        title="VS Code">
+                        <i data-lucide="code"
+                            class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Figma">
-                        <i data-lucide="pen-tool" class="w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5"
+                        title="Figma">
+                        <i data-lucide="pen-tool"
+                            class="w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Docker">
-                        <i data-lucide="container" class="w-8 h-8 text-gray-400 group-hover:text-accent transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5"
+                        title="Docker">
+                        <i data-lucide="container"
+                            class="w-8 h-8 text-gray-400 group-hover:text-accent transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="AWS">
-                        <i data-lucide="cloud" class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5"
+                        title="AWS">
+                        <i data-lucide="cloud"
+                            class="w-8 h-8 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Linux">
-                        <i data-lucide="terminal-square" class="w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5"
+                        title="Linux">
+                        <i data-lucide="terminal-square"
+                            class="w-8 h-8 text-gray-400 group-hover:text-secondary transition-colors"></i>
                     </div>
-                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5" title="Postman">
-                        <i data-lucide="send" class="w-8 h-8 text-gray-400 group-hover:text-accent transition-colors"></i>
+                    <div class="glass-card rounded-2xl p-4 hover:scale-110 transition-transform cursor-pointer group border border-white/5"
+                        title="Postman">
+                        <i data-lucide="send"
+                            class="w-8 h-8 text-gray-400 group-hover:text-accent transition-colors"></i>
                     </div>
                 </div>
             </div>
@@ -899,7 +986,8 @@
     <section id="projects" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <div class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold mb-4 border border-secondary/20">
+                <div
+                    class="inline-block px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-semibold mb-4 border border-secondary/20">
                     Portfolio
                 </div>
                 <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
@@ -912,25 +1000,34 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-primary/30">
+                <div
+                    class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-primary/30">
                     <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="network" class="w-16 h-16 text-gray-700 group-hover:text-primary/30 transition-colors duration-500"></i>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10">
                         </div>
-                        <div class="project-overlay absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center z-20">
-                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl hover:shadow-2xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="network"
+                                class="w-16 h-16 text-gray-700 group-hover:text-primary/30 transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button
+                                class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl hover:shadow-2xl">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary border border-primary/20">Network</span>
+                            <span
+                                class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary border border-primary/20">Network</span>
                             <span class="text-xs text-gray-500">Enterprise</span>
                         </div>
-                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-primary transition-colors">Enterprise Network Infrastructure</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Complete network redesign with VLAN segmentation, OSPF routing, and link redundancy for 99.99% uptime.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-primary transition-colors">
+                            Enterprise Network Infrastructure</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Complete network redesign with VLAN
+                            segmentation, OSPF routing, and link redundancy for 99.99% uptime.</p>
                         <div class="flex gap-2">
                             <span class="text-xs text-gray-500">Cisco</span>
                             <span class="text-xs text-gray-600">•</span>
@@ -942,25 +1039,35 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-secondary/30">
+                <div
+                    class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-secondary/30">
                     <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="monitor" class="w-16 h-16 text-gray-700 group-hover:text-secondary/30 transition-colors duration-500"></i>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10">
                         </div>
-                        <div class="project-overlay absolute inset-0 bg-secondary/10 backdrop-blur-sm flex items-center justify-center z-20">
-                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="monitor"
+                                class="w-16 h-16 text-gray-700 group-hover:text-secondary/30 transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-secondary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button
+                                class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary border border-secondary/20">Web App</span>
+                            <span
+                                class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary border border-secondary/20">Web
+                                App</span>
                             <span class="text-xs text-gray-500">Dashboard</span>
                         </div>
-                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-secondary transition-colors">Network Monitoring Dashboard</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Real-time dashboard for monitoring network traffic, device status, and automated alerting system.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-secondary transition-colors">
+                            Network Monitoring Dashboard</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Real-time dashboard for monitoring network
+                            traffic, device status, and automated alerting system.</p>
                         <div class="flex gap-2">
                             <span class="text-xs text-gray-500">React</span>
                             <span class="text-xs text-gray-600">•</span>
@@ -972,25 +1079,34 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-accent/30">
+                <div
+                    class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-accent/30">
                     <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="shield-check" class="w-16 h-16 text-gray-700 group-hover:text-accent/30 transition-colors duration-500"></i>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10">
                         </div>
-                        <div class="project-overlay absolute inset-0 bg-accent/10 backdrop-blur-sm flex items-center justify-center z-20">
-                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="shield-check"
+                                class="w-16 h-16 text-gray-700 group-hover:text-accent/30 transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-accent/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button
+                                class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent border border-accent/20">Security</span>
+                            <span
+                                class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent border border-accent/20">Security</span>
                             <span class="text-xs text-gray-500">VPN</span>
                         </div>
-                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-accent transition-colors">Secure VPN Gateway</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Enterprise VPN solution with site-to-site and remote access capabilities, featuring MFA integration.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-accent transition-colors">Secure
+                            VPN Gateway</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Enterprise VPN solution with site-to-site
+                            and remote access capabilities, featuring MFA integration.</p>
                         <div class="flex gap-2">
                             <span class="text-xs text-gray-500">IPsec</span>
                             <span class="text-xs text-gray-600">•</span>
@@ -1002,25 +1118,34 @@
                 </div>
 
                 <!-- Project 4 -->
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-secondary/30">
+                <div
+                    class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-secondary/30">
                     <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="shopping-cart" class="w-16 h-16 text-gray-700 group-hover:text-secondary/30 transition-colors duration-500"></i>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10">
                         </div>
-                        <div class="project-overlay absolute inset-0 bg-secondary/10 backdrop-blur-sm flex items-center justify-center z-20">
-                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="shopping-cart"
+                                class="w-16 h-16 text-gray-700 group-hover:text-secondary/30 transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-secondary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button
+                                class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary border border-secondary/20">E-Commerce</span>
+                            <span
+                                class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary border border-secondary/20">E-Commerce</span>
                             <span class="text-xs text-gray-500">Full Stack</span>
                         </div>
-                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-secondary transition-colors">E-Commerce Platform</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Complete e-commerce solution with payment gateway integration, inventory management, and analytics.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-secondary transition-colors">
+                            E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Complete e-commerce solution with payment
+                            gateway integration, inventory management, and analytics.</p>
                         <div class="flex gap-2">
                             <span class="text-xs text-gray-500">Next.js</span>
                             <span class="text-xs text-gray-600">•</span>
@@ -1032,25 +1157,34 @@
                 </div>
 
                 <!-- Project 5 -->
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-primary/30">
+                <div
+                    class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-primary/30">
                     <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="wifi" class="w-16 h-16 text-gray-700 group-hover:text-primary/30 transition-colors duration-500"></i>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10">
                         </div>
-                        <div class="project-overlay absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center z-20">
-                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="wifi"
+                                class="w-16 h-16 text-gray-700 group-hover:text-primary/30 transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-primary/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button
+                                class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary border border-primary/20">Wireless</span>
+                            <span
+                                class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary border border-primary/20">Wireless</span>
                             <span class="text-xs text-gray-500">Enterprise</span>
                         </div>
-                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-primary transition-colors">Managed WiFi System</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Enterprise-grade WiFi management with captive portal, voucher system, and bandwidth allocation.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-primary transition-colors">
+                            Managed WiFi System</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Enterprise-grade WiFi management with
+                            captive portal, voucher system, and bandwidth allocation.</p>
                         <div class="flex gap-2">
                             <span class="text-xs text-gray-500">MikroTik</span>
                             <span class="text-xs text-gray-600">•</span>
@@ -1062,25 +1196,34 @@
                 </div>
 
                 <!-- Project 6 -->
-                <div class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-accent/30">
+                <div
+                    class="group relative glass-card rounded-2xl overflow-hidden reveal border border-white/5 hover:border-accent/30">
                     <div class="aspect-video bg-gradient-to-br from-gray-800 to-gray-900 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <i data-lucide="bar-chart-3" class="w-16 h-16 text-gray-700 group-hover:text-accent/30 transition-colors duration-500"></i>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-darker via-transparent to-transparent opacity-80 z-10">
                         </div>
-                        <div class="project-overlay absolute inset-0 bg-accent/10 backdrop-blur-sm flex items-center justify-center z-20">
-                            <button class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i data-lucide="bar-chart-3"
+                                class="w-16 h-16 text-gray-700 group-hover:text-accent/30 transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-accent/10 backdrop-blur-sm flex items-center justify-center z-20">
+                            <button
+                                class="px-6 py-3 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-xl">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex items-center gap-2 mb-3">
-                            <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent border border-accent/20">Analytics</span>
+                            <span
+                                class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent border border-accent/20">Analytics</span>
                             <span class="text-xs text-gray-500">Visualization</span>
                         </div>
-                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-accent transition-colors">Network Analytics Tool</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Advanced network traffic analysis with real-time visualization, anomaly detection, and reporting.</p>
+                        <h3 class="font-display font-bold text-xl mb-2 group-hover:text-accent transition-colors">
+                            Network Analytics Tool</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Advanced network traffic analysis with
+                            real-time visualization, anomaly detection, and reporting.</p>
                         <div class="flex gap-2">
                             <span class="text-xs text-gray-500">Python</span>
                             <span class="text-xs text-gray-600">•</span>
@@ -1098,7 +1241,8 @@
     <section id="certifications" class="py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <div class="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4 border border-accent/20">
+                <div
+                    class="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4 border border-accent/20">
                     Credentials
                 </div>
                 <h2 class="font-display font-bold text-4xl md:text-5xl mb-4">
@@ -1111,18 +1255,22 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- CCNA -->
-                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-primary hover:border-l-8 transition-all">
+                <div
+                    class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-primary hover:border-l-8 transition-all">
                     <div class="flex items-start gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/20">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/20">
                             <i data-lucide="award" class="w-7 h-7 text-primary"></i>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <h3 class="font-display font-bold text-lg">CCNA</h3>
-                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                                <span
+                                    class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
                             </div>
                             <p class="text-primary text-sm font-medium mb-2">Cisco Certified Network Associate</p>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Comprehensive networking certification covering routing, switching, wireless, and security fundamentals.</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Comprehensive networking certification
+                                covering routing, switching, wireless, and security fundamentals.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>Issued 2023</span>
@@ -1134,18 +1282,22 @@
                 </div>
 
                 <!-- MTCNA -->
-                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-secondary hover:border-l-8 transition-all">
+                <div
+                    class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-secondary hover:border-l-8 transition-all">
                     <div class="flex items-start gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center flex-shrink-0 border border-secondary/20">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-secondary/20 flex items-center justify-center flex-shrink-0 border border-secondary/20">
                             <i data-lucide="shield" class="w-7 h-7 text-secondary"></i>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <h3 class="font-display font-bold text-lg">MTCNA</h3>
-                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                                <span
+                                    class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
                             </div>
                             <p class="text-secondary text-sm font-medium mb-2">MikroTik Certified Network Associate</p>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-3">RouterOS fundamentals, basic configuration, static routing, and bandwidth management.</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">RouterOS fundamentals, basic
+                                configuration, static routing, and bandwidth management.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>Issued 2022</span>
@@ -1155,18 +1307,22 @@
                 </div>
 
                 <!-- Meta Frontend -->
-                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-accent hover:border-l-8 transition-all">
+                <div
+                    class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-accent hover:border-l-8 transition-all">
                     <div class="flex items-start gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-accent/20 flex items-center justify-center flex-shrink-0 border border-accent/20">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-accent/20 flex items-center justify-center flex-shrink-0 border border-accent/20">
                             <i data-lucide="code" class="w-7 h-7 text-accent"></i>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
-                                <h3 class="font-display font-bold text-lg">Meta Front-End</h3>
-                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                                <h3 class="font-display font-bold text-lg">Front-End</h3>
+                                <span
+                                    class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
                             </div>
-                            <p class="text-accent text-sm font-medium mb-2">Meta Front-End Developer Professional</p>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Modern front-end development including React, advanced CSS, UI/UX principles, and version control.</p>
+                            <p class="text-accent text-sm font-medium mb-2">Front-End Developer</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Modern front-end development including
+                                React, advanced CSS, UI/UX principles, and version control.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>Issued 2024</span>
@@ -1176,18 +1332,22 @@
                 </div>
 
                 <!-- AWS -->
-                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-yellow-500 hover:border-l-8 transition-all">
+                <div
+                    class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-yellow-500 hover:border-l-8 transition-all">
                     <div class="flex items-start gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0 border border-yellow-500/20">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0 border border-yellow-500/20">
                             <i data-lucide="cloud" class="w-7 h-7 text-yellow-500"></i>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <h3 class="font-display font-bold text-lg">AWS Cloud</h3>
-                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                                <span
+                                    class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
                             </div>
                             <p class="text-yellow-500 text-sm font-medium mb-2">AWS Cloud Practitioner</p>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Cloud computing fundamentals, AWS core services, security architecture, and pricing models.</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Cloud computing fundamentals, AWS core
+                                services, security architecture, and pricing models.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>Issued 2023</span>
@@ -1197,18 +1357,22 @@
                 </div>
 
                 <!-- FreeCodeCamp -->
-                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-pink-500 hover:border-l-8 transition-all">
+                <div
+                    class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-pink-500 hover:border-l-8 transition-all">
                     <div class="flex items-start gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-500/20 flex items-center justify-center flex-shrink-0 border border-pink-500/20">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-pink-500/20 flex items-center justify-center flex-shrink-0 border border-pink-500/20">
                             <i data-lucide="layout" class="w-7 h-7 text-pink-500"></i>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <h3 class="font-display font-bold text-lg">Responsive Web</h3>
-                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                                <span
+                                    class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
                             </div>
                             <p class="text-pink-500 text-sm font-medium mb-2">FreeCodeCamp Certification</p>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Responsive web design mastery with HTML5, CSS3, Flexbox, CSS Grid, and accessibility.</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Responsive web design mastery with
+                                HTML5, CSS3, Flexbox, CSS Grid, and accessibility.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>Issued 2022</span>
@@ -1218,18 +1382,22 @@
                 </div>
 
                 <!-- Linux -->
-                <div class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-cyan-500 hover:border-l-8 transition-all">
+                <div
+                    class="cert-card glass-card rounded-2xl p-6 reveal border-l-4 border-cyan-500 hover:border-l-8 transition-all">
                     <div class="flex items-start gap-4">
-                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0 border border-cyan-500/20">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0 border border-cyan-500/20">
                             <i data-lucide="terminal" class="w-7 h-7 text-cyan-500"></i>
                         </div>
                         <div class="flex-1">
                             <div class="flex items-center justify-between mb-1">
                                 <h3 class="font-display font-bold text-lg">Linux Essentials</h3>
-                                <span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
+                                <span
+                                    class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium border border-green-500/20">Active</span>
                             </div>
                             <p class="text-cyan-500 text-sm font-medium mb-2">LPI Linux Essentials</p>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Linux OS fundamentals, command line proficiency, scripting basics, and system administration.</p>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-3">Linux OS fundamentals, command line
+                                proficiency, scripting basics, and system administration.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>Issued 2023</span>
@@ -1249,21 +1417,26 @@
                     <span class="font-display font-bold text-2xl gradient-text">AR.</span>
                     <span class="text-gray-600 text-sm">© 2024 Ardian Rahman. All rights reserved.</span>
                 </div>
-                
+
                 <div class="flex items-center gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
                         <i data-lucide="github" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
                         <i data-lucide="linkedin" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
                         <i data-lucide="twitter" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                    <a href="#"
+                        class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
                         <i data-lucide="instagram" class="w-5 h-5"></i>
                     </a>
-                    <a href="mailto:contact@example.com" class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
+                    <a href="mailto:contact@example.com"
+                        class="w-10 h-10 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all hover:scale-110 border border-white/5">
                         <i data-lucide="mail" class="w-5 h-5"></i>
                     </a>
                 </div>
@@ -1276,7 +1449,7 @@
         lucide.createIcons();
 
         // Typewriter Effect
-        const roles = ['Network Operation Specialist', 'Front-End Developer', 'System Administrator'];
+        const roles = ['Network Operation Enthusiast', 'Front-End Developer', 'System Administrator'];
         let roleIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -1382,7 +1555,7 @@
 
                 particles.slice(i + 1).forEach(other => {
                     if (connections >= maxConnections) return;
-                    
+
                     const dx = particle.x - other.x;
                     const dy = particle.y - other.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
