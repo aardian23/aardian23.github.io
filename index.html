@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <script>
@@ -398,55 +399,70 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 md:py-32 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="reveal flex justify-center">
-                    <div class="relative w-full max-w-xs">
-                        <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl"></div>
-                        <div class="relative glass-card rounded-2xl p-5">
-                            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 flex items-center justify-center">
+  <section id="about" class="py-20 md:py-32 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal flex justify-center">
+                <div class="relative w-full max-w-xs">
+                    <!-- Glow Effect -->
+                    <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl"></div>
+                    
+                    <!-- Card Container dengan ukuran fixed -->
+                    <div class="relative glass-card rounded-2xl p-5">
+                        <!-- Image Container dengan aspect ratio tetap -->
+                        <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 relative">
+                            <!-- Ganti src dengan path image Anda -->
+                            <img 
+                                src="assets/img/about.jpeg" 
+                                alt="Ardian Rahman" 
+                                class="w-full h-full object-cover object-center"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                            >
+                            <!-- Fallback jika image error -->
+                            <div class="hidden absolute inset-0 items-center justify-center">
                                 <div class="text-center">
                                     <i data-lucide="user" class="w-20 h-20 text-gray-600 mx-auto mb-3"></i>
                                     <p class="text-gray-500 text-xs">Profile Photo</p>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="absolute -top-3 -right-3 glass-card rounded-lg p-2 animate-float shadow-lg">
-                            <i data-lucide="network" class="w-5 h-5 text-primary"></i>
-                        </div>
-                        <div class="absolute -bottom-3 -left-3 glass-card rounded-lg p-2 animate-float shadow-lg" style="animation-delay: 1s;">
-                            <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
-                        </div>
                     </div>
-                </div>
-
-                <div class="reveal">
-                    <h2 class="font-display font-bold text-3xl md:text-4xl mb-6">
-                        About <span class="gradient-text">Me</span>
-                    </h2>
-                    <div class="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base">
-                        <p>
-                            I am an IT professional with a passion for two fields: <strong class="text-white">Network Operations</strong> and <strong class="text-white">Front-End Development</strong>. 
-                            This unique combination allows me to understand technical infrastructure from the server side to the user interface.
-                        </p>
-                        <p>
-                            On the network side, I have experience in Cisco & MikroTik configuration, infrastructure troubleshooting, 
-                            and ensuring 99.9% system availability. On the development side, I create modern web applications 
-                            using React, Vue, and the latest technologies.
-                        </p>
+                    
+                    <!-- Floating Cards -->
+                    <div class="absolute -top-3 -right-3 glass-card rounded-lg p-2 animate-float shadow-lg">
+                        <i data-lucide="network" class="w-5 h-5 text-primary"></i>
                     </div>
-
-                    <div class="mt-8 flex flex-wrap gap-3">
-                        <span class="px-3 py-1.5 rounded-full glass text-xs text-primary border border-primary/20">Network Operation Center</span>
-                        <span class="px-3 py-1.5 rounded-full glass text-xs text-secondary border border-secondary/20">Front-End</span>
-                        <span class="px-3 py-1.5 rounded-full glass text-xs text-accent border border-accent/20">System Admin</span>
+                    <div class="absolute -bottom-3 -left-3 glass-card rounded-lg p-2 animate-float shadow-lg" style="animation-delay: 1s;">
+                        <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
                     </div>
                 </div>
             </div>
+
+            <div class="reveal">
+                <h2 class="font-display font-bold text-3xl md:text-4xl mb-6">
+                    About <span class="gradient-text">Me</span>
+                </h2>
+                <div class="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base">
+                    <p>
+                        I am an IT professional with a passion for two fields: <strong class="text-white">Network Operations</strong> and <strong class="text-white">Front-End Development</strong>. 
+                        This unique combination allows me to understand technical infrastructure from the server side to the user interface.
+                    </p>
+                    <p>
+                        On the network side, I have experience in Cisco & MikroTik configuration, infrastructure troubleshooting, 
+                        and ensuring 99.9% system availability. On the development side, I create modern web applications 
+                        using React, Vue, and the latest technologies.
+                    </p>
+                </div>
+
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <span class="px-3 py-1.5 rounded-full glass text-xs text-primary border border-primary/20">Network Operation Center</span>
+                    <span class="px-3 py-1.5 rounded-full glass text-xs text-secondary border border-secondary/20">Front-End</span>
+                    <span class="px-3 py-1.5 rounded-full glass text-xs text-accent border border-accent/20">System Admin</span>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Experience Timeline Section -->
     <section id="experience" class="py-20 md:py-32 relative">
