@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -46,9 +49,11 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #0f172a;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #0ea5e9;
             border-radius: 4px;
@@ -68,7 +73,7 @@
         .network-bg {
             position: absolute;
             inset: 0;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 1px 1px, rgba(14, 165, 233, 0.15) 1px, transparent 0);
             background-size: 40px 40px;
         }
@@ -128,6 +133,7 @@
             transform: translateY(30px);
             transition: all 0.8s ease-out;
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
@@ -138,15 +144,25 @@
             content: '|';
             animation: blink 1s infinite;
         }
+
         @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
         }
 
         /* Skill Tags */
         .skill-tag {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .skill-tag:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.3);
@@ -159,9 +175,17 @@
             opacity: 0.4;
             animation: morph 8s ease-in-out infinite;
         }
+
         @keyframes morph {
-            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+
+            0%,
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
         }
 
         /* Timeline Styles */
@@ -189,6 +213,7 @@
         .timeline-card {
             transition: all 0.4s ease;
         }
+
         .timeline-card:hover {
             transform: translateX(10px);
             border-color: rgba(14, 165, 233, 0.5);
@@ -198,6 +223,7 @@
             .timeline-line {
                 left: 20px;
             }
+
             .timeline-dot {
                 left: 20px;
             }
@@ -262,6 +288,7 @@
         .cert-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .cert-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
@@ -279,38 +306,50 @@
         }
     </style>
 </head>
+
 <body class="bg-darker text-gray-100 font-sans overflow-x-hidden">
 
     <!-- Global Background -->
-    <div class="global-bg">
+    <!-- Global Background -->
+    <div class="global-bg" id="global-bg">
         <div class="network-bg"></div>
         <canvas id="particles-canvas"></canvas>
-        <div class="blob bg-primary w-96 h-96 top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
-        <div class="blob bg-secondary w-96 h-96 top-1/3 right-0 translate-x-1/2" style="animation-delay: 2s;"></div>
-        <div class="blob bg-accent w-64 h-64 bottom-0 left-1/3" style="animation-delay: 4s;"></div>
-        <div class="blob bg-primary w-80 h-80 bottom-1/4 right-1/4" style="animation-delay: 6s;"></div>
+
+        <!-- Blobs - Static di mobile, animasi di desktop -->
+        <div class="blob blob-1 bg-primary w-96 h-96"></div>
+        <div class="blob blob-2 bg-secondary w-96 h-96"></div>
+        <div class="blob blob-3 bg-accent w-64 h-64"></div>
+        <div class="blob blob-4 bg-primary w-80 h-80"></div>
     </div>
 
     <!-- Fixed Navigation -->
     <nav id="navbar" class="fixed w-full z-50 top-0 left-0 transition-all duration-300 py-3">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div id="nav-container" class="glass rounded-full px-6 py-2.5 flex justify-between items-center transition-all duration-300">
+            <div id="nav-container"
+                class="glass rounded-full px-6 py-2.5 flex justify-between items-center transition-all duration-300">
                 <a href="#" class="font-display font-bold text-xl gradient-text">
                     AR<span class="text-white">.</span>
                 </a>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-6">
-                    <a href="#home" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Home</a>
-                    <a href="#about" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">About</a>
-                    <a href="#experience" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Experience</a>
-                    <a href="#skills" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Skills</a>
-                    <a href="#projects" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Projects</a>
-                    <a href="#certifications" class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Certifications</a>
+                    <a href="#home"
+                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Home</a>
+                    <a href="#about"
+                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">About</a>
+                    <a href="#experience"
+                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Experience</a>
+                    <a href="#skills"
+                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Skills</a>
+                    <a href="#projects"
+                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Projects</a>
+                    <a href="#certifications"
+                        class="nav-link text-xs font-medium text-gray-300 hover:text-primary transition-colors">Certifications</a>
                 </div>
 
                 <!-- Hamburger Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-1 relative w-8 h-8 flex flex-col justify-center items-center gap-1.5 z-50">
+                <button id="mobile-menu-btn"
+                    class="md:hidden text-gray-300 hover:text-white focus:outline-none p-1 relative w-8 h-8 flex flex-col justify-center items-center gap-1.5 z-50">
                     <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
                     <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
                     <span class="hamburger-line w-5 h-0.5 bg-current block"></span>
@@ -320,37 +359,49 @@
             <!-- Mobile Menu - Inside nav, fixed position -->
             <div id="mobile-menu" class="hidden md:hidden mobile-menu-wrapper mt-2">
                 <div class="glass rounded-2xl p-3 space-y-1 mx-auto max-w-7xl">
-                    <a href="#home" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="home">
+                    <a href="#home"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
+                        data-section="home">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="home" class="w-4 h-4"></i>
                             Home
                         </span>
                     </a>
-                    <a href="#about" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="about">
+                    <a href="#about"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
+                        data-section="about">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="user" class="w-4 h-4"></i>
                             About
                         </span>
                     </a>
-                    <a href="#experience" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="experience">
+                    <a href="#experience"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
+                        data-section="experience">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="briefcase" class="w-4 h-4"></i>
                             Experience
                         </span>
                     </a>
-                    <a href="#skills" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="skills">
+                    <a href="#skills"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
+                        data-section="skills">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="code" class="w-4 h-4"></i>
                             Skills
                         </span>
                     </a>
-                    <a href="#projects" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="projects">
+                    <a href="#projects"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
+                        data-section="projects">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="folder" class="w-4 h-4"></i>
                             Projects
                         </span>
                     </a>
-                    <a href="#certifications" class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all" data-section="certifications">
+                    <a href="#certifications"
+                        class="mobile-menu-item block text-sm text-gray-300 py-3 px-4 rounded-lg transition-all"
+                        data-section="certifications">
                         <span class="relative z-10 flex items-center gap-3">
                             <i data-lucide="award" class="w-4 h-4"></i>
                             Certifications
@@ -370,23 +421,28 @@
             <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl mb-4 leading-tight">
                 <span class="block text-white">Ardian Rahman</span>
             </h1>
-            
+
             <div class="h-8 md:h-10 mb-8">
-                <span class="text-lg md:text-xl lg:text-2xl text-primary font-medium terminal-cursor" id="typewriter"></span>
+                <span class="text-lg md:text-xl lg:text-2xl text-primary font-medium terminal-cursor"
+                    id="typewriter"></span>
             </div>
 
             <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Specializing in <span class="text-primary font-semibold">Network Operations</span> and <span class="text-secondary font-semibold">Front-End Development</span>. 
+                Specializing in <span class="text-primary font-semibold">Network Operations</span> and <span
+                    class="text-secondary font-semibold">Front-End Development</span>.
                 Building reliable network infrastructure and stunning user interfaces.
             </p>
 
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#projects" class="group relative px-6 py-3 bg-primary rounded-full text-sm font-semibold text-white overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
+                <a href="#projects"
+                    class="group relative px-6 py-3 bg-primary rounded-full text-sm font-semibold text-white overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25">
                     <span class="relative z-10 flex items-center gap-2">
-                        View Projects <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        View Projects <i data-lucide="arrow-right"
+                            class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </span>
                 </a>
-                <a href="#" class="px-6 py-3 glass rounded-full text-sm font-semibold text-white hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2">
+                <a href="#"
+                    class="px-6 py-3 glass rounded-full text-sm font-semibold text-white hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2">
                     <i data-lucide="file-text" class="w-4 h-4"></i>
                     Curriculum Vitae
                 </a>
@@ -399,70 +455,78 @@
     </section>
 
     <!-- About Section -->
-  <section id="about" class="py-20 md:py-32 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-            <div class="reveal flex justify-center">
-                <div class="relative w-full max-w-xs">
-                    <!-- Glow Effect -->
-                    <div class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl"></div>
-                    
-                    <!-- Card Container dengan ukuran fixed -->
-                    <div class="relative glass-card rounded-2xl p-5">
-                        <!-- Image Container dengan aspect ratio tetap -->
-                        <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 relative">
-                            <!-- Ganti src dengan path image Anda -->
-                            <img 
-                                src="assets/img/test.jpeg" 
-                                alt="Ardian Rahman" 
-                                class="w-full h-full object-cover object-center"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                            >
-                            <!-- Fallback jika image error -->
-                            <div class="hidden absolute inset-0 items-center justify-center">
-                                <div class="text-center">
-                                    <i data-lucide="user" class="w-20 h-20 text-gray-600 mx-auto mb-3"></i>
-                                    <p class="text-gray-500 text-xs">Profile Photo</p>
+    <section id="about" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal flex justify-center">
+                    <div class="relative w-full max-w-xs">
+                        <!-- Glow Effect -->
+                        <div
+                            class="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-2xl opacity-20 blur-xl">
+                        </div>
+
+                        <!-- Card Container dengan ukuran fixed -->
+                        <div class="relative glass-card rounded-2xl p-5">
+                            <!-- Image Container dengan aspect ratio tetap -->
+                            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-gray-800 relative">
+                                <!-- Ganti src dengan path image Anda -->
+                                <img src="assets/img/test.jpeg" alt="Ardian Rahman"
+                                    class="w-full h-full object-cover object-center"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <!-- Fallback jika image error -->
+                                <div class="hidden absolute inset-0 items-center justify-center">
+                                    <div class="text-center">
+                                        <i data-lucide="user" class="w-20 h-20 text-gray-600 mx-auto mb-3"></i>
+                                        <p class="text-gray-500 text-xs">Profile Photo</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Floating Cards -->
-                    <div class="absolute -top-3 -right-3 glass-card rounded-lg p-2 animate-float shadow-lg">
-                        <i data-lucide="network" class="w-5 h-5 text-primary"></i>
-                    </div>
-                    <div class="absolute -bottom-3 -left-3 glass-card rounded-lg p-2 animate-float shadow-lg" style="animation-delay: 1s;">
-                        <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
+
+                        <!-- Floating Cards -->
+                        <div class="absolute -top-3 -right-3 glass-card rounded-lg p-2 animate-float shadow-lg">
+                            <i data-lucide="network" class="w-5 h-5 text-primary"></i>
+                        </div>
+                        <div class="absolute -bottom-3 -left-3 glass-card rounded-lg p-2 animate-float shadow-lg"
+                            style="animation-delay: 1s;">
+                            <i data-lucide="code-2" class="w-5 h-5 text-secondary"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="reveal">
-                <h2 class="font-display font-bold text-3xl md:text-4xl mb-6">
-                    About <span class="gradient-text">Me</span>
-                </h2>
-                <div class="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base">
-                    <p>
-                        I am an IT professional with a passion for two fields: <strong class="text-white">Network Operations</strong> and <strong class="text-white">Front-End Development</strong>. 
-                        This unique combination allows me to understand technical infrastructure from the server side to the user interface.
-                    </p>
-                    <p>
-                        On the network side, I have experience in Cisco & MikroTik configuration, infrastructure troubleshooting, 
-                        and ensuring 99.9% system availability. On the development side, I create modern web applications 
-                        using React, Vue, and the latest technologies.
-                    </p>
-                </div>
+                <div class="reveal">
+                    <h2 class="font-display font-bold text-3xl md:text-4xl mb-6">
+                        About <span class="gradient-text">Me</span>
+                    </h2>
+                    <div class="space-y-4 text-gray-400 leading-relaxed text-sm md:text-base">
+                        <p>
+                            I am an IT professional with a passion for two fields: <strong class="text-white">Network
+                                Operations</strong> and <strong class="text-white">Front-End Development</strong>.
+                            This unique combination allows me to understand technical infrastructure from the server
+                            side to the user interface.
+                        </p>
+                        <p>
+                            On the network side, I have experience in Cisco & MikroTik configuration, infrastructure
+                            troubleshooting,
+                            and ensuring 99.9% system availability. On the development side, I create modern web
+                            applications
+                            using React, Vue, and the latest technologies.
+                        </p>
+                    </div>
 
-                <div class="mt-8 flex flex-wrap gap-3">
-                    <span class="px-3 py-1.5 rounded-full glass text-xs text-primary border border-primary/20">Network Operation Center</span>
-                    <span class="px-3 py-1.5 rounded-full glass text-xs text-secondary border border-secondary/20">Front-End</span>
-                    <span class="px-3 py-1.5 rounded-full glass text-xs text-accent border border-accent/20">System Admin</span>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span
+                            class="px-3 py-1.5 rounded-full glass text-xs text-primary border border-primary/20">Network
+                            Operation Center</span>
+                        <span
+                            class="px-3 py-1.5 rounded-full glass text-xs text-secondary border border-secondary/20">Front-End</span>
+                        <span class="px-3 py-1.5 rounded-full glass text-xs text-accent border border-accent/20">System
+                            Admin</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Experience Timeline Section -->
     <section id="experience" class="py-20 md:py-32 relative">
@@ -487,7 +551,8 @@
                         <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
                             <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
                                         <i data-lucide="graduation-cap" class="w-3 h-3"></i>
                                         Education
                                     </span>
@@ -511,14 +576,17 @@
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
-                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4">
+                            <div
+                                class="timeline-card glass-card rounded-xl p-5 border-l-4 border-secondary md:text-right md:border-l-0 md:border-r-4">
                                 <div class="flex items-center gap-2 mb-3 md:justify-end">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-secondary/20 text-secondary flex items-center gap-1">
                                         <i data-lucide="graduation-cap" class="w-3 h-3"></i>
                                         Education
                                     </span>
                                 </div>
-                                <h3 class="font-display font-bold text-lg mb-1">Vocational High School in Software Engineering</h3>
+                                <h3 class="font-display font-bold text-lg mb-1">Vocational High School in Software
+                                    Engineering</h3>
                                 <p class="text-secondary text-sm mb-2 flex items-center gap-1 md:justify-end">
                                     <i data-lucide="map-pin" class="w-3 h-3"></i>
                                     SMK Telkom Jakarta
@@ -541,7 +609,8 @@
                         <div class="md:w-5/12 md:pl-8 pl-12 md:pl-0">
                             <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-accent">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-accent/20 text-accent flex items-center gap-1">
                                         <i data-lucide="briefcase" class="w-3 h-3"></i>
                                         Work
                                     </span>
@@ -551,7 +620,8 @@
                                     <i data-lucide="map-pin" class="w-3 h-3"></i>
                                     PT. XYZ Telecom
                                 </p>
-                                <p class="text-gray-400 text-xs mb-3">Monitoring network infrastructure, troubleshooting, and maintaining 99.9% uptime.</p>
+                                <p class="text-gray-400 text-xs mb-3">Monitoring network infrastructure,
+                                    troubleshooting, and maintaining 99.9% uptime.</p>
                                 <div class="flex items-center gap-2 text-xs text-gray-500">
                                     <i data-lucide="calendar" class="w-3 h-3"></i>
                                     <span>2023 - Present</span>
@@ -566,9 +636,11 @@
                     <div class="timeline-dot" style="top: 24px;"></div>
                     <div class="md:flex items-center justify-between">
                         <div class="md:w-5/12 md:pr-8 pl-12 md:pl-0">
-                            <div class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4">
+                            <div
+                                class="timeline-card glass-card rounded-xl p-5 border-l-4 border-primary md:text-right md:border-l-0 md:border-r-4">
                                 <div class="flex items-center gap-2 mb-3 md:justify-end">
-                                    <span class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs bg-primary/20 text-primary flex items-center gap-1">
                                         <i data-lucide="briefcase" class="w-3 h-3"></i>
                                         Work
                                     </span>
@@ -578,7 +650,8 @@
                                     <i data-lucide="map-pin" class="w-3 h-3"></i>
                                     Freelance
                                 </p>
-                                <p class="text-gray-400 text-xs mb-3">Building responsive web applications and user interfaces for various clients.</p>
+                                <p class="text-gray-400 text-xs mb-3">Building responsive web applications and user
+                                    interfaces for various clients.</p>
                                 <div class="flex items-center gap-2 text-xs text-gray-500 md:justify-end">
                                     <i data-lucide="calendar" class="w-3 h-3"></i>
                                     <span>2022 - 2023</span>
@@ -612,30 +685,38 @@
                     </div>
                     <h3 class="font-display font-bold text-xl">Network Operations</h3>
                 </div>
-                
+
                 <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         Cisco Routing & Switching
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         MikroTik Configuration
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         Network Security
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         Firewall & VPN
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         Linux Server
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         TCP/IP Protocol
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         VLAN & Subnetting
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-primary/30 bg-primary/10 text-primary text-sm font-medium cursor-default">
                         Network Monitoring
                     </div>
                 </div>
@@ -649,30 +730,38 @@
                     </div>
                     <h3 class="font-display font-bold text-xl">Front-End Development</h3>
                 </div>
-                
+
                 <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         React.js / Next.js
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         HTML5 / CSS3
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         Tailwind CSS
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         Bootstrap 5
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         JavaScript / jQuery
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         Responsive Design
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         Git / GitHub
                     </div>
-                    <div class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
+                    <div
+                        class="skill-tag px-4 py-2 rounded-xl glass border border-secondary/30 bg-secondary/10 text-secondary text-sm font-medium cursor-default">
                         REST API Integration
                     </div>
                 </div>
@@ -683,19 +772,24 @@
                 <p class="text-center text-gray-400 mb-6 text-sm">Tools & Technologies</p>
                 <div class="flex flex-wrap justify-center gap-4">
                     <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="globe" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                        <i data-lucide="globe"
+                            class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
                     <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="server" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                        <i data-lucide="server"
+                            class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
                     <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="shield" class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
+                        <i data-lucide="shield"
+                            class="w-6 h-6 text-gray-400 group-hover:text-primary transition-colors"></i>
                     </div>
                     <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="layout" class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                        <i data-lucide="layout"
+                            class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
                     </div>
                     <div class="glass-card rounded-xl p-3 hover:scale-110 transition-transform cursor-pointer group">
-                        <i data-lucide="box" class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
+                        <i data-lucide="box"
+                            class="w-6 h-6 text-gray-400 group-hover:text-secondary transition-colors"></i>
                     </div>
                 </div>
             </div>
@@ -721,8 +815,10 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="network" class="w-12 h-12 text-gray-600"></i>
                         </div>
-                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div
+                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button
+                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 View Details
                             </button>
                         </div>
@@ -731,8 +827,10 @@
                         <div class="flex items-center gap-2 mb-2">
                             <span class="px-2 py-0.5 rounded-full text-xs bg-primary/20 text-primary">Network</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">Enterprise Network Infrastructure</h3>
-                        <p class="text-gray-400 text-xs mb-3">Network redesign with VLAN, OSPF, and link redundancy implementation.</p>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">
+                            Enterprise Network Infrastructure</h3>
+                        <p class="text-gray-400 text-xs mb-3">Network redesign with VLAN, OSPF, and link redundancy
+                            implementation.</p>
                     </div>
                 </div>
 
@@ -742,8 +840,10 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="monitor" class="w-12 h-12 text-gray-600"></i>
                         </div>
-                        <div class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div
+                            class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button
+                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 View Details
                             </button>
                         </div>
@@ -752,8 +852,10 @@
                         <div class="flex items-center gap-2 mb-2">
                             <span class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">Web App</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">Network Monitoring Dashboard</h3>
-                        <p class="text-gray-400 text-xs mb-3">Real-time dashboard for network traffic monitoring and alerting.</p>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">
+                            Network Monitoring Dashboard</h3>
+                        <p class="text-gray-400 text-xs mb-3">Real-time dashboard for network traffic monitoring and
+                            alerting.</p>
                     </div>
                 </div>
 
@@ -763,8 +865,10 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="shield-check" class="w-12 h-12 text-gray-600"></i>
                         </div>
-                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div
+                            class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button
+                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 View Details
                             </button>
                         </div>
@@ -773,8 +877,10 @@
                         <div class="flex items-center gap-2 mb-2">
                             <span class="px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">Security</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">Secure VPN Gateway</h3>
-                        <p class="text-gray-400 text-xs mb-3">Site-to-Site and Remote Access VPN with high-security configuration.</p>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">Secure
+                            VPN Gateway</h3>
+                        <p class="text-gray-400 text-xs mb-3">Site-to-Site and Remote Access VPN with high-security
+                            configuration.</p>
                     </div>
                 </div>
 
@@ -784,18 +890,23 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="shopping-cart" class="w-12 h-12 text-gray-600"></i>
                         </div>
-                        <div class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div
+                            class="absolute inset-0 bg-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button
+                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 View Details
                             </button>
                         </div>
                     </div>
                     <div class="p-5">
                         <div class="flex items-center gap-2 mb-2">
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">E-Commerce</span>
+                            <span
+                                class="px-2 py-0.5 rounded-full text-xs bg-secondary/20 text-secondary">E-Commerce</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">E-Commerce Platform</h3>
-                        <p class="text-gray-400 text-xs mb-3">Complete e-commerce with payment gateway and inventory management.</p>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-secondary transition-colors">
+                            E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-xs mb-3">Complete e-commerce with payment gateway and inventory
+                            management.</p>
                     </div>
                 </div>
 
@@ -805,8 +916,10 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="wifi" class="w-12 h-12 text-gray-600"></i>
                         </div>
-                        <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div
+                            class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button
+                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 View Details
                             </button>
                         </div>
@@ -815,8 +928,10 @@
                         <div class="flex items-center gap-2 mb-2">
                             <span class="px-2 py-0.5 rounded-full text-xs bg-primary/20 text-primary">Wireless</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">Managed WiFi System</h3>
-                        <p class="text-gray-400 text-xs mb-3">Enterprise WiFi management with captive portal and voucher system.</p>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-primary transition-colors">
+                            Managed WiFi System</h3>
+                        <p class="text-gray-400 text-xs mb-3">Enterprise WiFi management with captive portal and voucher
+                            system.</p>
                     </div>
                 </div>
 
@@ -826,8 +941,10 @@
                         <div class="absolute inset-0 flex items-center justify-center">
                             <i data-lucide="bar-chart-3" class="w-12 h-12 text-gray-600"></i>
                         </div>
-                        <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div
+                            class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button
+                                class="px-4 py-2 bg-white text-dark rounded-full text-sm font-semibold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 View Details
                             </button>
                         </div>
@@ -836,8 +953,10 @@
                         <div class="flex items-center gap-2 mb-2">
                             <span class="px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">Analytics</span>
                         </div>
-                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">Network Analytics Tool</h3>
-                        <p class="text-gray-400 text-xs mb-3">Network traffic analysis tool with real-time data visualization.</p>
+                        <h3 class="font-display font-bold text-lg mb-1 group-hover:text-accent transition-colors">
+                            Network Analytics Tool</h3>
+                        <p class="text-gray-400 text-xs mb-3">Network traffic analysis tool with real-time data
+                            visualization.</p>
                     </div>
                 </div>
             </div>
@@ -865,7 +984,8 @@
                         <div>
                             <h3 class="font-display font-bold text-base mb-0.5">CCNA</h3>
                             <p class="text-primary text-xs font-medium mb-1">Cisco Certified Network Associate</p>
-                            <p class="text-gray-400 text-xs mb-2">Global networking certification covering routing, switching, and security fundamentals.</p>
+                            <p class="text-gray-400 text-xs mb-2">Global networking certification covering routing,
+                                switching, and security fundamentals.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>2023</span>
@@ -878,13 +998,15 @@
 
                 <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-secondary">
                     <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0">
                             <i data-lucide="shield" class="w-6 h-6 text-secondary"></i>
                         </div>
                         <div>
                             <h3 class="font-display font-bold text-base mb-0.5">MTCNA</h3>
                             <p class="text-secondary text-xs font-medium mb-1">MikroTik Certified Network Associate</p>
-                            <p class="text-gray-400 text-xs mb-2">RouterOS basic configuration, static routing, and bandwidth management.</p>
+                            <p class="text-gray-400 text-xs mb-2">RouterOS basic configuration, static routing, and
+                                bandwidth management.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>2022</span>
@@ -903,7 +1025,8 @@
                         <div>
                             <h3 class="font-display font-bold text-base mb-0.5">Meta Front-End</h3>
                             <p class="text-accent text-xs font-medium mb-1">Meta Front-End Developer Professional</p>
-                            <p class="text-gray-400 text-xs mb-2">Modern front-end development including React, UI/UX, and version control.</p>
+                            <p class="text-gray-400 text-xs mb-2">Modern front-end development including React, UI/UX,
+                                and version control.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>2024</span>
@@ -916,13 +1039,15 @@
 
                 <div class="cert-card glass-card rounded-2xl p-5 reveal border-l-4 border-yellow-500">
                     <div class="flex items-start gap-3">
-                        <div class="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center flex-shrink-0">
                             <i data-lucide="cloud" class="w-6 h-6 text-yellow-500"></i>
                         </div>
                         <div>
                             <h3 class="font-display font-bold text-base mb-0.5">AWS Cloud</h3>
                             <p class="text-yellow-500 text-xs font-medium mb-1">AWS Cloud Practitioner</p>
-                            <p class="text-gray-400 text-xs mb-2">Cloud computing fundamentals, AWS services, and cloud security architecture.</p>
+                            <p class="text-gray-400 text-xs mb-2">Cloud computing fundamentals, AWS services, and cloud
+                                security architecture.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>2023</span>
@@ -941,7 +1066,8 @@
                         <div>
                             <h3 class="font-display font-bold text-base mb-0.5">Responsive Web</h3>
                             <p class="text-pink-500 text-xs font-medium mb-1">FreeCodeCamp Certification</p>
-                            <p class="text-gray-400 text-xs mb-2">Responsive web design with HTML5, CSS3, Flexbox, and CSS Grid.</p>
+                            <p class="text-gray-400 text-xs mb-2">Responsive web design with HTML5, CSS3, Flexbox, and
+                                CSS Grid.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>2022</span>
@@ -960,7 +1086,8 @@
                         <div>
                             <h3 class="font-display font-bold text-base mb-0.5">Linux Essentials</h3>
                             <p class="text-cyan-500 text-xs font-medium mb-1">LPI Linux Essentials</p>
-                            <p class="text-gray-400 text-xs mb-2">Linux OS fundamentals, command line, and basic administration.</p>
+                            <p class="text-gray-400 text-xs mb-2">Linux OS fundamentals, command line, and basic
+                                administration.</p>
                             <div class="flex items-center gap-2 text-xs text-gray-500">
                                 <i data-lucide="calendar" class="w-3 h-3"></i>
                                 <span>2023</span>
@@ -976,22 +1103,27 @@
 
     <!-- Footer -->
     <footer class="py-6 border-t border-gray-800 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2">
                 <span class="font-display font-bold text-lg gradient-text">AR.</span>
                 <span class="text-gray-500 text-xs">© 2024 Ardian Rahman. All rights reserved.</span>
             </div>
             <div class="flex items-center gap-3">
-                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                <a href="#"
+                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
                     <i data-lucide="github" class="w-4 h-4"></i>
                 </a>
-                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                <a href="#"
+                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
                     <i data-lucide="linkedin" class="w-4 h-4"></i>
                 </a>
-                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                <a href="#"
+                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
                     <i data-lucide="twitter" class="w-4 h-4"></i>
                 </a>
-                <a href="#" class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
+                <a href="#"
+                    class="w-8 h-8 rounded-full glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary/20 transition-all">
                     <i data-lucide="instagram" class="w-4 h-4"></i>
                 </a>
             </div>
@@ -1010,7 +1142,7 @@
 
         function typeWriter() {
             const currentRole = roles[roleIndex];
-            
+
             if (isDeleting) {
                 typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
                 charIndex--;
@@ -1032,7 +1164,7 @@
 
             setTimeout(typeWriter, typeSpeed);
         }
-        
+
         setTimeout(typeWriter, 1000);
 
         // Global Particle Animation
@@ -1041,12 +1173,12 @@
         let particles = [];
         let animationId;
         let isActive = true;
-        
+
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-        
+
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
@@ -1082,23 +1214,23 @@
                 particles.push(new Particle());
             }
         }
-        
+
         initParticles();
 
         function animateParticles() {
             if (!isActive) return;
-            
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             particles.forEach((particle, i) => {
                 particle.update();
                 particle.draw();
-                
+
                 particles.slice(i + 1).forEach(other => {
                     const dx = particle.x - other.x;
                     const dy = particle.y - other.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     if (distance < 100) {
                         ctx.strokeStyle = `rgba(14, 165, 233, ${0.1 * (1 - distance / 100)})`;
                         ctx.lineWidth = 1;
@@ -1109,10 +1241,10 @@
                     }
                 });
             });
-            
+
             animationId = requestAnimationFrame(animateParticles);
         }
-        
+
         animateParticles();
 
         document.addEventListener('visibilitychange', () => {
@@ -1144,10 +1276,10 @@
         // Navbar Scroll Effect - Blur Transparent (Dark)
         const navbar = document.getElementById('navbar');
         const navContainer = document.getElementById('nav-container');
-        
+
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
+
             if (currentScroll > 50) {
                 navContainer.classList.add('navbar-scrolled');
                 navbar.classList.add('py-2');
@@ -1169,7 +1301,7 @@
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             isMenuOpen = !isMenuOpen;
-            
+
             if (isMenuOpen) {
                 mobileMenuBtn.classList.add('hamburger-open');
                 mobileMenu.classList.remove('hidden');
@@ -1183,10 +1315,10 @@
 
         // Mobile Menu Item Click Effect
         mobileMenuItems.forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 mobileMenuItems.forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
-                
+
                 setTimeout(() => {
                     isMenuOpen = false;
                     mobileMenuBtn.classList.remove('hamburger-open');
@@ -1223,7 +1355,7 @@
 
         // Update active menu based on scroll position
         const sections = document.querySelectorAll('section[id]');
-        
+
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
@@ -1252,4 +1384,5 @@
         });
     </script>
 </body>
+
 </html>

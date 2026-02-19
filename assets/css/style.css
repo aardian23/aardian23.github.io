@@ -7,7 +7,7 @@
     height: 100%;
     z-index: -1;
     background: #020617;
-    overflow: hidden; /* Mencegah blob keluar dari viewport */
+    overflow: hidden;
 }
 
 .network-bg {
@@ -21,86 +21,93 @@
     background-size: 40px 40px;
 }
 
-/* Blob Container */
-.blob-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-/* Blobs dengan positioning absolute yang benar */
+/* Blobs - Desktop dengan animasi */
 .blob {
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
     opacity: 0.35;
-    animation: morph 8s ease-in-out infinite;
-    /* Tidak menggunakan transform untuk positioning */
-    will-change: border-radius;
+    /* Posisi default */
+    pointer-events: none;
 }
 
-/* Posisi spesifik untuk setiap blob */
+/* Blob 1 - Top Left */
 .blob-1 {
-    top: -10%;
-    left: -10%;
-    animation-delay: 0s;
+    top: -100px;
+    left: -100px;
+    animation: float1 20s ease-in-out infinite;
 }
 
+/* Blob 2 - Right Middle */
 .blob-2 {
     top: 30%;
-    right: -10%;
-    animation-delay: 2s;
+    right: -100px;
+    animation: float2 25s ease-in-out infinite;
 }
 
+/* Blob 3 - Bottom Left */
 .blob-3 {
-    bottom: -5%;
+    bottom: -50px;
     left: 30%;
-    animation-delay: 4s;
+    animation: float3 22s ease-in-out infinite;
 }
 
+/* Blob 4 - Bottom Right */
 .blob-4 {
     bottom: 20%;
-    right: 20%;
-    animation-delay: 6s;
+    right: 15%;
+    animation: float4 18s ease-in-out infinite;
 }
 
-@keyframes morph {
-    0%, 100% { 
-        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
-    50% { 
-        border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-    }
+/* Animasi floating lembut (bukan morphing) */
+@keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, 30px) scale(1.1); }
 }
 
-/* Mobile Optimizations */
+@keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-20px, 40px) scale(1.05); }
+}
+
+@keyframes float3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.1); }
+}
+
+@keyframes float4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, -20px) scale(1.05); }
+}
+
+/* MOBILE: Matikan semua animasi, gunakan posisi fixed */
 @media (max-width: 768px) {
     .network-bg {
-        background-size: 30px 30px;
-        opacity: 0.8;
+        background-size: 25px 25px;
+        opacity: 0.6;
     }
     
+    /* Matikan animasi, posisi absolute tetap */
     .blob {
-        filter: blur(40px);
-        opacity: 0.3;
-        animation-duration: 12s;
+        animation: none !important;
+        filter: blur(50px);
+        opacity: 0.25;
+        transform: none !important;
     }
     
+    /* Ukuran lebih kecil di mobile */
     .blob-1 {
-        width: 300px;
-        height: 300px;
-        top: -5%;
-        left: -15%;
+        width: 250px;
+        height: 250px;
+        top: -50px;
+        left: -50px;
     }
     
     .blob-2 {
         width: 280px;
         height: 280px;
-        top: 40%;
-        right: -15%;
+        top: 35%;
+        right: -80px;
     }
     
     .blob-3 {
@@ -111,13 +118,45 @@
     }
     
     .blob-4 {
-        width: 250px;
-        height: 250px;
-        bottom: 30%;
-        right: 10%;
+        width: 220px;
+        height: 220px;
+        bottom: 25%;
+        right: 5%;
     }
     
+    /* Canvas particles opacity */
     #particles-canvas {
-        opacity: 0.5;
+        opacity: 0.4;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .blob-1 {
+        width: 200px;
+        height: 200px;
+        top: -30px;
+        left: -30px;
+    }
+    
+    .blob-2 {
+        width: 220px;
+        height: 220px;
+        top: 40%;
+        right: -60px;
+    }
+    
+    .blob-3 {
+        width: 160px;
+        height: 160px;
+        bottom: 15%;
+        left: 10%;
+    }
+    
+    .blob-4 {
+        width: 180px;
+        height: 180px;
+        bottom: 30%;
+        right: 0%;
     }
 }
