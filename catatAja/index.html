@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>catatAja — Task & Time Manager Edition</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Ambient Fluid Background Animation */
+    @keyframes floatOrb {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    .orb-1 { animation: floatOrb 12s ease-in-out infinite; }
+    .orb-2 { animation: floatOrb 15s ease-in-out infinite reverse; }
+
+    /* Ultra Apple Liquid Glassmorphism */
+    .ultra-glass {
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(25px) saturate(200%);
+      -webkit-backdrop-filter: blur(25px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 
+        0 20px 50px -12px rgba(99, 102, 241, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+        0 10px 20px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .ultra-glass-subtle {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+
+    /* Interactive Shimmering Button */
+    .liquid-button {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #6366f1 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4),
+                  0 0 15px rgba(255, 255, 255, 0.4) inset;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .liquid-button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      transform: rotate(30deg) translateY(-100%);
+      transition: transform 0.75s ease;
+    }
+
+    .liquid-button:hover::after {
+      transform: rotate(30deg) translateY(100%);
+    }
+
+    /* Spring Physics Animations */
+    @keyframes appleBounce {
+      0% { transform: scale(0.85) translateY(20px); opacity: 0; }
+      50% { transform: scale(1.02) translateY(-4px); opacity: 1; }
+      75% { transform: scale(0.98) translateY(1px); }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .animate-apple-spring {
+      animation: appleBounce 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .note-card {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .note-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 25px 40px -12px rgba(99, 102, 241, 0.12),
+                  0 0 20px rgba(255, 255, 255, 0.8) inset;
+    }
+
+    /* Custom Input Focus Ring */
+    .glass-input {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-input:focus {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18), 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+      transform: scale(1.005);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 via-indigo-50/50 to-purple-100/40 min-h-screen text-slate-800 font-sans antialiased selection:bg-indigo-500 selection:text-white pb-16 overflow-x-hidden">
+
+  <!-- Ambient Fluid Dynamic Orbs -->
+  <div class="orb-1 fixed top-[-15%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-indigo-300/40 to-violet-300/30 blur-[130px] pointer-events-none"></div>
+  <div class="orb-2 fixed bottom-[-15%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-purple-300/40 to-pink-300/30 blur-[130px] pointer-events-none"></div>
+
+  <div class="max-w-3xl mx-auto px-4 pt-10 md:pt-14 relative z-10">
+
+    <!-- 1. HEADER SECTION -->
+    <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+      <div class="flex items-center gap-4">
+        <div class="p-3.5 bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 rounded-2xl shadow-xl shadow-indigo-500/25 text-white ring-4 ring-white/80 active:scale-90 transition-transform cursor-pointer">
+          <svg class="w-7 h-7 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-3xl md:text-4xl font-black tracking-tight bg-gradient-to-r from-indigo-700 via-violet-700 to-pink-600 bg-clip-text text-transparent">
+            catatAja
+          </h1>
+          <p class="text-xs font-bold text-slate-500 tracking-wide uppercase">Time & Task Manager</p>
+        </div>
+      </div>
+
+      <!-- Live Counters -->
+      <div class="flex items-center gap-2.5 self-start sm:self-auto">
+        <span class="ultra-glass-subtle px-4 py-2 rounded-2xl text-xs font-bold text-indigo-700 flex items-center gap-2 shadow-sm hover:scale-105 transition-transform">
+          <span class="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping"></span>
+          <span id="activeCount">0</span> Tugas
+        </span>
+        <span class="ultra-glass-subtle px-4 py-2 rounded-2xl text-xs font-bold text-emerald-700 flex items-center gap-2 shadow-sm hover:scale-105 transition-transform">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          <span id="completedCount">0</span> Selesai
+        </span>
+      </div>
+    </header>
+
+    <!-- 2. INPUT FORM CARD -->
+    <section class="ultra-glass rounded-[2rem] p-6 md:p-7 mb-8 transition-all duration-300">
+      <form id="noteForm" class="space-y-4">
+        <input type="hidden" id="editNoteId" value="">
+
+        <div>
+          <input 
+            type="text" 
+            id="titleInput" 
+            placeholder="Judul Tugas / Catatan..." 
+            class="glass-input w-full bg-white/60 border border-white/80 rounded-2xl px-4 py-3.5 text-sm font-semibold text-slate-800 placeholder-slate-400 focus:outline-none shadow-inner"
+          >
+        </div>
+
+        <div>
+          <textarea 
+            id="detailsInput" 
+            rows="3" 
+            placeholder="Rincian Tugas (Tambahkan detail atau instruksi kerja...)" 
+            class="glass-input w-full bg-white/60 border border-white/80 rounded-2xl px-4 py-3.5 text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none resize-none shadow-inner"
+          ></textarea>
+        </div>
+
+        <!-- Input Tenggat Waktu (DueDate) & Kategori -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Tenggat Waktu (Deadline):</label>
+            <input 
+              type="datetime-local" 
+              id="dueDateInput"
+              class="glass-input w-full bg-white/80 border border-white/90 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-700 focus:outline-none shadow-sm cursor-pointer hover:bg-white transition-all"
+            >
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">Kategori:</label>
+            <select id="categoryInput" class="w-full bg-white/80 border border-white/90 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none shadow-sm cursor-pointer hover:bg-white transition-all">
+              <option value="Teknis">Teknis</option>
+              <option value="Pekerjaan">Pekerjaan</option>
+              <option value="Pribadi">Pribadi</option>
+              <option value="Mendesak">Mendesak</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
+          <!-- Priority Selector Pills -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Prioritas:</span>
+            <div class="flex gap-1.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="priority" value="Low" class="peer hidden">
+                <span class="px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-200/80 bg-white/60 text-slate-600 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:border-emerald-500 active:scale-95 transition-all block shadow-sm hover:bg-white">Rendah</span>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="priority" value="Medium" class="peer hidden" checked>
+                <span class="px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-200/80 bg-white/60 text-slate-600 peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500 active:scale-95 transition-all block shadow-sm hover:bg-white">Sedang</span>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="priority" value="High" class="peer hidden">
+                <span class="px-3.5 py-1.5 text-xs font-bold rounded-xl border border-slate-200/80 bg-white/60 text-slate-600 peer-checked:bg-rose-500 peer-checked:text-white peer-checked:border-rose-500 active:scale-95 transition-all block shadow-sm hover:bg-white">Tinggi</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          id="submitBtn"
+          class="liquid-button w-full mt-3 text-white font-bold py-3.5 px-4 rounded-2xl text-sm transition-all duration-300 hover:scale-[1.015] active:scale-[0.97] flex items-center justify-center gap-2"
+        >
+          <span id="btnText">Tambah Tugas</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+        </button>
+      </form>
+    </section>
+
+    <!-- 3. SEARCH & CONTROL BAR -->
+    <section class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+      <div class="relative w-full sm:w-72">
+        <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Cari tugas atau catatan..." 
+          class="glass-input w-full ultra-glass-subtle rounded-2xl pl-10 pr-4 py-2.5 text-xs font-semibold text-slate-800 placeholder-slate-400 focus:outline-none shadow-sm"
+        >
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex ultra-glass-subtle rounded-2xl p-1 w-full sm:w-auto shadow-sm">
+        <button data-filter="all" class="filter-tab flex-1 sm:flex-initial px-4 py-2 text-xs font-bold rounded-xl transition-all text-white bg-indigo-600 shadow-md">Semua</button>
+        <button data-filter="active" class="filter-tab flex-1 sm:flex-initial px-4 py-2 text-xs font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900">Belum Selesai</button>
+        <button data-filter="completed" class="filter-tab flex-1 sm:flex-initial px-4 py-2 text-xs font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900">Selesai</button>
+      </div>
+    </section>
+
+    <!-- 4. TASK DASHBOARD / LIST VIEW -->
+    <main id="notesList" class="space-y-4">
+      <!-- Rendered dynamically by JavaScript -->
+    </main>
+
+  </div>
+
+  <!-- 5. FUNCTIONAL JAVASCRIPT LOGIC -->
+  <script>
+    let notes = JSON.parse(localStorage.getItem('catatAja_notes_v3')) || [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    const noteForm = document.getElementById('noteForm');
+    const titleInput = document.getElementById('titleInput');
+    const detailsInput = document.getElementById('detailsInput');
+    const dueDateInput = document.getElementById('dueDateInput');
+    const categoryInput = document.getElementById('categoryInput');
+    const searchInput = document.getElementById('searchInput');
+    const editNoteId = document.getElementById('editNoteId');
+    const btnText = document.getElementById('btnText');
+    const notesList = document.getElementById('notesList');
+    const activeCount = document.getElementById('activeCount');
+    const completedCount = document.getElementById('completedCount');
+    const filterTabs = document.querySelectorAll('.filter-tab');
+
+    function saveNotes() {
+      localStorage.setItem('catatAja_notes_v3', JSON.stringify(notes));
+      updateCounters();
+      renderNotes();
+    }
+
+    function updateCounters() {
+      const active = notes.filter(n => !n.isCompleted).length;
+      const completed = notes.filter(n => n.isCompleted).length;
+      activeCount.textContent = active;
+      completedCount.textContent = completed;
+    }
+
+    function formatDateTime(dateTimeString) {
+      if (!dateTimeString) return null;
+      const date = new Date(dateTimeString);
+      return date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function getDueStatus(dueDateString, isCompleted) {
+      if (!dueDateString || isCompleted) return null;
+      const now = new Date();
+      const due = new Date(dueDateString);
+      const diffHours = (due - now) / (1000 * 60 * 60);
+
+      if (diffHours < 0) {
+        return { label: 'Terlewat', color: 'bg-rose-500 text-white animate-pulse' };
+      } else if (diffHours <= 24) {
+        return { label: 'Mendekati Tenggat', color: 'bg-amber-500 text-white font-bold' };
+      }
+      return null;
+    }
+
+    noteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = titleInput.value.trim();
+      
+      if (!title) {
+        titleInput.classList.add('ring-4', 'ring-rose-500/30');
+        setTimeout(() => titleInput.classList.remove('ring-4', 'ring-rose-500/30'), 1000);
+        return;
+      }
+
+      const priority = document.querySelector('input[name="priority"]:checked').value;
+      const isEditing = editNoteId.value !== '';
+
+      if (isEditing) {
+        const id = Number(editNoteId.value);
+        notes = notes.map(note => note.id === id ? {
+          ...note,
+          title,
+          details: detailsInput.value.trim(),
+          dueDate: dueDateInput.value,
+          priority,
+          category: categoryInput.value
+        } : note);
+      } else {
+        const newNote = {
+          id: Date.now(),
+          title,
+          details: detailsInput.value.trim(),
+          dueDate: dueDateInput.value,
+          priority,
+          category: categoryInput.value,
+          isCompleted: false,
+          isExpanded: false,
+          createdAt: new Date().toISOString()
+        };
+        notes.unshift(newNote);
+      }
+
+      resetForm();
+      saveNotes();
+    });
+
+    function resetForm() {
+      editNoteId.value = '';
+      titleInput.value = '';
+      detailsInput.value = '';
+      dueDateInput.value = '';
+      btnText.textContent = 'Tambah Tugas';
+      document.querySelector('input[name="priority"][value="Medium"]').checked = true;
+    }
+
+    window.toggleComplete = function(id) {
+      notes = notes.map(note => note.id === id ? { ...note, isCompleted: !note.isCompleted } : note);
+      saveNotes();
+    };
+
+    window.toggleExpand = function(id) {
+      notes = notes.map(note => note.id === id ? { ...note, isExpanded: !note.isExpanded } : note);
+      renderNotes();
+    };
+
+    window.editNote = function(id) {
+      const note = notes.find(n => n.id === id);
+      if (!note) return;
+
+      editNoteId.value = note.id;
+      titleInput.value = note.title;
+      detailsInput.value = note.details || '';
+      dueDateInput.value = note.dueDate || '';
+      categoryInput.value = note.category;
+      document.querySelector(`input[name="priority"][value="${note.priority}"]`).checked = true;
+
+      btnText.textContent = 'Simpan Perubahan';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.deleteNote = function(id) {
+      const card = document.getElementById(`note-card-${id}`);
+      if (card) {
+        card.style.transform = 'scale(0.85) translateY(15px)';
+        card.style.opacity = '0';
+        setTimeout(() => {
+          notes = notes.filter(note => note.id !== id);
+          saveNotes();
+        }, 300);
+      } else {
+        notes = notes.filter(note => note.id !== id);
+        saveNotes();
+      }
+    };
+
+    function renderNotes() {
+      notesList.innerHTML = '';
+
+      const filteredNotes = notes.filter(note => {
+        const matchesFilter = 
+          currentFilter === 'all' ? true :
+          currentFilter === 'active' ? !note.isCompleted :
+          note.isCompleted;
+
+        const matchesSearch = 
+          note.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          note.details.toLowerCase().includes(searchQuery.toLowerCase());
+
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filteredNotes.length === 0) {
+        notesList.innerHTML = `
+          <div class="ultra-glass text-center py-16 rounded-[2rem] animate-apple-spring">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-500 shadow-inner">
+              <svg class="w-8 h-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="text-sm font-bold text-slate-700">Belum Ada Tugas / Catatan</h3>
+            <p class="text-xs font-medium text-slate-400 mt-1">Tambahkan tugas baru untuk menjadwalkan pekerjaanmu!</p>
+          </div>
+        `;
+        return;
+      }
+
+      filteredNotes.forEach(note => {
+        const priorityStyles = {
+          High: { border: 'border-l-rose-500', badge: 'bg-rose-50 text-rose-600 border-rose-200' },
+          Medium: { border: 'border-l-amber-500', badge: 'bg-amber-50 text-amber-600 border-amber-200' },
+          Low: { border: 'border-l-emerald-500', badge: 'bg-emerald-50 text-emerald-600 border-emerald-200' }
+        };
+
+        const dueStatus = getDueStatus(note.dueDate, note.isCompleted);
+        const formattedDueDate = formatDateTime(note.dueDate);
+        const formattedCreatedDate = formatDateTime(note.createdAt);
+
+        const card = document.createElement('div');
+        card.id = `note-card-${note.id}`;
+        card.className = `note-card animate-apple-spring ultra-glass border-l-[6px] ${priorityStyles[note.priority].border} rounded-[1.5rem] p-4 md:p-5 ${note.isCompleted ? 'opacity-55 bg-white/30' : ''}`;
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3">
+            <div class="space-y-2 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border ${priorityStyles[note.priority].badge}">
+                  ${note.priority === 'High' ? 'Tinggi' : note.priority === 'Medium' ? 'Sedang' : 'Rendah'}
+                </span>
+                <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                  ${note.category}
+                </span>
+
+                ${dueStatus ? `
+                  <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold ${dueStatus.color}">
+                    ${dueStatus.label}
+                  </span>
+                ` : ''}
+              </div>
+
+              <h3 class="text-sm font-bold text-slate-800 ${note.isCompleted ? 'line-through text-slate-400' : ''}">
+                ${note.title}
+              </h3>
+
+              ${note.details ? `
+                <div>
+                  <p class="text-xs text-slate-600 leading-relaxed font-medium ${!note.isExpanded ? 'line-clamp-2' : ''}">
+                    ${note.details}
+                  </p>
+                  ${note.details.length > 90 ? `
+                    <button onclick="toggleExpand(${note.id})" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 mt-1 focus:outline-none">
+                      ${note.isExpanded ? 'Sembunyikan' : 'Baca Selengkapnya...'}
+                    </button>
+                  ` : ''}
+                </div>
+              ` : ''}
+
+              <!-- Time Badges Bar -->
+              <div class="flex flex-wrap items-center gap-3 pt-1 border-t border-slate-200/50 text-[11px] text-slate-500 font-medium">
+                ${formattedDueDate ? `
+                  <div class="flex items-center gap-1 font-bold ${dueStatus ? 'text-rose-600' : 'text-indigo-600'}">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Tenggat: ${formattedDueDate}</span>
+                  </div>
+                ` : ''}
+                <div class="flex items-center gap-1 text-slate-400">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  <span>Dibuat: ${formattedCreatedDate || '-'}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Glass Action Bar -->
+            <div class="flex items-center gap-1 bg-white/60 backdrop-blur-md p-1 rounded-xl border border-white/90 shadow-sm">
+              <button onclick="toggleComplete(${note.id})" title="Tandai Selesai" class="p-1.5 rounded-lg text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 active:scale-90 transition-all focus:outline-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"/></svg>
+              </button>
+              <button onclick="editNote(${note.id})" title="Edit Catatan" class="p-1.5 rounded-lg text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 active:scale-90 transition-all focus:outline-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+              </button>
+              <button onclick="deleteNote(${note.id})" title="Hapus Catatan" class="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 active:scale-90 transition-all focus:outline-none">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+
+        notesList.appendChild(card);
+      });
+    }
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => t.className = 'filter-tab flex-1 sm:flex-initial px-4 py-2 text-xs font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900');
+        tab.className = 'filter-tab flex-1 sm:flex-initial px-4 py-2 text-xs font-bold rounded-xl transition-all text-white bg-indigo-600 shadow-md';
+        currentFilter = tab.dataset.filter;
+        renderNotes();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderNotes();
+    });
+
+    updateCounters();
+    renderNotes();
+  </script>
+</body>
+</html>
