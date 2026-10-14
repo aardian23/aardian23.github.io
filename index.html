@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ardian Rahman — Creative Developer & Network Engineer</title>
+  <meta name="description" content="Portfolio Ardian Rahman - Fullstack Developer, Network & Cyber Security Enthusiast. Membangun pengalaman digital interaktif dan berkinerja tinggi.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans, Syne, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Lighting Gradients -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-noise"></div>
+
+  <!-- Transparent Modern Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="nav-brand" aria-label="Beranda">
+        <span class="brand-monogram">AR</span>
+        <span class="brand-name">Ardian<span class="brand-dot">.</span>Rahman</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-desktop" aria-label="Navigasi Utama">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active" data-nav="home">Beranda</a></li>
+          <li><a href="#about" class="nav-link" data-nav="about">Tentang</a></li>
+          <li><a href="#tech" class="nav-link" data-nav="tech">Teknologi</a></li>
+          <li><a href="#certifications" class="nav-link" data-nav="certifications">Sertifikasi</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Items: Theme Toggle & Hamburger -->
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="theme-btn" aria-label="Ganti Tema" title="Ganti Mode Terang / Gelap">
+          <div class="theme-icon-wrapper">
+            <i data-lucide="sun" class="icon-sun"></i>
+            <i data-lucide="moon" class="icon-moon"></i>
+          </div>
+          <span class="theme-label sr-only">Ganti Tema</span>
+        </button>
+
+        <!-- CTA Button in Desktop Navbar -->
+        <a href="#contact" class="nav-cta-btn">
+          <span>Kontak</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+
+        <!-- Animated Hamburger Button -->
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Buka Menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hamburger-box">
+            <span class="hamburger-line line-1"></span>
+            <span class="hamburger-line line-2"></span>
+            <span class="hamburger-line line-3"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Mobile Navigation Drawer -->
+  <div class="mobile-menu-backdrop" id="mobile-backdrop"></div>
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-menu-header">
+        <div class="mobile-brand">
+          <span class="brand-monogram">AR</span>
+          <span class="brand-name">Ardian<span class="brand-dot">.</span>Rahman</span>
+        </div>
+        <div class="mobile-status-pill">
+          <span class="pulse-dot"></span>
+          <span>Tersedia untuk Proyek</span>
+        </div>
+      </div>
+
+      <nav class="mobile-nav">
+        <ul class="mobile-nav-links">
+          <li style="--delay: 1">
+            <a href="#home" class="mobile-link active" data-nav="home">
+              <span class="mobile-link-num">01</span>
+              <span class="mobile-link-title">Beranda</span>
+              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
+            </a>
+          </li>
+          <li style="--delay: 2">
+            <a href="#about" class="mobile-link" data-nav="about">
+              <span class="mobile-link-num">02</span>
+              <span class="mobile-link-title">Tentang Saya</span>
+              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
+            </a>
+          </li>
+          <li style="--delay: 3">
+            <a href="#tech" class="mobile-link" data-nav="tech">
+              <span class="mobile-link-num">03</span>
+              <span class="mobile-link-title">Teknologi</span>
+              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
+            </a>
+          </li>
+          <li style="--delay: 4">
+            <a href="#certifications" class="mobile-link" data-nav="certifications">
+              <span class="mobile-link-num">04</span>
+              <span class="mobile-link-title">Sertifikasi</span>
+              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
+            </a>
+          </li>
+          <li style="--delay: 5">
+            <a href="#contact" class="mobile-link" data-nav="contact">
+              <span class="mobile-link-num">05</span>
+              <span class="mobile-link-title">Kontak</span>
+              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="mobile-menu-footer">
+        <p class="mobile-footer-text">Mari berdiskusi tentang ide proyek Anda berikutnya.</p>
+        <div class="mobile-socials">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          <a href="mailto:ardianrahman310@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
+    <!-- HOME / HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="container hero-container">
+        
+        <!-- Left Hero Content (Editorial Typography & Animated Headline) -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span class="badge-text">Available for Hire & Networking Projects</span>
+          </div>
+
+          <!-- ANIMATED KINETIC HEADLINE (Headline Beranimasi Interaktif) -->
+          <h1 class="hero-title">
+            Membangun arsitektur web 
+            <span class="kinetic-pill">
+              <span class="kinetic-word" id="kinetic-word">Modern</span>
+            </span>
+            dengan presisi visual & performa tinggi.
+          </h1>
+
+          <p class="hero-description">
+            Halo! Saya <strong>Ardian Rahman</strong>, Developer & Network Enthusiast dengan kompetensi <em>MTCNA</em>, <em>Cisco Networking</em>, dan pengembangan web modern. Berfokus pada antarmuka reaktif, keamanan jaringan, dan sistem yang tangguh.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#about" class="btn btn-primary">
+              <span>Eksplorasi Profil</span>
+              <i data-lucide="arrow-down-right"></i>
+            </a>
+            <a href="#certifications" class="btn btn-secondary">
+              <span>9 Sertifikasi Terverifikasi</span>
+              <i data-lucide="award"></i>
+            </a>
+          </div>
+
+          <!-- INOVASI EFEK HIDUP & INTERAKTIF (Menggantikan baris angka statis) -->
+          <div class="live-innovation-widget" id="live-engine">
+            <div class="widget-top-bar">
+              <div class="widget-status-indicator">
+                <span class="pulse-dot green"></span>
+                <span class="status-name">CORE SYSTEM ACTIVE</span>
+              </div>
+              <div class="widget-live-clock">
+                <i data-lucide="clock" class="clock-icon"></i>
+                <span id="live-wib-clock">WIB --:--:--</span>
+              </div>
+            </div>
+
+            <div class="widget-body">
+              <!-- Interactive Interactive Mode Pills -->
+              <div class="engine-modes" role="tablist" aria-label="Mode Interaktif">
+                <button class="mode-chip active" data-mode="dev" title="Mode Development">
+                  <i data-lucide="terminal"></i>
+                  <span>Dev Engine</span>
+                </button>
+                <button class="mode-chip" data-mode="network" title="Mode Jaringan & Keamanan">
+                  <i data-lucide="shield-check"></i>
+                  <span>Network Guard</span>
+                </button>
+                <button class="mode-chip" data-mode="creative" title="Mode Kreatif">
+                  <i data-lucide="sparkles"></i>
+                  <span>Creative Flow</span>
+                </button>
+              </div>
+
+              <!-- Dynamic Output Console / Sound Wave Simulator -->
+              <div class="engine-display">
+                <div class="display-row">
+                  <span class="prompt-symbol">&gt;</span>
+                  <p class="engine-typewriter" id="engine-output">Memuat lingkungan kerja: React, MTCNA, Cisco & Cloud siap digunakan.</p>
+                </div>
+                
+                <div class="audio-wave-bars" title="Interactive Audio Visualizer">
+                  <span class="bar bar-1"></span>
+                  <span class="bar bar-2"></span>
+                  <span class="bar bar-3"></span>
+                  <span class="bar bar-4"></span>
+                  <span class="bar bar-5"></span>
+                  <span class="bar bar-6"></span>
+                  <span class="bar bar-7"></span>
+                </div>
+              </div>
+
+              <!-- Interactive Ping & Quick Pulse -->
+              <div class="widget-footer-strip">
+                <div class="latency-pill">
+                  <span class="latency-dot"></span>
+                  <span id="latency-text">Latency: 14ms (Optimal)</span>
+                </div>
+                <button id="btn-trigger-pulse" class="pulse-trigger-btn" title="Kirim Sinyal Ping Interaktif">
+                  <i data-lucide="radio"></i>
+                  <span>Test Ping</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Hero: Hanging Interactive Lanyard ID Card (Dengan Spacing Mobile Lega) -->
+        <div class="hero-interactive-card" id="card-hero-container">
+          
+          <!-- Lanyard Rig (Top anchor, ribbon, clip, ring) -->
+          <div class="lanyard-rig" id="lanyard-rig">
+            <!-- Ceiling mount / Anchor point -->
+            <div class="lanyard-mount">
+              <div class="mount-bracket"></div>
+            </div>
+
+            <!-- SVG Flexible Lanyard Ribbon -->
+            <svg class="lanyard-svg" id="lanyard-svg" viewBox="0 0 400 320" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="strapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="var(--lanyard-edge)"/>
+                  <stop offset="30%" stop-color="var(--lanyard-main)"/>
+                  <stop offset="70%" stop-color="var(--lanyard-main)"/>
+                  <stop offset="100%" stop-color="var(--lanyard-edge)"/>
+                </linearGradient>
+              </defs>
+              <!-- Dynamic Left & Right Ribbon Strands -->
+              <path id="lanyard-left-strap" class="lanyard-strap" d="M 180 0 Q 185 100, 195 190" stroke="url(#strapGrad)" stroke-width="18" stroke-linecap="round" fill="none" />
+              <path id="lanyard-right-strap" class="lanyard-strap" d="M 220 0 Q 215 100, 205 190" stroke="url(#strapGrad)" stroke-width="18" stroke-linecap="round" fill="none" />
+              <!-- Strap stitch detail line -->
+              <path id="lanyard-stitch" d="M 200 0 Q 200 100, 200 190" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-dasharray="4,4" fill="none" />
+            </svg>
+
+            <!-- Physical Swivel Clip & Ring -->
+            <div class="lanyard-hardware" id="lanyard-hardware">
+              <div class="strap-loop">
+                <span class="brand-stitch">MTCNA-DEV</span>
+              </div>
+              <div class="metal-swivel">
+                <div class="swivel-top"></div>
+                <div class="swivel-cylinder"></div>
+                <div class="swivel-ring"></div>
+                <div class="lobster-claw"></div>
+              </div>
+            </div>
+
+            <!-- 3D Hanging ID Card -->
+            <div class="card-3d-wrapper" id="card-3d-wrapper">
+              <div class="id-card" id="id-card">
+                
+                <!-- Holographic Glare Overlay -->
+                <div class="card-glare" id="card-glare"></div>
+
+                <!-- Card Badge Hole / Slot -->
+                <div class="card-slot">
+                  <div class="slot-cutout"></div>
+                </div>
+
+                <!-- FRONT FACE OF ID CARD -->
+                <div class="card-face card-front">
+                  
+                  <!-- ID Card Top Header -->
+                  <div class="card-header">
+                    <div class="org-badge">
+                      <span class="org-chip"></span>
+                      <span class="org-title">ENGINEERING ACCESS</span>
+                    </div>
+                    <div class="card-access-pill">
+                      <span>MTCNA / PRO</span>
+                    </div>
+                  </div>
+
+                  <!-- Profile Avatar Showcase -->
+                  <div class="card-avatar-container">
+                    <div class="avatar-ring">
+                      <img src="assets/images/Ardian Rahman.jpeg" 
+                           alt="Ardian Rahman Portrait" 
+                           class="avatar-img"
+                           loading="lazy">
+                      <div class="avatar-badge" title="Status Aktif & Terverifikasi">
+                        <i data-lucide="check-check"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Profile Identifiers -->
+                  <div class="card-identity">
+                    <h3 class="card-name">Ardian Rahman</h3>
+                    <p class="card-role">Developer & Network Associate</p>
+                    <div class="id-number-tag">
+                      <code>ID: AR-2026-X99</code>
+                      <span class="tag-status">VERIFIED</span>
+                    </div>
+                  </div>
+
+                  <!-- Micro-details & Holographic Barcode -->
+                  <div class="card-footer-info">
+                    <div class="barcode-area">
+                      <div class="barcode-lines"></div>
+                      <span class="barcode-text">9842 1083 4401 2026</span>
+                    </div>
+                    <div class="card-nfc-chip" title="NFC Smart Card Enabled">
+                      <i data-lucide="wifi"></i>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- BACK FACE OF ID CARD -->
+                <div class="card-face card-back">
+                  <div class="card-slot">
+                    <div class="slot-cutout"></div>
+                  </div>
+
+                  <div class="back-magstripe">
+                    <div class="magstripe-bar"></div>
+                  </div>
+
+                  <div class="back-content">
+                    <div class="back-section">
+                      <span class="back-label">Kredensial Inti</span>
+                      <p class="back-val">MikroTik MTCNA, Cisco Networking, Web Frontend & Cyber Security</p>
+                    </div>
+
+                    <div class="back-grid">
+                      <div>
+                        <span class="back-label">Domisili</span>
+                        <p class="back-val">Indonesia</p>
+                      </div>
+                      <div>
+                        <span class="back-label">Spesialisasi</span>
+                        <p class="back-val">Fullstack & Network</p>
+                      </div>
+                    </div>
+
+                    <div class="back-signature-box">
+                      <span class="back-label">Tanda Tangan Terotorisasi:</span>
+                      <div class="signature-line">Ardian Rahman</div>
+                    </div>
+
+                    <div class="back-security-notice">
+                      <i data-lucide="shield-check"></i>
+                      <p>Kredensial digital resmi portofolio. Terverifikasi Kominfo, Cisco & Dicoding.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Interactive Controller Pill -->
+            <div class="card-controller">
+              <span class="drag-hint">
+                <i data-lucide="move" class="hint-icon"></i>
+                <span class="hint-text">Goyang / Tarik kartu</span>
+              </span>
+              <button id="flip-card-btn" class="flip-btn" aria-label="Balik Kartu ID">
+                <i data-lucide="repeat"></i>
+                <span>Balik Kartu</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Smooth Scroll Down Indicator Pill -->
+      <a href="#about" class="scroll-down-indicator" aria-label="Gulir ke Bawah">
+        <span class="indicator-mouse">
+          <span class="wheel"></span>
+        </span>
+        <span class="indicator-label">Gulir ke Bawah</span>
+        <i data-lucide="chevron-down" class="indicator-chevron"></i>
+      </a>
+    </section>
+
+    <!-- ABOUT SECTION (Editorial Style, Non-Generic AI) -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        
+        <!-- Section Header -->
+        <div class="section-tag">
+          <span class="tag-index">01</span>
+          <span class="tag-title">TENTANG SAYA</span>
+        </div>
+
+        <div class="about-grid">
+          
+          <!-- Large Editorial Headline & Story -->
+          <div class="about-story">
+            <h2 class="editorial-headline">
+              Menyatukan logika rekayasa web dengan ketangguhan infrastruktur jaringan.
+            </h2>
+            
+            <div class="story-paragraphs">
+              <p>
+                Saya percaya bahwa sebuah aplikasi web yang luar biasa membutuhkan dua pilar utama: pengalaman pengguna yang intuitif di lapisan antarmuka, serta fondasi arsitektur jaringan yang aman dan andal di balik layar.
+              </p>
+              <p>
+                Berbekal sertifikasi resmi <strong>MikroTik (MTCNA)</strong>, <strong>Cisco Networking</strong>, pelatihan <strong>Cyber Security Kominfo</strong>, serta kurikulum komprehensif <strong>Dicoding</strong> dalam JavaScript, Frontend, AI, dan AWS Cloud, saya merancang solusi digital dengan pendekatan holistik — dari protokol jaringan hingga piksel antarmuka.
+              </p>
+            </div>
+
+            <div class="story-quote">
+              <div class="quote-bar"></div>
+              <blockquote>
+                "Kekuatan sebuah sistem digital tidak hanya ditentukan oleh bagaimana ia tampil, tetapi oleh seberapa tangguh dan aman ia melayani penggunanya setiap saat."
+              </blockquote>
+            </div>
+          </div>
+
+          <!-- About Highlights -->
+          <div class="about-details">
+            <div class="detail-block">
+              <span class="detail-label">Prinsip & Nilai Kerja</span>
+              <ul class="principles-list">
+                <li>
+                  <span class="principle-bullet">01</span>
+                  <div>
+                    <strong>Keamanan & Stabilitas Jaringan</strong>
+                    <p>Memahami protokol transmisi, konfigurasi routing, firewall, dan mitigasi ancaman siber sejak tahap perancangan awal.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="principle-bullet">02</span>
+                  <div>
+                    <strong>Estetika Eksklusif & Anti-Generik</strong>
+                    <p>Menghindari gaya template AI yang kaku. Setiap antarmuka dirancang unik dengan kepribadian dan responsivitas tinggi.</p>
+                  </div>
+                </li>
+                <li>
+                  <span class="principle-bullet">03</span>
+                  <div>
+                    <strong>Cloud & AI Readiness</strong>
+                    <p>Kemampuan mengintegrasikan layanan komputasi awan AWS serta konsep fundamental Artificial Intelligence ke dalam aplikasi nyata.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="detail-block info-strip">
+              <div class="info-row">
+                <span class="info-key">Lokasi</span>
+                <span class="info-val">Indonesia (WIB / UTC+7)</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">Kompetensi Utama</span>
+                <span class="info-val">Web Development & Network Associate</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">Sertifikasi Unggulan</span>
+                <span class="info-val">MTCNA, Cisco, Dicoding & Kominfo</span>
+              </div>
+              <div class="info-row">
+                <span class="info-key">Status Ketersediaan</span>
+                <span class="info-val highlight-green">Tersedia untuk Peluang Baru</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECHNOLOGI / TECH STACK SECTION -->
+    <section id="tech" class="section tech-section">
+      <div class="container">
+        
+        <div class="section-tag">
+          <span class="tag-index">02</span>
+          <span class="tag-title">TEKNOLOGI & KEAHLIAN</span>
+        </div>
+
+        <div class="tech-header-row">
+          <div class="tech-title-wrap">
+            <h2 class="section-heading">Alat dan ekosistem yang saya kuasai secara mendalam.</h2>
+            <p class="section-subheading">Kombinasi harmonis antara teknologi pengembangan web modern, arsitektur cloud AWS, dan infrastruktur jaringan bersertifikasi.</p>
+          </div>
+
+          <!-- Interactive Filter Tabs -->
+          <div class="tech-filter-tabs" role="tablist">
+            <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">Semua</button>
+            <button class="filter-tab" data-filter="frontend" role="tab" aria-selected="false">Frontend</button>
+            <button class="filter-tab" data-filter="networking" role="tab" aria-selected="false">Networking & Security</button>
+            <button class="filter-tab" data-filter="cloud-ai" role="tab" aria-selected="false">Cloud & AI</button>
+          </div>
+        </div>
+
+        <!-- Curated Interactive Stack Grid -->
+        <div class="tech-showcase-grid" id="tech-grid">
+          
+          <!-- Frontend -->
+          <div class="tech-pill" data-category="frontend">
+            <div class="tech-icon-box">
+              <i data-lucide="code-2"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">HTML5 & Modern CSS3</h3>
+                <span class="tech-level">Dicoding Certified</span>
+              </div>
+              <p class="tech-desc">Semantic structure, CSS Flexbox/Grid, fluid typography, responsive layout berstandar w3c.</p>
+              <div class="tech-tags">
+                <span>Semantic</span>
+                <span>Flexbox</span>
+                <span>Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-pill" data-category="frontend">
+            <div class="tech-icon-box">
+              <i data-lucide="file-code"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">JavaScript (ES6+)</h3>
+                <span class="tech-level">Dicoding Certified</span>
+              </div>
+              <p class="tech-desc">DOM Manipulation, Web Storage API, Asynchronous JavaScript (Promises/Async-Await), Event Loop.</p>
+              <div class="tech-tags">
+                <span>ES6+</span>
+                <span>Web Storage</span>
+                <span>Async JS</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-pill" data-category="frontend">
+            <div class="tech-icon-box">
+              <i data-lucide="layout"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">Front-End Web Apps</h3>
+                <span class="tech-level">Intermediate</span>
+              </div>
+              <p class="tech-desc">Pembuatan aplikasi web interaktif, single page interface, modular component styling.</p>
+              <div class="tech-tags">
+                <span>SPA</span>
+                <span>UI Components</span>
+                <span>A11y</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Networking & Security -->
+          <div class="tech-pill" data-category="networking">
+            <div class="tech-icon-box">
+              <i data-lucide="router"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">MikroTik RouterOS (MTCNA)</h3>
+                <span class="tech-level">MTCNA Certified</span>
+              </div>
+              <p class="tech-desc">Routing protocols, DHCP, NAT, Firewall filter rules, Bandwidth Queue, Wireless AP & bridging.</p>
+              <div class="tech-tags">
+                <span>MTCNA</span>
+                <span>Routing</span>
+                <span>Firewall</span>
+                <span>Queues</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-pill" data-category="networking">
+            <div class="tech-icon-box">
+              <i data-lucide="network"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">Cisco Networking</h3>
+                <span class="tech-level">Cisco Certified</span>
+              </div>
+              <p class="tech-desc">Networking Essentials & Basics, TCP/IP & OSI Layer, Subnetting (IPv4/IPv6), Switch & Router config.</p>
+              <div class="tech-tags">
+                <span>Cisco</span>
+                <span>Subnetting</span>
+                <span>OSI Model</span>
+                <span>Switches</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-pill" data-category="networking">
+            <div class="tech-icon-box">
+              <i data-lucide="shield-alert"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">Basic Cyber Security</h3>
+                <span class="tech-level">Kominfo Certified</span>
+              </div>
+              <p class="tech-desc">Threat identification, authentication defense, secure communications, security baseline practices.</p>
+              <div class="tech-tags">
+                <span>Kominfo DTS</span>
+                <span>Cyber Defense</span>
+                <span>Data Privacy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cloud & AI -->
+          <div class="tech-pill" data-category="cloud-ai">
+            <div class="tech-icon-box">
+              <i data-lucide="cloud"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">AWS Cloud Fundamentals</h3>
+                <span class="tech-level">Dicoding / AWS</span>
+              </div>
+              <p class="tech-desc">Arsitektur komputasi awan AWS, EC2 instances, S3 storage bucket, IAM permissions, serverless.</p>
+              <div class="tech-tags">
+                <span>AWS EC2</span>
+                <span>S3</span>
+                <span>Cloud Security</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-pill" data-category="cloud-ai">
+            <div class="tech-icon-box">
+              <i data-lucide="cpu"></i>
+            </div>
+            <div class="tech-info">
+              <div class="tech-name-row">
+                <h3 class="tech-name">Dasar Artificial Intelligence</h3>
+                <span class="tech-level">Dicoding Certified</span>
+              </div>
+              <p class="tech-desc">Konsep dasar Machine Learning, Supervised & Unsupervised Learning, pemanfaatan AI dalam web.</p>
+              <div class="tech-tags">
+                <span>AI Concepts</span>
+                <span>Machine Learning</span>
+                <span>Data Flow</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tech Marquee Strip -->
+        <div class="tech-strip-wrapper">
+          <div class="tech-strip">
+            <span class="strip-item"><i data-lucide="router"></i> MikroTik MTCNA</span>
+            <span class="strip-item"><i data-lucide="network"></i> Cisco Networking Essentials</span>
+            <span class="strip-item"><i data-lucide="shield-check"></i> Basic Cyber Security Kominfo</span>
+            <span class="strip-item"><i data-lucide="cloud"></i> AWS Cloud Dasar</span>
+            <span class="strip-item"><i data-lucide="cpu"></i> AI Fundamentals</span>
+            <span class="strip-item"><i data-lucide="file-code"></i> Modern JavaScript ES6+</span>
+            <span class="strip-item"><i data-lucide="router"></i> MikroTik MTCNA</span>
+            <span class="strip-item"><i data-lucide="network"></i> Cisco Networking Essentials</span>
+            <span class="strip-item"><i data-lucide="shield-check"></i> Basic Cyber Security Kominfo</span>
+            <span class="strip-item"><i data-lucide="cloud"></i> AWS Cloud Dasar</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS SECTION (Sesuai dengan 9 Sertifikasi Pengguna) -->
+    <section id="certifications" class="section cert-section">
+      <div class="container">
+        
+        <div class="section-tag">
+          <span class="tag-index">03</span>
+          <span class="tag-title">SERTIFIKASI & KREDENSIAL RESMI</span>
+        </div>
+
+        <div class="cert-header-row">
+          <div>
+            <h2 class="section-heading">Kredensial dan sertifikasi resmi yang saya raih.</h2>
+            <p class="section-subheading">Validasi kompetensi resmi dari MikroTik, Cisco Networking Academy, Dicoding Indonesia, dan Kominfo.</p>
+          </div>
+
+          <!-- Interactive Issuer Filter Tabs -->
+          <div class="cert-filter-tabs" role="tablist">
+            <button class="cert-tab active" data-issuer="all" role="tab" aria-selected="true">Semua (9)</button>
+            <button class="cert-tab" data-issuer="dicoding" role="tab" aria-selected="false">Dicoding (5)</button>
+            <button class="cert-tab" data-issuer="cisco" role="tab" aria-selected="false">Cisco (2)</button>
+            <button class="cert-tab" data-issuer="mikrotik" role="tab" aria-selected="false">MikroTik (1)</button>
+            <button class="cert-tab" data-issuer="kominfo" role="tab" aria-selected="false">Kominfo (1)</button>
+          </div>
+        </div>
+
+        <!-- 9 User Certifications Catalog -->
+        <div class="cert-catalog" id="cert-catalog">
+          
+          <!-- 1. MTCNA -->
+          <article class="cert-item" data-issuer="mikrotik">
+            <div class="cert-left">
+              <div class="cert-issuer-badge mikrotik">MikroTik</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="router"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">MikroTik SIA (Latvia) / MikroTik Training</span>
+                <span class="cert-credential-code">MTCNA Certified</span>
+              </div>
+              <h3 class="cert-title">MikroTik Certified Network Associate (MTCNA)</h3>
+              <p class="cert-summary">
+                Sertifikasi internasional RouterOS & RouterBOARD MikroTik mencakup Routing, Bridging, Firewall Filter, NAT, Mangle, Bandwidth Management (Queues), Wireless Networking, dan Tunnels.
+              </p>
+              <div class="cert-skill-pills">
+                <span>RouterOS</span>
+                <span>Firewall & NAT</span>
+                <span>Bandwidth Queue</span>
+                <span>Routing Protocols</span>
+                <span>Wireless AP</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="MikroTik Certified Network Associate (MTCNA)"
+                      data-org="MikroTik SIA (Latvia)"
+                      data-date="Terverifikasi Resmi"
+                      data-id="MTCNA-ID-2026"
+                      data-desc="Sertifikasi internasional yang membuktikan keahlian dalam instalasi, konfigurasi, pemeliharaan, serta troubleshooting perangkat RouterBOARD dan sistem operasi MikroTik RouterOS di lingkungan jaringan nyata."
+                      data-link="https://mikrotik.com"
+                      aria-label="Lihat Detail Sertifikat MTCNA">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 2. Dicoding - Belajar Membuat Front-End Web untuk Pemula -->
+          <article class="cert-item" data-issuer="dicoding">
+            <div class="cert-left">
+              <div class="cert-issuer-badge dicoding">Dicoding</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="code-2"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Dicoding Indonesia</span>
+                <span class="cert-credential-code">Dicoding Verified</span>
+              </div>
+              <h3 class="cert-title">Belajar Membuat Front-End Web untuk Pemula</h3>
+              <p class="cert-summary">
+                Membangun aplikasi web interaktif dengan manipulasi DOM modern, implementasi Web Storage (localStorage & sessionStorage), serta penanganan event secara dinamis.
+              </p>
+              <div class="cert-skill-pills">
+                <span>DOM Manipulation</span>
+                <span>Web Storage</span>
+                <span>Custom Events</span>
+                <span>Frontend Logic</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Belajar Membuat Front-End Web untuk Pemula"
+                      data-org="Dicoding Indonesia"
+                      data-date="Terverifikasi Dicoding"
+                      data-id="DCD-FE-PEMULA"
+                      data-desc="Kurikulum terakreditasi Dicoding untuk mencetak pengembang web front-end yang mampu mengelola state lokal, manipulasi elemen dokumen dinamis, serta membangun interaksi pengguna yang responsif."
+                      data-link="https://www.dicoding.com"
+                      aria-label="Lihat Detail Sertifikat">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 3. Dicoding - Belajar Dasar Pemrograman JavaScript -->
+          <article class="cert-item" data-issuer="dicoding">
+            <div class="cert-left">
+              <div class="cert-issuer-badge dicoding">Dicoding</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="file-code"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Dicoding Indonesia</span>
+                <span class="cert-credential-code">Dicoding Verified</span>
+              </div>
+              <h3 class="cert-title">Belajar Dasar Pemrograman JavaScript</h3>
+              <p class="cert-summary">
+                Mendalami fundamental bahasa JavaScript ES6+: Object-Oriented Programming (OOP), Functional Programming, penanganan Asynchronous (Promise & Async/Await), dan Node.js environment.
+              </p>
+              <div class="cert-skill-pills">
+                <span>JavaScript ES6+</span>
+                <span>OOP</span>
+                <span>Functional Programming</span>
+                <span>Asynchronous JS</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Belajar Dasar Pemrograman JavaScript"
+                      data-org="Dicoding Indonesia"
+                      data-date="Terverifikasi Dicoding"
+                      data-id="DCD-JS-BASIC"
+                      data-desc="Memahami logika dan paradigma pemrograman JavaScript standar industri, termasuk penanganan data kompleks, pengujian fungsi modular, serta kode asinkron."
+                      data-link="https://www.dicoding.com"
+                      aria-label="Lihat Detail Sertifikat">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 4. Dicoding - Belajar Dasar AI -->
+          <article class="cert-item" data-issuer="dicoding">
+            <div class="cert-left">
+              <div class="cert-issuer-badge dicoding">Dicoding</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="cpu"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Dicoding Indonesia</span>
+                <span class="cert-credential-code">Dicoding Verified</span>
+              </div>
+              <h3 class="cert-title">Belajar Dasar AI (Artificial Intelligence)</h3>
+              <p class="cert-summary">
+                Memahami konsep fundamental kecerdasan buatan, Machine Learning, Deep Learning, Generative AI, serta etika penggunaan teknologi AI dalam pengembangan perangkat lunak modern.
+              </p>
+              <div class="cert-skill-pills">
+                <span>AI Fundamentals</span>
+                <span>Machine Learning</span>
+                <span>Generative AI</span>
+                <span>AI Ethics</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Belajar Dasar AI (Artificial Intelligence)"
+                      data-org="Dicoding Indonesia"
+                      data-date="Terverifikasi Dicoding"
+                      data-id="DCD-AI-BASIC"
+                      data-desc="Pemahaman esensial mengenai arsitektur kecerdasan buatan, bagaimana model machine learning dilatih, klasifikasi data, dan integrasi API AI pada ekosistem aplikasi."
+                      data-link="https://www.dicoding.com"
+                      aria-label="Lihat Detail Sertifikat">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 5. Dicoding - Belajar Dasar Pemrograman Web -->
+          <article class="cert-item" data-issuer="dicoding">
+            <div class="cert-left">
+              <div class="cert-issuer-badge dicoding">Dicoding</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="layout"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Dicoding Indonesia</span>
+                <span class="cert-credential-code">Dicoding Verified</span>
+              </div>
+              <h3 class="cert-title">Belajar Dasar Pemrograman Web</h3>
+              <p class="cert-summary">
+                Fondasi sintaksis HTML5, teknik styling CSS3 modern, layouting dengan Flexbox dan CSS Grid, penerapan responsive design, serta pembuatan website portofolio interaktif.
+              </p>
+              <div class="cert-skill-pills">
+                <span>HTML5 Semantic</span>
+                <span>CSS3 Modern</span>
+                <span>CSS Flexbox</span>
+                <span>CSS Grid</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Belajar Dasar Pemrograman Web"
+                      data-org="Dicoding Indonesia"
+                      data-date="Terverifikasi Dicoding"
+                      data-id="DCD-WEB-BASIC"
+                      data-desc="Penguasaan teknik pembuatan layout halaman website yang bersih, semantik, ramah mesin pencari (SEO), dan responsif di berbagai ukuran layar monitor hingga smartphone."
+                      data-link="https://www.dicoding.com"
+                      aria-label="Lihat Detail Sertifikat">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 6. Dicoding - Belajar Dasar AWS Cloud -->
+          <article class="cert-item" data-issuer="dicoding">
+            <div class="cert-left">
+              <div class="cert-issuer-badge dicoding">Dicoding</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="cloud"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Dicoding Indonesia & AWS</span>
+                <span class="cert-credential-code">AWS Authorized</span>
+              </div>
+              <h3 class="cert-title">Belajar Dasar AWS Cloud</h3>
+              <p class="cert-summary">
+                Mempelajari infrastruktur global Amazon Web Services (AWS), konsep komputasi awan (IaaS, PaaS, SaaS), Elastic Compute Cloud (EC2), Simple Storage Service (S3), dan manajemen keamanan IAM.
+              </p>
+              <div class="cert-skill-pills">
+                <span>AWS Global Infra</span>
+                <span>EC2 Compute</span>
+                <span>S3 Storage</span>
+                <span>AWS IAM</span>
+                <span>Cloud Security</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Belajar Dasar AWS Cloud"
+                      data-org="Dicoding Indonesia & Amazon Web Services (AWS)"
+                      data-date="Terverifikasi AWS"
+                      data-id="DCD-AWS-CLOUD"
+                      data-desc="Validasi pemahaman infrastruktur komputasi awan Amazon Web Services, efisiensi biaya arsitektur cloud, keamanan akses akun IAM, dan deployment serverless."
+                      data-link="https://www.dicoding.com"
+                      aria-label="Lihat Detail Sertifikat">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 7. Cisco - Networking Essentials -->
+          <article class="cert-item" data-issuer="cisco">
+            <div class="cert-left">
+              <div class="cert-issuer-badge cisco">Cisco</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="network"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Cisco Networking Academy</span>
+                <span class="cert-credential-code">Cisco NetAcad Verified</span>
+              </div>
+              <h3 class="cert-title">Networking Essentials</h3>
+              <p class="cert-summary">
+                Membangun jaringan LAN/WAN berskala kecil hingga menengah, konfigurasi IP addressing, subnetting VLSM, router & switch Cisco, pengujian konektivitas, dan keamanan jaringan dasar.
+              </p>
+              <div class="cert-skill-pills">
+                <span>Cisco IOS</span>
+                <span>IPv4 & IPv6</span>
+                <span>Subnetting</span>
+                <span>Packet Tracer</span>
+                <span>Network Troubleshooting</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Networking Essentials"
+                      data-org="Cisco Networking Academy"
+                      data-date="Terverifikasi Cisco"
+                      data-id="CISCO-NET-ESS"
+                      data-desc="Kurikulum resmi dari Cisco Networking Academy mengenai cara kerja jaringan komputer, perutean paket data, pemecahan masalah jaringan dengan Cisco Packet Tracer, dan keamanan koneksi."
+                      data-link="https://www.netacad.com"
+                      aria-label="Lihat Detail Sertifikat Cisco">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 8. Cisco - Networking Basics -->
+          <article class="cert-item" data-issuer="cisco">
+            <div class="cert-left">
+              <div class="cert-issuer-badge cisco">Cisco</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="cable"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Cisco Networking Academy</span>
+                <span class="cert-credential-code">Cisco NetAcad Verified</span>
+              </div>
+              <h3 class="cert-title">Networking Basics</h3>
+              <p class="cert-summary">
+                Pengenalan arsitektur jaringan komputer, model referensi OSI dan TCP/IP, media transmisi kabel dan nirkabel, topologi jaringan, serta protokol komunikasi standar internet.
+              </p>
+              <div class="cert-skill-pills">
+                <span>OSI Model</span>
+                <span>TCP/IP Stack</span>
+                <span>Network Media</span>
+                <span>Ethernet</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Networking Basics"
+                      data-org="Cisco Networking Academy"
+                      data-date="Terverifikasi Cisco"
+                      data-id="CISCO-NET-BASICS"
+                      data-desc="Dasar-dasar teknologi jaringan Cisco, memahami peranan hardware seperti NIC, Switch, Router, serta pemahaman protokol komunikasi data pada setiap lapisan layer OSI."
+                      data-link="https://www.netacad.com"
+                      aria-label="Lihat Detail Sertifikat Cisco">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- 9. Kominfo - Basic Cyber Security -->
+          <article class="cert-item" data-issuer="kominfo">
+            <div class="cert-left">
+              <div class="cert-issuer-badge kominfo">Kominfo</div>
+              <div class="cert-issuer-icon">
+                <i data-lucide="shield-check"></i>
+              </div>
+            </div>
+            <div class="cert-body">
+              <div class="cert-meta-top">
+                <span class="cert-org">Kementerian Komunikasi dan Informatika (Kominfo RI)</span>
+                <span class="cert-credential-code">DTS Kominfo Verified</span>
+              </div>
+              <h3 class="cert-title">Basic Cyber Security</h3>
+              <p class="cert-summary">
+                Pelatihan keamanan siber resmi Digital Talent Scholarship (DTS) Kominfo RI: pencegahan malware, keamanan data pribadi, mitigasi serangan social engineering, dan pertahanan siber dasar.
+              </p>
+              <div class="cert-skill-pills">
+                <span>Cyber Security</span>
+                <span>Threat Mitigation</span>
+                <span>Social Engineering Defense</span>
+                <span>Data Protection</span>
+              </div>
+            </div>
+            <div class="cert-action">
+              <button class="btn-cert-view" 
+                      data-title="Basic Cyber Security"
+                      data-org="Kementerian Komunikasi dan Informatika RI (DTS)"
+                      data-date="Terverifikasi Kominfo RI"
+                      data-id="KOMINFO-CYBER-SEC"
+                      data-desc="Program pelatihan intensif Kementerian Kominfo untuk meningkatkan literasi dan kapabilitas pertahanan siber nasional, meliputi analisis ancaman, proteksi data digital, serta kepatuhan keamanan informasi."
+                      data-link="https://digitalent.kominfo.go.id"
+                      aria-label="Lihat Detail Sertifikat Kominfo">
+                <span>Lihat Detail</span>
+                <i data-lucide="external-link"></i>
+              </button>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT & FOOTER SECTION (Footer Interaktif & Kaya Fitur) -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        
+        <!-- Interactive Direct Connect Card -->
+        <div class="contact-card-editorial">
+          <div class="contact-content">
+            <div class="hero-badge">
+              <span class="pulse-dot"></span>
+              <span class="badge-text">Terbuka untuk Kolaborasi Proyek & Jaringan</span>
+            </div>
+            <h2 class="contact-title">Punya ide proyek, konfigurasi jaringan, atau ingin berdiskusi?</h2>
+            <p class="contact-subtitle">
+              Pilih topik cepat di bawah untuk langsung terhubung dengan saya via WhatsApp atau Email:
+            </p>
+
+            <!-- Interactive Quick Prompt Chips -->
+            <div class="quick-prompt-chips">
+              <button class="quick-chip" data-msg="Halo Ardian, saya tertarik untuk kolaborasi pembuatan website portofolio / bisnis.">
+                <span>🚀 Kolaborasi Web</span>
+              </button>
+              <button class="quick-chip" data-msg="Halo Ardian, saya butuh bantuan konsultasi konfigurasi jaringan MikroTik / Cisco.">
+                <span>🌐 Konsultasi Jaringan (MTCNA)</span>
+              </button>
+              <button class="quick-chip" data-msg="Halo Ardian, saya ingin mendiskusikan peluang kerja sama / proyek baru.">
+                <span>💼 Tawaran Proyek</span>
+              </button>
+            </div>
+            
+            <div class="contact-actions-row">
+              <button id="copy-email-btn" class="btn btn-primary" data-email="ardian.rahman.dev@gmail.com">
+                <i data-lucide="copy" class="btn-icon"></i>
+                <span id="copy-btn-text">Salin Email: ardian.rahman.dev@gmail.com</span>
+              </button>
+              
+              <a href="https://wa.me/?text=Halo%20Ardian%20Rahman,%20saya%20melihat%20portofolio%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" id="direct-wa-btn">
+                <i data-lucide="message-square"></i>
+                <span>Hubungi via WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sleek, Highly Interactive Modern Footer -->
+        <footer class="site-footer">
+          <div class="footer-top">
+            
+            <!-- Left Footer Bragitnd & System Status -->
+            <div class="footer-brand-col">
+              <div class="footer-brand">
+                <span class="brand-monogram">AR</span>
+                <span class="brand-name">Ardian Rahman</span>
+              </div>
+              <p class="footer-tagline">
+                Creative Fullstack Developer & Network Associate (MTCNA). Membangun produk digital yang aman, cepat, dan bernilai tinggi.
+              </p>
+              <div class="footer-live-badge">
+                <span class="live-blink"></span>
+                <span>📍 Lokasi: Indonesia • <span id="footer-wib-clock"></span></span>
+              </div>
+            </div>
+
+            <!-- Middle Navigation -->
+            <div class="footer-links-col">
+              <span class="footer-col-title">Navigasi Halaman</span>
+              <ul class="footer-nav-list">
+                <li><a href="#home">Beranda Utama</a></li>
+                <li><a href="#about">Tentang & Filosofi</a></li>
+                <li><a href="#tech">Keahlian & Teknologi</a></li>
+                <li><a href="#certifications">9 Sertifikasi Resmi</a></li>
+                <li><a href="#contact">Kontak Langsung</a></li>
+              </ul>
+            </div>
+
+            <!-- Right Interactive Social Dock -->
+            <div class="footer-connect-col">
+              <span class="footer-col-title">Koneksi & Media Sosial</span>
+              <p class="footer-connect-text">Terhubung di platform profesional dan repositori open-source:</p>
+              
+              <div class="footer-social-dock">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="dock-item" data-tooltip="GitHub Profile">
+                  <i data-lucide="github"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="dock-item" data-tooltip="LinkedIn Network">
+                  <i data-lucide="linkedin"></i>
+                </a>
+                <a href="mailto:ardian.rahman.dev@gmail.com" class="dock-item" data-tooltip="Kirim Email">
+                  <i data-lucide="mail"></i>
+                </a>
+                <a href="https://wa.me/?text=Halo%20Ardian%20Rahman" target="_blank" rel="noopener noreferrer" class="dock-item" data-tooltip="WhatsApp Langsung">
+                  <i data-lucide="phone"></i>
+                </a>
+              </div>
+
+              <!-- Interactive Sound FX / Ambient Vibe Pill -->
+              <div class="ambient-vibe-pill" id="ambient-pill">
+                <i data-lucide="volume-2" class="vibe-icon"></i>
+                <span class="vibe-text">Audio Interaktif Aktif</span>
+                <span class="vibe-eq">
+                  <span></span><span></span><span></span>
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Footer Strip with Circular Scroll-to-Top -->
+          <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Ardian Rahman. Dibuat dengan presisi arsitektur web & estetika modern.</p>
+            
+            <!-- Circular Progress Back-to-Top Button -->
+            <button class="back-to-top-progress" id="back-to-top" aria-label="Kembali ke Atas Halaman">
+              <svg class="progress-ring" width="46" height="46">
+                <circle class="progress-ring-bg" stroke="var(--border-subtle)" stroke-width="3" fill="transparent" r="18" cx="23" cy="23"/>
+                <circle class="progress-ring-circle" id="scroll-progress-circle" stroke="var(--accent-blue)" stroke-width="3" fill="transparent" r="18" cx="23" cy="23"/>
+              </svg>
+              <i data-lucide="arrow-up" class="back-icon"></i>
+              <span class="progress-text" id="scroll-percent-text">0%</span>
+            </button>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE CERTIFICATE MODAL -->
+  <div class="modal-backdrop" id="cert-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Tutup Dialog">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="modal-header">
+        <div class="modal-icon-badge">
+          <i data-lucide="award"></i>
+        </div>
+        <div>
+          <span class="modal-org" id="modal-org">Penerbit Sertifikat</span>
+          <h3 class="modal-title" id="modal-title">Nama Sertifikasi</h3>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-info-grid">
+          <div class="info-cell">
+            <span class="cell-label">Status Validasi</span>
+            <span class="cell-status"><i data-lucide="check-circle-2"></i> Resmi & Terverifikasi</span>
+          </div>
+          <div class="info-cell">
+            <span class="cell-label">Credential ID</span>
+            <code class="cell-code" id="modal-id">-</code>
+          </div>
+          <div class="info-cell full-span">
+            <span class="cell-label">Tanggal / Masa Berlaku</span>
+            <span class="cell-val" id="modal-date">-</span>
+          </div>
+        </div>
+
+        <div class="modal-description">
+          <span class="cell-label">Deskripsi & Cakupan Materi</span>
+          <p id="modal-desc">-</p>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modal-link">
+          <span>Verifikasi di Situs Penerbit</span>
+          <i data-lucide="external-link"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION FOR COPY EMAIL -->
+  <div class="toast-notification" id="toast-notify" role="alert" aria-live="polite">
+    <i data-lucide="check" class="toast-icon"></i>
+    <span class="toast-text">Email berhasil disalin ke clipboard!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
