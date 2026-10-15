@@ -1,1273 +1,1022 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="en" class="dark scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ardian Rahman — Creative Developer & Network Engineer</title>
-  <meta name="description" content="Portfolio Ardian Rahman - Fullstack Developer, Network & Cyber Security Enthusiast. Membangun pengalaman digital interaktif dan berkinerja tinggi.">
-  
-  <!-- Google Fonts: Plus Jakarta Sans, Syne, JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Lenis Smooth Scroll -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-  
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ardian Rahman | Network Engineer Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pitchBlack: '#000000',
+                        cyberLime: '#00FF87',
+                        electricViolet: '#9D4EDD',
+                        warmYellow: '#FFB703',
+                        lightBg: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Neon Glow Effects */
+        .glow-headline {
+            text-shadow: 0 0 20px rgba(0, 255, 135, 0.4), 0 0 40px rgba(157, 78, 221, 0.3), 0 0 60px rgba(0, 255, 135, 0.2);
+        }
+        .glow-lime {
+            box-shadow: 0 0 25px -3px rgba(0, 255, 135, 0.4);
+        }
+        .glow-violet {
+            box-shadow: 0 0 25px -3px rgba(157, 78, 221, 0.4);
+        }
+        .glow-text-lime {
+            text-shadow: 0 0 12px rgba(0, 255, 135, 0.6);
+        }
+        .glow-text-violet {
+            text-shadow: 0 0 12px rgba(157, 78, 221, 0.6);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        html:not(.dark) ::webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00FF87;
+        }
+
+        /* Glassmorphism Navbar */
+        .nav-blur-active {
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        html:not(.dark) .nav-blur-active {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Interactive Physics Frame Canvas Overlay */
+        #ropeCanvas {
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 15;
+        }
+
+        /* Floating Animation */
+        @keyframes gentleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(0.8deg); }
+        }
+        .animate-float {
+            animation: gentleFloat 5s ease-in-out infinite;
+        }
+
+        /* Honeycomb Grid */
+        .hex-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-pitchBlack dark:bg-pitchBlack text-gray-100 dark:text-gray-100 selection:bg-cyberLime selection:text-black transition-colors duration-300">
 
-  <!-- Ambient Lighting Gradients -->
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-noise"></div>
-
-  <!-- Transparent Modern Navbar -->
-  <header class="navbar" id="navbar">
-    <div class="nav-container">
-      <!-- Brand Logo -->
-      <a href="#home" class="nav-brand" aria-label="Beranda">
-        <span class="brand-monogram">AR</span>
-        <span class="brand-name">Ardian<span class="brand-dot">.</span>Rahman</span>
-      </a>
-
-      <!-- Desktop Navigation Links -->
-      <nav class="nav-desktop" aria-label="Navigasi Utama">
-        <ul class="nav-links">
-          <li><a href="#home" class="nav-link active" data-nav="home">Beranda</a></li>
-          <li><a href="#about" class="nav-link" data-nav="about">Tentang</a></li>
-          <li><a href="#tech" class="nav-link" data-nav="tech">Teknologi</a></li>
-          <li><a href="#certifications" class="nav-link" data-nav="certifications">Sertifikasi</a></li>
-        </ul>
-      </nav>
-
-      <!-- Action Items: Theme Toggle & Hamburger -->
-      <div class="nav-actions">
-        <!-- Theme Toggle Button -->
-        <button id="theme-toggle" class="theme-btn" aria-label="Ganti Tema" title="Ganti Mode Terang / Gelap">
-          <div class="theme-icon-wrapper">
-            <i data-lucide="sun" class="icon-sun"></i>
-            <i data-lucide="moon" class="icon-moon"></i>
-          </div>
-          <span class="theme-label sr-only">Ganti Tema</span>
-        </button>
-
-        <!-- CTA Button in Desktop Navbar -->
-        <a href="#contact" class="nav-cta-btn">
-          <span>Kontak</span>
-          <i data-lucide="arrow-up-right"></i>
-        </a>
-
-        <!-- Animated Hamburger Button -->
-        <button id="hamburger-btn" class="hamburger-btn" aria-label="Buka Menu" aria-expanded="false" aria-controls="mobile-menu">
-          <span class="hamburger-box">
-            <span class="hamburger-line line-1"></span>
-            <span class="hamburger-line line-2"></span>
-            <span class="hamburger-line line-3"></span>
-          </span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Interactive Mobile Navigation Drawer -->
-  <div class="mobile-menu-backdrop" id="mobile-backdrop"></div>
-  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-inner">
-      <div class="mobile-menu-header">
-        <div class="mobile-brand">
-          <span class="brand-monogram">AR</span>
-          <span class="brand-name">Ardian<span class="brand-dot">.</span>Rahman</span>
-        </div>
-        <div class="mobile-status-pill">
-          <span class="pulse-dot"></span>
-          <span>Tersedia untuk Proyek</span>
-        </div>
-      </div>
-
-      <nav class="mobile-nav">
-        <ul class="mobile-nav-links">
-          <li style="--delay: 1">
-            <a href="#home" class="mobile-link active" data-nav="home">
-              <span class="mobile-link-num">01</span>
-              <span class="mobile-link-title">Beranda</span>
-              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
+    <!-- SIMPLIFIED ULTRA-SLEEK GLASSMORPHIC NAVBAR -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <!-- Brand -->
+            <a href="#home" class="flex items-center space-x-2 group">
+                <div class="w-9 h-9 rounded-full bg-black dark:bg-black border border-cyberLime/50 flex items-center justify-center text-cyberLime group-hover:shadow-[0_0_15px_rgba(0,255,135,0.6)] transition-all">
+                    <i data-lucide="terminal" class="w-4 h-4"></i>
+                </div>
+                <span class="font-mono font-bold text-base tracking-wider text-black dark:text-white group-hover:text-cyberLime transition-colors">ARDIAN.RAHMAN</span>
             </a>
-          </li>
-          <li style="--delay: 2">
-            <a href="#about" class="mobile-link" data-nav="about">
-              <span class="mobile-link-num">02</span>
-              <span class="mobile-link-title">Tentang Saya</span>
-              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
-            </a>
-          </li>
-          <li style="--delay: 3">
-            <a href="#tech" class="mobile-link" data-nav="tech">
-              <span class="mobile-link-num">03</span>
-              <span class="mobile-link-title">Teknologi</span>
-              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
-            </a>
-          </li>
-          <li style="--delay: 4">
-            <a href="#certifications" class="mobile-link" data-nav="certifications">
-              <span class="mobile-link-num">04</span>
-              <span class="mobile-link-title">Sertifikasi</span>
-              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
-            </a>
-          </li>
-          <li style="--delay: 5">
-            <a href="#contact" class="mobile-link" data-nav="contact">
-              <span class="mobile-link-num">05</span>
-              <span class="mobile-link-title">Kontak</span>
-              <i data-lucide="arrow-right" class="mobile-link-arrow"></i>
-            </a>
-          </li>
-        </ul>
-      </nav>
 
-      <div class="mobile-menu-footer">
-        <p class="mobile-footer-text">Mari berdiskusi tentang ide proyek Anda berikutnya.</p>
-        <div class="mobile-socials">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i data-lucide="github"></i></a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-          <a href="mailto:ardianrahman310@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
-        </div>
-      </div>
-    </div>
-  </aside>
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 font-mono text-xs tracking-wider">
+                <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-cyberLime dark:hover:text-cyberLime transition-colors">HOME</a>
+                <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-cyberLime dark:hover:text-cyberLime transition-colors">ABOUT</a>
+                <a href="#tech" class="text-gray-600 dark:text-gray-300 hover:text-cyberLime dark:hover:text-cyberLime transition-colors">TECH</a>
+                <a href="#projects" class="text-gray-600 dark:text-gray-300 hover:text-cyberLime dark:hover:text-cyberLime transition-colors">PROJECTS</a>
+                <a href="#certification" class="text-gray-600 dark:text-gray-300 hover:text-cyberLime dark:hover:text-cyberLime transition-colors">CERTIFICATION</a>
+                <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-cyberLime dark:hover:text-cyberLime transition-colors">CONTACT</a>
+            </nav>
 
-  <!-- MAIN CONTENT -->
-  <main id="main-content">
-
-    <!-- HOME / HERO SECTION -->
-    <section id="home" class="hero-section">
-      <div class="container hero-container">
-        
-        <!-- Left Hero Content (Editorial Typography & Animated Headline) -->
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="pulse-dot"></span>
-            <span class="badge-text">Available for Hire & Networking Projects</span>
-          </div>
-
-          <!-- ANIMATED KINETIC HEADLINE (Headline Beranimasi Interaktif) -->
-          <h1 class="hero-title">
-            Membangun arsitektur web 
-            <span class="kinetic-pill">
-              <span class="kinetic-word" id="kinetic-word">Modern</span>
-            </span>
-            dengan presisi visual & performa tinggi.
-          </h1>
-
-          <p class="hero-description">
-            Halo! Saya <strong>Ardian Rahman</strong>, Developer & Network Enthusiast dengan kompetensi <em>MTCNA</em>, <em>Cisco Networking</em>, dan pengembangan web modern. Berfokus pada antarmuka reaktif, keamanan jaringan, dan sistem yang tangguh.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#about" class="btn btn-primary">
-              <span>Eksplorasi Profil</span>
-              <i data-lucide="arrow-down-right"></i>
-            </a>
-            <a href="#certifications" class="btn btn-secondary">
-              <span>9 Sertifikasi Terverifikasi</span>
-              <i data-lucide="award"></i>
-            </a>
-          </div>
-
-          <!-- INOVASI EFEK HIDUP & INTERAKTIF (Menggantikan baris angka statis) -->
-          <div class="live-innovation-widget" id="live-engine">
-            <div class="widget-top-bar">
-              <div class="widget-status-indicator">
-                <span class="pulse-dot green"></span>
-                <span class="status-name">CORE SYSTEM ACTIVE</span>
-              </div>
-              <div class="widget-live-clock">
-                <i data-lucide="clock" class="clock-icon"></i>
-                <span id="live-wib-clock">WIB --:--:--</span>
-              </div>
-            </div>
-
-            <div class="widget-body">
-              <!-- Interactive Interactive Mode Pills -->
-              <div class="engine-modes" role="tablist" aria-label="Mode Interaktif">
-                <button class="mode-chip active" data-mode="dev" title="Mode Development">
-                  <i data-lucide="terminal"></i>
-                  <span>Dev Engine</span>
+            <!-- Actions (Theme Toggle & Mobile Menu) -->
+            <div class="flex items-center space-x-3">
+                <button id="theme-toggle" class="p-2 rounded-full border border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-cyberLime hover:text-cyberLime transition-all">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
                 </button>
-                <button class="mode-chip" data-mode="network" title="Mode Jaringan & Keamanan">
-                  <i data-lucide="shield-check"></i>
-                  <span>Network Guard</span>
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
-                <button class="mode-chip" data-mode="creative" title="Mode Kreatif">
-                  <i data-lucide="sparkles"></i>
-                  <span>Creative Flow</span>
-                </button>
-              </div>
-
-              <!-- Dynamic Output Console / Sound Wave Simulator -->
-              <div class="engine-display">
-                <div class="display-row">
-                  <span class="prompt-symbol">&gt;</span>
-                  <p class="engine-typewriter" id="engine-output">Memuat lingkungan kerja: React, MTCNA, Cisco & Cloud siap digunakan.</p>
-                </div>
-                
-                <div class="audio-wave-bars" title="Interactive Audio Visualizer">
-                  <span class="bar bar-1"></span>
-                  <span class="bar bar-2"></span>
-                  <span class="bar bar-3"></span>
-                  <span class="bar bar-4"></span>
-                  <span class="bar bar-5"></span>
-                  <span class="bar bar-6"></span>
-                  <span class="bar bar-7"></span>
-                </div>
-              </div>
-
-              <!-- Interactive Ping & Quick Pulse -->
-              <div class="widget-footer-strip">
-                <div class="latency-pill">
-                  <span class="latency-dot"></span>
-                  <span id="latency-text">Latency: 14ms (Optimal)</span>
-                </div>
-                <button id="btn-trigger-pulse" class="pulse-trigger-btn" title="Kirim Sinyal Ping Interaktif">
-                  <i data-lucide="radio"></i>
-                  <span>Test Ping</span>
-                </button>
-              </div>
             </div>
-          </div>
-
         </div>
 
-        <!-- Right Hero: Hanging Interactive Lanyard ID Card (Dengan Spacing Mobile Lega) -->
-        <div class="hero-interactive-card" id="card-hero-container">
-          
-          <!-- Lanyard Rig (Top anchor, ribbon, clip, ring) -->
-          <div class="lanyard-rig" id="lanyard-rig">
-            <!-- Ceiling mount / Anchor point -->
-            <div class="lanyard-mount">
-              <div class="mount-bracket"></div>
-            </div>
-
-            <!-- SVG Flexible Lanyard Ribbon -->
-            <svg class="lanyard-svg" id="lanyard-svg" viewBox="0 0 400 320" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="strapGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="var(--lanyard-edge)"/>
-                  <stop offset="30%" stop-color="var(--lanyard-main)"/>
-                  <stop offset="70%" stop-color="var(--lanyard-main)"/>
-                  <stop offset="100%" stop-color="var(--lanyard-edge)"/>
-                </linearGradient>
-              </defs>
-              <!-- Dynamic Left & Right Ribbon Strands -->
-              <path id="lanyard-left-strap" class="lanyard-strap" d="M 180 0 Q 185 100, 195 190" stroke="url(#strapGrad)" stroke-width="18" stroke-linecap="round" fill="none" />
-              <path id="lanyard-right-strap" class="lanyard-strap" d="M 220 0 Q 215 100, 205 190" stroke="url(#strapGrad)" stroke-width="18" stroke-linecap="round" fill="none" />
-              <!-- Strap stitch detail line -->
-              <path id="lanyard-stitch" d="M 200 0 Q 200 100, 200 190" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-dasharray="4,4" fill="none" />
-            </svg>
-
-            <!-- Physical Swivel Clip & Ring -->
-            <div class="lanyard-hardware" id="lanyard-hardware">
-              <div class="strap-loop">
-                <span class="brand-stitch">MTCNA-DEV</span>
-              </div>
-              <div class="metal-swivel">
-                <div class="swivel-top"></div>
-                <div class="swivel-cylinder"></div>
-                <div class="swivel-ring"></div>
-                <div class="lobster-claw"></div>
-              </div>
-            </div>
-
-            <!-- 3D Hanging ID Card -->
-            <div class="card-3d-wrapper" id="card-3d-wrapper">
-              <div class="id-card" id="id-card">
-                
-                <!-- Holographic Glare Overlay -->
-                <div class="card-glare" id="card-glare"></div>
-
-                <!-- Card Badge Hole / Slot -->
-                <div class="card-slot">
-                  <div class="slot-cutout"></div>
-                </div>
-
-                <!-- FRONT FACE OF ID CARD -->
-                <div class="card-face card-front">
-                  
-                  <!-- ID Card Top Header -->
-                  <div class="card-header">
-                    <div class="org-badge">
-                      <span class="org-chip"></span>
-                      <span class="org-title">ENGINEERING ACCESS</span>
-                    </div>
-                    <div class="card-access-pill">
-                      <span>MTCNA / PRO</span>
-                    </div>
-                  </div>
-
-                  <!-- Profile Avatar Showcase -->
-                  <div class="card-avatar-container">
-                    <div class="avatar-ring">
-                      <img src="assets/images/Ardian Rahman.jpeg" 
-                           alt="Ardian Rahman Portrait" 
-                           class="avatar-img"
-                           loading="lazy">
-                      <div class="avatar-badge" title="Status Aktif & Terverifikasi">
-                        <i data-lucide="check-check"></i>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Profile Identifiers -->
-                  <div class="card-identity">
-                    <h3 class="card-name">Ardian Rahman</h3>
-                    <p class="card-role">Developer & Network Associate</p>
-                    <div class="id-number-tag">
-                      <code>ID: AR-2026-X99</code>
-                      <span class="tag-status">VERIFIED</span>
-                    </div>
-                  </div>
-
-                  <!-- Micro-details & Holographic Barcode -->
-                  <div class="card-footer-info">
-                    <div class="barcode-area">
-                      <div class="barcode-lines"></div>
-                      <span class="barcode-text">9842 1083 4401 2026</span>
-                    </div>
-                    <div class="card-nfc-chip" title="NFC Smart Card Enabled">
-                      <i data-lucide="wifi"></i>
-                    </div>
-                  </div>
-
-                </div>
-
-                <!-- BACK FACE OF ID CARD -->
-                <div class="card-face card-back">
-                  <div class="card-slot">
-                    <div class="slot-cutout"></div>
-                  </div>
-
-                  <div class="back-magstripe">
-                    <div class="magstripe-bar"></div>
-                  </div>
-
-                  <div class="back-content">
-                    <div class="back-section">
-                      <span class="back-label">Kredensial Inti</span>
-                      <p class="back-val">MikroTik MTCNA, Cisco Networking, Web Frontend & Cyber Security</p>
-                    </div>
-
-                    <div class="back-grid">
-                      <div>
-                        <span class="back-label">Domisili</span>
-                        <p class="back-val">Indonesia</p>
-                      </div>
-                      <div>
-                        <span class="back-label">Spesialisasi</span>
-                        <p class="back-val">Fullstack & Network</p>
-                      </div>
-                    </div>
-
-                    <div class="back-signature-box">
-                      <span class="back-label">Tanda Tangan Terotorisasi:</span>
-                      <div class="signature-line">Ardian Rahman</div>
-                    </div>
-
-                    <div class="back-security-notice">
-                      <i data-lucide="shield-check"></i>
-                      <p>Kredensial digital resmi portofolio. Terverifikasi Kominfo, Cisco & Dicoding.</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Interactive Controller Pill -->
-            <div class="card-controller">
-              <span class="drag-hint">
-                <i data-lucide="move" class="hint-icon"></i>
-                <span class="hint-text">Goyang / Tarik kartu</span>
-              </span>
-              <button id="flip-card-btn" class="flip-btn" aria-label="Balik Kartu ID">
-                <i data-lucide="repeat"></i>
-                <span>Balik Kartu</span>
-              </button>
-            </div>
-
-          </div>
-
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 px-6 py-4 space-y-3 font-mono text-xs">
+            <a href="#home" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">HOME</a>
+            <a href="#about" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">ABOUT</a>
+            <a href="#tech" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">TECH</a>
+            <a href="#projects" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">PROJECTS</a>
+            <a href="#certification" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">CERTIFICATION</a>
+            <a href="#contact" class="block py-2 text-gray-700 dark:text-gray-300 hover:text-cyberLime">CONTACT</a>
         </div>
+    </header>
 
-      </div>
+    <!-- SECTION 1: HOME / HERO -->
+    <section id="home" class="min-h-screen pt-32 pb-20 flex items-center justify-center relative overflow-hidden bg-white dark:bg-pitchBlack transition-colors">
+        <!-- Ambient Radial Background Glows -->
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyberLime/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-[500px] h-[500px] bg-electricViolet/15 rounded-full blur-[150px] pointer-events-none"></div>
 
-      <!-- Smooth Scroll Down Indicator Pill -->
-      <a href="#about" class="scroll-down-indicator" aria-label="Gulir ke Bawah">
-        <span class="indicator-mouse">
-          <span class="wheel"></span>
-        </span>
-        <span class="indicator-label">Gulir ke Bawah</span>
-        <i data-lucide="chevron-down" class="indicator-chevron"></i>
-      </a>
-    </section>
-
-    <!-- ABOUT SECTION (Editorial Style, Non-Generic AI) -->
-    <section id="about" class="section about-section">
-      <div class="container">
-        
-        <!-- Section Header -->
-        <div class="section-tag">
-          <span class="tag-index">01</span>
-          <span class="tag-title">TENTANG SAYA</span>
-        </div>
-
-        <div class="about-grid">
-          
-          <!-- Large Editorial Headline & Story -->
-          <div class="about-story">
-            <h2 class="editorial-headline">
-              Menyatukan logika rekayasa web dengan ketangguhan infrastruktur jaringan.
-            </h2>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
             
-            <div class="story-paragraphs">
-              <p>
-                Saya percaya bahwa sebuah aplikasi web yang luar biasa membutuhkan dua pilar utama: pengalaman pengguna yang intuitif di lapisan antarmuka, serta fondasi arsitektur jaringan yang aman dan andal di balik layar.
-              </p>
-              <p>
-                Berbekal sertifikasi resmi <strong>MikroTik (MTCNA)</strong>, <strong>Cisco Networking</strong>, pelatihan <strong>Cyber Security Kominfo</strong>, serta kurikulum komprehensif <strong>Dicoding</strong> dalam JavaScript, Frontend, AI, dan AWS Cloud, saya merancang solusi digital dengan pendekatan holistik — dari protokol jaringan hingga piksel antarmuka.
-              </p>
+            <!-- Terminal Bash Prompt Line -->
+            <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gray-100 dark:bg-black/80 border border-cyberLime/40 text-black dark:text-white font-mono text-sm sm:text-base glow-lime shadow-lg">
+                <span class="text-cyberLime font-bold">$</span>
+                <span id="bash-prompt" class="text-cyberLime font-medium"></span>
+                <span class="w-2.5 h-5 bg-cyberLime inline-block animate-pulse"></span>
             </div>
 
-            <div class="story-quote">
-              <div class="quote-bar"></div>
-              <blockquote>
-                "Kekuatan sebuah sistem digital tidak hanya ditentukan oleh bagaimana ia tampil, tetapi oleh seberapa tangguh dan aman ia melayani penggunanya setiap saat."
-              </blockquote>
-            </div>
-          </div>
-
-          <!-- About Highlights -->
-          <div class="about-details">
-            <div class="detail-block">
-              <span class="detail-label">Prinsip & Nilai Kerja</span>
-              <ul class="principles-list">
-                <li>
-                  <span class="principle-bullet">01</span>
-                  <div>
-                    <strong>Keamanan & Stabilitas Jaringan</strong>
-                    <p>Memahami protokol transmisi, konfigurasi routing, firewall, dan mitigasi ancaman siber sejak tahap perancangan awal.</p>
-                  </div>
-                </li>
-                <li>
-                  <span class="principle-bullet">02</span>
-                  <div>
-                    <strong>Estetika Eksklusif & Anti-Generik</strong>
-                    <p>Menghindari gaya template AI yang kaku. Setiap antarmuka dirancang unik dengan kepribadian dan responsivitas tinggi.</p>
-                  </div>
-                </li>
-                <li>
-                  <span class="principle-bullet">03</span>
-                  <div>
-                    <strong>Cloud & AI Readiness</strong>
-                    <p>Kemampuan mengintegrasikan layanan komputasi awan AWS serta konsep fundamental Artificial Intelligence ke dalam aplikasi nyata.</p>
-                  </div>
-                </li>
-              </ul>
+            <!-- BOLD EYE-SOOTHING GLOW HEADLINE -->
+            <div class="space-y-4">
+                <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-black dark:text-white font-sans uppercase">
+                    Network <span class="glow-headline text-transparent bg-clip-text bg-gradient-to-r from-cyberLime via-emerald-400 to-electricViolet">Engineer</span>
+                </h1>
+                <p class="text-xl sm:text-2xl font-mono text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                    Architecting Enterprise Connectivity, Routing Topology &amp; Automated Network Infrastructure
+                </p>
             </div>
 
-            <div class="detail-block info-strip">
-              <div class="info-row">
-                <span class="info-key">Lokasi</span>
-                <span class="info-val">Indonesia (WIB / UTC+7)</span>
-              </div>
-              <div class="info-row">
-                <span class="info-key">Kompetensi Utama</span>
-                <span class="info-val">Web Development & Network Associate</span>
-              </div>
-              <div class="info-row">
-                <span class="info-key">Sertifikasi Unggulan</span>
-                <span class="info-val">MTCNA, Cisco, Dicoding & Kominfo</span>
-              </div>
-              <div class="info-row">
-                <span class="info-key">Status Ketersediaan</span>
-                <span class="info-val highlight-green">Tersedia untuk Peluang Baru</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- TECHNOLOGI / TECH STACK SECTION -->
-    <section id="tech" class="section tech-section">
-      <div class="container">
-        
-        <div class="section-tag">
-          <span class="tag-index">02</span>
-          <span class="tag-title">TEKNOLOGI & KEAHLIAN</span>
-        </div>
-
-        <div class="tech-header-row">
-          <div class="tech-title-wrap">
-            <h2 class="section-heading">Alat dan ekosistem yang saya kuasai secara mendalam.</h2>
-            <p class="section-subheading">Kombinasi harmonis antara teknologi pengembangan web modern, arsitektur cloud AWS, dan infrastruktur jaringan bersertifikasi.</p>
-          </div>
-
-          <!-- Interactive Filter Tabs -->
-          <div class="tech-filter-tabs" role="tablist">
-            <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">Semua</button>
-            <button class="filter-tab" data-filter="frontend" role="tab" aria-selected="false">Frontend</button>
-            <button class="filter-tab" data-filter="networking" role="tab" aria-selected="false">Networking & Security</button>
-            <button class="filter-tab" data-filter="cloud-ai" role="tab" aria-selected="false">Cloud & AI</button>
-          </div>
-        </div>
-
-        <!-- Curated Interactive Stack Grid -->
-        <div class="tech-showcase-grid" id="tech-grid">
-          
-          <!-- Frontend -->
-          <div class="tech-pill" data-category="frontend">
-            <div class="tech-icon-box">
-              <i data-lucide="code-2"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">HTML5 & Modern CSS3</h3>
-                <span class="tech-level">Dicoding Certified</span>
-              </div>
-              <p class="tech-desc">Semantic structure, CSS Flexbox/Grid, fluid typography, responsive layout berstandar w3c.</p>
-              <div class="tech-tags">
-                <span>Semantic</span>
-                <span>Flexbox</span>
-                <span>Responsive</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="tech-pill" data-category="frontend">
-            <div class="tech-icon-box">
-              <i data-lucide="file-code"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">JavaScript (ES6+)</h3>
-                <span class="tech-level">Dicoding Certified</span>
-              </div>
-              <p class="tech-desc">DOM Manipulation, Web Storage API, Asynchronous JavaScript (Promises/Async-Await), Event Loop.</p>
-              <div class="tech-tags">
-                <span>ES6+</span>
-                <span>Web Storage</span>
-                <span>Async JS</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="tech-pill" data-category="frontend">
-            <div class="tech-icon-box">
-              <i data-lucide="layout"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">Front-End Web Apps</h3>
-                <span class="tech-level">Intermediate</span>
-              </div>
-              <p class="tech-desc">Pembuatan aplikasi web interaktif, single page interface, modular component styling.</p>
-              <div class="tech-tags">
-                <span>SPA</span>
-                <span>UI Components</span>
-                <span>A11y</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Networking & Security -->
-          <div class="tech-pill" data-category="networking">
-            <div class="tech-icon-box">
-              <i data-lucide="router"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">MikroTik RouterOS (MTCNA)</h3>
-                <span class="tech-level">MTCNA Certified</span>
-              </div>
-              <p class="tech-desc">Routing protocols, DHCP, NAT, Firewall filter rules, Bandwidth Queue, Wireless AP & bridging.</p>
-              <div class="tech-tags">
-                <span>MTCNA</span>
-                <span>Routing</span>
-                <span>Firewall</span>
-                <span>Queues</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="tech-pill" data-category="networking">
-            <div class="tech-icon-box">
-              <i data-lucide="network"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">Cisco Networking</h3>
-                <span class="tech-level">Cisco Certified</span>
-              </div>
-              <p class="tech-desc">Networking Essentials & Basics, TCP/IP & OSI Layer, Subnetting (IPv4/IPv6), Switch & Router config.</p>
-              <div class="tech-tags">
-                <span>Cisco</span>
-                <span>Subnetting</span>
-                <span>OSI Model</span>
-                <span>Switches</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="tech-pill" data-category="networking">
-            <div class="tech-icon-box">
-              <i data-lucide="shield-alert"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">Basic Cyber Security</h3>
-                <span class="tech-level">Kominfo Certified</span>
-              </div>
-              <p class="tech-desc">Threat identification, authentication defense, secure communications, security baseline practices.</p>
-              <div class="tech-tags">
-                <span>Kominfo DTS</span>
-                <span>Cyber Defense</span>
-                <span>Data Privacy</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cloud & AI -->
-          <div class="tech-pill" data-category="cloud-ai">
-            <div class="tech-icon-box">
-              <i data-lucide="cloud"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">AWS Cloud Fundamentals</h3>
-                <span class="tech-level">Dicoding / AWS</span>
-              </div>
-              <p class="tech-desc">Arsitektur komputasi awan AWS, EC2 instances, S3 storage bucket, IAM permissions, serverless.</p>
-              <div class="tech-tags">
-                <span>AWS EC2</span>
-                <span>S3</span>
-                <span>Cloud Security</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="tech-pill" data-category="cloud-ai">
-            <div class="tech-icon-box">
-              <i data-lucide="cpu"></i>
-            </div>
-            <div class="tech-info">
-              <div class="tech-name-row">
-                <h3 class="tech-name">Dasar Artificial Intelligence</h3>
-                <span class="tech-level">Dicoding Certified</span>
-              </div>
-              <p class="tech-desc">Konsep dasar Machine Learning, Supervised & Unsupervised Learning, pemanfaatan AI dalam web.</p>
-              <div class="tech-tags">
-                <span>AI Concepts</span>
-                <span>Machine Learning</span>
-                <span>Data Flow</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Tech Marquee Strip -->
-        <div class="tech-strip-wrapper">
-          <div class="tech-strip">
-            <span class="strip-item"><i data-lucide="router"></i> MikroTik MTCNA</span>
-            <span class="strip-item"><i data-lucide="network"></i> Cisco Networking Essentials</span>
-            <span class="strip-item"><i data-lucide="shield-check"></i> Basic Cyber Security Kominfo</span>
-            <span class="strip-item"><i data-lucide="cloud"></i> AWS Cloud Dasar</span>
-            <span class="strip-item"><i data-lucide="cpu"></i> AI Fundamentals</span>
-            <span class="strip-item"><i data-lucide="file-code"></i> Modern JavaScript ES6+</span>
-            <span class="strip-item"><i data-lucide="router"></i> MikroTik MTCNA</span>
-            <span class="strip-item"><i data-lucide="network"></i> Cisco Networking Essentials</span>
-            <span class="strip-item"><i data-lucide="shield-check"></i> Basic Cyber Security Kominfo</span>
-            <span class="strip-item"><i data-lucide="cloud"></i> AWS Cloud Dasar</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CERTIFICATIONS SECTION (Sesuai dengan 9 Sertifikasi Pengguna) -->
-    <section id="certifications" class="section cert-section">
-      <div class="container">
-        
-        <div class="section-tag">
-          <span class="tag-index">03</span>
-          <span class="tag-title">SERTIFIKASI & KREDENSIAL RESMI</span>
-        </div>
-
-        <div class="cert-header-row">
-          <div>
-            <h2 class="section-heading">Kredensial dan sertifikasi resmi yang saya raih.</h2>
-            <p class="section-subheading">Validasi kompetensi resmi dari MikroTik, Cisco Networking Academy, Dicoding Indonesia, dan Kominfo.</p>
-          </div>
-
-          <!-- Interactive Issuer Filter Tabs -->
-          <div class="cert-filter-tabs" role="tablist">
-            <button class="cert-tab active" data-issuer="all" role="tab" aria-selected="true">Semua (9)</button>
-            <button class="cert-tab" data-issuer="dicoding" role="tab" aria-selected="false">Dicoding (5)</button>
-            <button class="cert-tab" data-issuer="cisco" role="tab" aria-selected="false">Cisco (2)</button>
-            <button class="cert-tab" data-issuer="mikrotik" role="tab" aria-selected="false">MikroTik (1)</button>
-            <button class="cert-tab" data-issuer="kominfo" role="tab" aria-selected="false">Kominfo (1)</button>
-          </div>
-        </div>
-
-        <!-- 9 User Certifications Catalog -->
-        <div class="cert-catalog" id="cert-catalog">
-          
-          <!-- 1. MTCNA -->
-          <article class="cert-item" data-issuer="mikrotik">
-            <div class="cert-left">
-              <div class="cert-issuer-badge mikrotik">MikroTik</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="router"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">MikroTik SIA (Latvia) / MikroTik Training</span>
-                <span class="cert-credential-code">MTCNA Certified</span>
-              </div>
-              <h3 class="cert-title">MikroTik Certified Network Associate (MTCNA)</h3>
-              <p class="cert-summary">
-                Sertifikasi internasional RouterOS & RouterBOARD MikroTik mencakup Routing, Bridging, Firewall Filter, NAT, Mangle, Bandwidth Management (Queues), Wireless Networking, dan Tunnels.
-              </p>
-              <div class="cert-skill-pills">
-                <span>RouterOS</span>
-                <span>Firewall & NAT</span>
-                <span>Bandwidth Queue</span>
-                <span>Routing Protocols</span>
-                <span>Wireless AP</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="MikroTik Certified Network Associate (MTCNA)"
-                      data-org="MikroTik SIA (Latvia)"
-                      data-date="Terverifikasi Resmi"
-                      data-id="MTCNA-ID-2026"
-                      data-desc="Sertifikasi internasional yang membuktikan keahlian dalam instalasi, konfigurasi, pemeliharaan, serta troubleshooting perangkat RouterBOARD dan sistem operasi MikroTik RouterOS di lingkungan jaringan nyata."
-                      data-link="https://mikrotik.com"
-                      aria-label="Lihat Detail Sertifikat MTCNA">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 2. Dicoding - Belajar Membuat Front-End Web untuk Pemula -->
-          <article class="cert-item" data-issuer="dicoding">
-            <div class="cert-left">
-              <div class="cert-issuer-badge dicoding">Dicoding</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="code-2"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Dicoding Indonesia</span>
-                <span class="cert-credential-code">Dicoding Verified</span>
-              </div>
-              <h3 class="cert-title">Belajar Membuat Front-End Web untuk Pemula</h3>
-              <p class="cert-summary">
-                Membangun aplikasi web interaktif dengan manipulasi DOM modern, implementasi Web Storage (localStorage & sessionStorage), serta penanganan event secara dinamis.
-              </p>
-              <div class="cert-skill-pills">
-                <span>DOM Manipulation</span>
-                <span>Web Storage</span>
-                <span>Custom Events</span>
-                <span>Frontend Logic</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Belajar Membuat Front-End Web untuk Pemula"
-                      data-org="Dicoding Indonesia"
-                      data-date="Terverifikasi Dicoding"
-                      data-id="DCD-FE-PEMULA"
-                      data-desc="Kurikulum terakreditasi Dicoding untuk mencetak pengembang web front-end yang mampu mengelola state lokal, manipulasi elemen dokumen dinamis, serta membangun interaksi pengguna yang responsif."
-                      data-link="https://www.dicoding.com"
-                      aria-label="Lihat Detail Sertifikat">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 3. Dicoding - Belajar Dasar Pemrograman JavaScript -->
-          <article class="cert-item" data-issuer="dicoding">
-            <div class="cert-left">
-              <div class="cert-issuer-badge dicoding">Dicoding</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="file-code"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Dicoding Indonesia</span>
-                <span class="cert-credential-code">Dicoding Verified</span>
-              </div>
-              <h3 class="cert-title">Belajar Dasar Pemrograman JavaScript</h3>
-              <p class="cert-summary">
-                Mendalami fundamental bahasa JavaScript ES6+: Object-Oriented Programming (OOP), Functional Programming, penanganan Asynchronous (Promise & Async/Await), dan Node.js environment.
-              </p>
-              <div class="cert-skill-pills">
-                <span>JavaScript ES6+</span>
-                <span>OOP</span>
-                <span>Functional Programming</span>
-                <span>Asynchronous JS</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Belajar Dasar Pemrograman JavaScript"
-                      data-org="Dicoding Indonesia"
-                      data-date="Terverifikasi Dicoding"
-                      data-id="DCD-JS-BASIC"
-                      data-desc="Memahami logika dan paradigma pemrograman JavaScript standar industri, termasuk penanganan data kompleks, pengujian fungsi modular, serta kode asinkron."
-                      data-link="https://www.dicoding.com"
-                      aria-label="Lihat Detail Sertifikat">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 4. Dicoding - Belajar Dasar AI -->
-          <article class="cert-item" data-issuer="dicoding">
-            <div class="cert-left">
-              <div class="cert-issuer-badge dicoding">Dicoding</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="cpu"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Dicoding Indonesia</span>
-                <span class="cert-credential-code">Dicoding Verified</span>
-              </div>
-              <h3 class="cert-title">Belajar Dasar AI (Artificial Intelligence)</h3>
-              <p class="cert-summary">
-                Memahami konsep fundamental kecerdasan buatan, Machine Learning, Deep Learning, Generative AI, serta etika penggunaan teknologi AI dalam pengembangan perangkat lunak modern.
-              </p>
-              <div class="cert-skill-pills">
-                <span>AI Fundamentals</span>
-                <span>Machine Learning</span>
-                <span>Generative AI</span>
-                <span>AI Ethics</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Belajar Dasar AI (Artificial Intelligence)"
-                      data-org="Dicoding Indonesia"
-                      data-date="Terverifikasi Dicoding"
-                      data-id="DCD-AI-BASIC"
-                      data-desc="Pemahaman esensial mengenai arsitektur kecerdasan buatan, bagaimana model machine learning dilatih, klasifikasi data, dan integrasi API AI pada ekosistem aplikasi."
-                      data-link="https://www.dicoding.com"
-                      aria-label="Lihat Detail Sertifikat">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 5. Dicoding - Belajar Dasar Pemrograman Web -->
-          <article class="cert-item" data-issuer="dicoding">
-            <div class="cert-left">
-              <div class="cert-issuer-badge dicoding">Dicoding</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="layout"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Dicoding Indonesia</span>
-                <span class="cert-credential-code">Dicoding Verified</span>
-              </div>
-              <h3 class="cert-title">Belajar Dasar Pemrograman Web</h3>
-              <p class="cert-summary">
-                Fondasi sintaksis HTML5, teknik styling CSS3 modern, layouting dengan Flexbox dan CSS Grid, penerapan responsive design, serta pembuatan website portofolio interaktif.
-              </p>
-              <div class="cert-skill-pills">
-                <span>HTML5 Semantic</span>
-                <span>CSS3 Modern</span>
-                <span>CSS Flexbox</span>
-                <span>CSS Grid</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Belajar Dasar Pemrograman Web"
-                      data-org="Dicoding Indonesia"
-                      data-date="Terverifikasi Dicoding"
-                      data-id="DCD-WEB-BASIC"
-                      data-desc="Penguasaan teknik pembuatan layout halaman website yang bersih, semantik, ramah mesin pencari (SEO), dan responsif di berbagai ukuran layar monitor hingga smartphone."
-                      data-link="https://www.dicoding.com"
-                      aria-label="Lihat Detail Sertifikat">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 6. Dicoding - Belajar Dasar AWS Cloud -->
-          <article class="cert-item" data-issuer="dicoding">
-            <div class="cert-left">
-              <div class="cert-issuer-badge dicoding">Dicoding</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="cloud"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Dicoding Indonesia & AWS</span>
-                <span class="cert-credential-code">AWS Authorized</span>
-              </div>
-              <h3 class="cert-title">Belajar Dasar AWS Cloud</h3>
-              <p class="cert-summary">
-                Mempelajari infrastruktur global Amazon Web Services (AWS), konsep komputasi awan (IaaS, PaaS, SaaS), Elastic Compute Cloud (EC2), Simple Storage Service (S3), dan manajemen keamanan IAM.
-              </p>
-              <div class="cert-skill-pills">
-                <span>AWS Global Infra</span>
-                <span>EC2 Compute</span>
-                <span>S3 Storage</span>
-                <span>AWS IAM</span>
-                <span>Cloud Security</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Belajar Dasar AWS Cloud"
-                      data-org="Dicoding Indonesia & Amazon Web Services (AWS)"
-                      data-date="Terverifikasi AWS"
-                      data-id="DCD-AWS-CLOUD"
-                      data-desc="Validasi pemahaman infrastruktur komputasi awan Amazon Web Services, efisiensi biaya arsitektur cloud, keamanan akses akun IAM, dan deployment serverless."
-                      data-link="https://www.dicoding.com"
-                      aria-label="Lihat Detail Sertifikat">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 7. Cisco - Networking Essentials -->
-          <article class="cert-item" data-issuer="cisco">
-            <div class="cert-left">
-              <div class="cert-issuer-badge cisco">Cisco</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="network"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Cisco Networking Academy</span>
-                <span class="cert-credential-code">Cisco NetAcad Verified</span>
-              </div>
-              <h3 class="cert-title">Networking Essentials</h3>
-              <p class="cert-summary">
-                Membangun jaringan LAN/WAN berskala kecil hingga menengah, konfigurasi IP addressing, subnetting VLSM, router & switch Cisco, pengujian konektivitas, dan keamanan jaringan dasar.
-              </p>
-              <div class="cert-skill-pills">
-                <span>Cisco IOS</span>
-                <span>IPv4 & IPv6</span>
-                <span>Subnetting</span>
-                <span>Packet Tracer</span>
-                <span>Network Troubleshooting</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Networking Essentials"
-                      data-org="Cisco Networking Academy"
-                      data-date="Terverifikasi Cisco"
-                      data-id="CISCO-NET-ESS"
-                      data-desc="Kurikulum resmi dari Cisco Networking Academy mengenai cara kerja jaringan komputer, perutean paket data, pemecahan masalah jaringan dengan Cisco Packet Tracer, dan keamanan koneksi."
-                      data-link="https://www.netacad.com"
-                      aria-label="Lihat Detail Sertifikat Cisco">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 8. Cisco - Networking Basics -->
-          <article class="cert-item" data-issuer="cisco">
-            <div class="cert-left">
-              <div class="cert-issuer-badge cisco">Cisco</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="cable"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Cisco Networking Academy</span>
-                <span class="cert-credential-code">Cisco NetAcad Verified</span>
-              </div>
-              <h3 class="cert-title">Networking Basics</h3>
-              <p class="cert-summary">
-                Pengenalan arsitektur jaringan komputer, model referensi OSI dan TCP/IP, media transmisi kabel dan nirkabel, topologi jaringan, serta protokol komunikasi standar internet.
-              </p>
-              <div class="cert-skill-pills">
-                <span>OSI Model</span>
-                <span>TCP/IP Stack</span>
-                <span>Network Media</span>
-                <span>Ethernet</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Networking Basics"
-                      data-org="Cisco Networking Academy"
-                      data-date="Terverifikasi Cisco"
-                      data-id="CISCO-NET-BASICS"
-                      data-desc="Dasar-dasar teknologi jaringan Cisco, memahami peranan hardware seperti NIC, Switch, Router, serta pemahaman protokol komunikasi data pada setiap lapisan layer OSI."
-                      data-link="https://www.netacad.com"
-                      aria-label="Lihat Detail Sertifikat Cisco">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-          <!-- 9. Kominfo - Basic Cyber Security -->
-          <article class="cert-item" data-issuer="kominfo">
-            <div class="cert-left">
-              <div class="cert-issuer-badge kominfo">Kominfo</div>
-              <div class="cert-issuer-icon">
-                <i data-lucide="shield-check"></i>
-              </div>
-            </div>
-            <div class="cert-body">
-              <div class="cert-meta-top">
-                <span class="cert-org">Kementerian Komunikasi dan Informatika (Kominfo RI)</span>
-                <span class="cert-credential-code">DTS Kominfo Verified</span>
-              </div>
-              <h3 class="cert-title">Basic Cyber Security</h3>
-              <p class="cert-summary">
-                Pelatihan keamanan siber resmi Digital Talent Scholarship (DTS) Kominfo RI: pencegahan malware, keamanan data pribadi, mitigasi serangan social engineering, dan pertahanan siber dasar.
-              </p>
-              <div class="cert-skill-pills">
-                <span>Cyber Security</span>
-                <span>Threat Mitigation</span>
-                <span>Social Engineering Defense</span>
-                <span>Data Protection</span>
-              </div>
-            </div>
-            <div class="cert-action">
-              <button class="btn-cert-view" 
-                      data-title="Basic Cyber Security"
-                      data-org="Kementerian Komunikasi dan Informatika RI (DTS)"
-                      data-date="Terverifikasi Kominfo RI"
-                      data-id="KOMINFO-CYBER-SEC"
-                      data-desc="Program pelatihan intensif Kementerian Kominfo untuk meningkatkan literasi dan kapabilitas pertahanan siber nasional, meliputi analisis ancaman, proteksi data digital, serta kepatuhan keamanan informasi."
-                      data-link="https://digitalent.kominfo.go.id"
-                      aria-label="Lihat Detail Sertifikat Kominfo">
-                <span>Lihat Detail</span>
-                <i data-lucide="external-link"></i>
-              </button>
-            </div>
-          </article>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CONTACT & FOOTER SECTION (Footer Interaktif & Kaya Fitur) -->
-    <section id="contact" class="section contact-section">
-      <div class="container">
-        
-        <!-- Interactive Direct Connect Card -->
-        <div class="contact-card-editorial">
-          <div class="contact-content">
-            <div class="hero-badge">
-              <span class="pulse-dot"></span>
-              <span class="badge-text">Terbuka untuk Kolaborasi Proyek & Jaringan</span>
-            </div>
-            <h2 class="contact-title">Punya ide proyek, konfigurasi jaringan, atau ingin berdiskusi?</h2>
-            <p class="contact-subtitle">
-              Pilih topik cepat di bawah untuk langsung terhubung dengan saya via WhatsApp atau Email:
-            </p>
-
-            <!-- Interactive Quick Prompt Chips -->
-            <div class="quick-prompt-chips">
-              <button class="quick-chip" data-msg="Halo Ardian, saya tertarik untuk kolaborasi pembuatan website portofolio / bisnis.">
-                <span>🚀 Kolaborasi Web</span>
-              </button>
-              <button class="quick-chip" data-msg="Halo Ardian, saya butuh bantuan konsultasi konfigurasi jaringan MikroTik / Cisco.">
-                <span>🌐 Konsultasi Jaringan (MTCNA)</span>
-              </button>
-              <button class="quick-chip" data-msg="Halo Ardian, saya ingin mendiskusikan peluang kerja sama / proyek baru.">
-                <span>💼 Tawaran Proyek</span>
-              </button>
-            </div>
-            
-            <div class="contact-actions-row">
-              <button id="copy-email-btn" class="btn btn-primary" data-email="ardian.rahman.dev@gmail.com">
-                <i data-lucide="copy" class="btn-icon"></i>
-                <span id="copy-btn-text">Salin Email: ardian.rahman.dev@gmail.com</span>
-              </button>
-              
-              <a href="https://wa.me/?text=Halo%20Ardian%20Rahman,%20saya%20melihat%20portofolio%20Anda." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" id="direct-wa-btn">
-                <i data-lucide="message-square"></i>
-                <span>Hubungi via WhatsApp</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sleek, Highly Interactive Modern Footer -->
-        <footer class="site-footer">
-          <div class="footer-top">
-            
-            <!-- Left Footer Bragitnd & System Status -->
-            <div class="footer-brand-col">
-              <div class="footer-brand">
-                <span class="brand-monogram">AR</span>
-                <span class="brand-name">Ardian Rahman</span>
-              </div>
-              <p class="footer-tagline">
-                Creative Fullstack Developer & Network Associate (MTCNA). Membangun produk digital yang aman, cepat, dan bernilai tinggi.
-              </p>
-              <div class="footer-live-badge">
-                <span class="live-blink"></span>
-                <span>📍 Lokasi: Indonesia • <span id="footer-wib-clock"></span></span>
-              </div>
-            </div>
-
-            <!-- Middle Navigation -->
-            <div class="footer-links-col">
-              <span class="footer-col-title">Navigasi Halaman</span>
-              <ul class="footer-nav-list">
-                <li><a href="#home">Beranda Utama</a></li>
-                <li><a href="#about">Tentang & Filosofi</a></li>
-                <li><a href="#tech">Keahlian & Teknologi</a></li>
-                <li><a href="#certifications">9 Sertifikasi Resmi</a></li>
-                <li><a href="#contact">Kontak Langsung</a></li>
-              </ul>
-            </div>
-
-            <!-- Right Interactive Social Dock -->
-            <div class="footer-connect-col">
-              <span class="footer-col-title">Koneksi & Media Sosial</span>
-              <p class="footer-connect-text">Terhubung di platform profesional dan repositori open-source:</p>
-              
-              <div class="footer-social-dock">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="dock-item" data-tooltip="GitHub Profile">
-                  <i data-lucide="github"></i>
-                </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="dock-item" data-tooltip="LinkedIn Network">
-                  <i data-lucide="linkedin"></i>
-                </a>
-                <a href="mailto:ardian.rahman.dev@gmail.com" class="dock-item" data-tooltip="Kirim Email">
-                  <i data-lucide="mail"></i>
-                </a>
-                <a href="https://wa.me/?text=Halo%20Ardian%20Rahman" target="_blank" rel="noopener noreferrer" class="dock-item" data-tooltip="WhatsApp Langsung">
-                  <i data-lucide="phone"></i>
-                </a>
-              </div>
-
-              <!-- Interactive Sound FX / Ambient Vibe Pill -->
-              <div class="ambient-vibe-pill" id="ambient-pill">
-                <i data-lucide="volume-2" class="vibe-icon"></i>
-                <span class="vibe-text">Audio Interaktif Aktif</span>
-                <span class="vibe-eq">
-                  <span></span><span></span><span></span>
+            <!-- Status Indicator Tags -->
+            <div class="flex flex-wrap items-center justify-center gap-3 pt-4 font-mono text-xs">
+                <span class="px-3.5 py-1.5 rounded-md bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-cyberLime animate-ping"></span>
+                    Student @ UBSI
                 </span>
-              </div>
+                <span class="px-3.5 py-1.5 rounded-md bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-electricViolet"></i>
+                    Computer Network Engineering
+                </span>
+                <span class="px-3.5 py-1.5 rounded-md bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-3.5 h-3.5 text-warmYellow"></i>
+                    NOC &amp; Fiber Optics Specialist
+                </span>
             </div>
 
-          </div>
+            <!-- Action CTA -->
+            <div class="pt-6 flex flex-wrap justify-center gap-4">
+                <a href="#about" class="px-8 py-3.5 rounded-xl bg-cyberLime hover:bg-emerald-400 text-black font-mono font-bold text-sm transition-all shadow-[0_0_25px_rgba(0,255,135,0.4)] flex items-center gap-2">
+                    <span>Explore Profile</span>
+                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="px-8 py-3.5 rounded-xl bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-300 dark:border-gray-800 text-black dark:text-white font-mono font-medium text-sm transition-all flex items-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4 text-electricViolet"></i>
+                    <span>Contact Me</span>
+                </a>
+            </div>
 
-          <!-- Bottom Footer Strip with Circular Scroll-to-Top -->
-          <div class="footer-bottom">
-            <p class="footer-copy">© 2026 Ardian Rahman. Dibuat dengan presisi arsitektur web & estetika modern.</p>
-            
-            <!-- Circular Progress Back-to-Top Button -->
-            <button class="back-to-top-progress" id="back-to-top" aria-label="Kembali ke Atas Halaman">
-              <svg class="progress-ring" width="46" height="46">
-                <circle class="progress-ring-bg" stroke="var(--border-subtle)" stroke-width="3" fill="transparent" r="18" cx="23" cy="23"/>
-                <circle class="progress-ring-circle" id="scroll-progress-circle" stroke="var(--accent-blue)" stroke-width="3" fill="transparent" r="18" cx="23" cy="23"/>
-              </svg>
-              <i data-lucide="arrow-up" class="back-icon"></i>
-              <span class="progress-text" id="scroll-percent-text">0%</span>
-            </button>
-          </div>
-        </footer>
-
-      </div>
+        </div>
     </section>
 
-  </main>
+    <!-- SECTION 2: ABOUT (WITH REALISTIC, ULTRA-FLEXIBLE UNBOUNDED HANGING PICTURE FRAME) -->
+    <section id="about" class="py-28 relative bg-gray-50 dark:bg-black/90 transition-colors border-t border-b border-gray-200 dark:border-gray-900">
+        <div id="about-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative min-h-[600px]">
+            
+            <!-- Section Title -->
+            <div class="text-center mb-16">
+                <span class="font-mono text-cyberLime text-xs tracking-widest block mb-2">// 01. PROFILE BRIEF</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-black dark:text-white font-sans tracking-tight">About Ardian Rahman</h2>
+                <div class="w-16 h-1 bg-cyberLime mx-auto mt-4 rounded-full"></div>
+            </div>
 
-  <!-- INTERACTIVE CERTIFICATE MODAL -->
-  <div class="modal-backdrop" id="cert-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-    <div class="modal-card">
-      <button class="modal-close" id="modal-close" aria-label="Tutup Dialog">
-        <i data-lucide="x"></i>
-      </button>
+            <!-- Canvas for Interactive Rope Physics (Overlay inside container) -->
+            <canvas id="ropeCanvas"></canvas>
 
-      <div class="modal-header">
-        <div class="modal-icon-badge">
-          <i data-lucide="award"></i>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- LEFT COLUMN: ULTRA-FLEXIBLE DRAGGABLE HANGING CARD -->
+                <div class="lg:col-span-5 relative flex justify-center py-8">
+                    <!-- Anchor Hooks Ceiling Bar -->
+                    <div id="anchor-bar" class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-2 bg-gray-300 dark:bg-gray-800 rounded-full flex justify-between px-3 z-10 border border-gray-400 dark:border-gray-700 shadow-md">
+                        <div id="hook-left" class="w-3 h-3 rounded-full bg-cyberLime border border-black shadow-[0_0_8px_#00FF87] -mt-0.5"></div>
+                        <div id="hook-right" class="w-3 h-3 rounded-full bg-cyberLime border border-black shadow-[0_0_8px_#00FF87] -mt-0.5"></div>
+                    </div>
+
+                    <!-- DRAGGABLE PROFILE PICTURE FRAME -->
+                    <div id="hanging-frame" class="relative z-20 cursor-grab active:cursor-grabbing select-none transition-shadow duration-300">
+                        <!-- Frame Container -->
+                        <div class="w-64 sm:w-72 bg-white dark:bg-gray-950 p-4 rounded-2xl border-2 border-cyberLime/60 shadow-[0_10px_35px_rgba(0,0,0,0.5)] dark:shadow-[0_10px_40px_rgba(0,255,135,0.25)] relative">
+                            
+                            <!-- Frame Hanger Ring Tabs -->
+                            <div id="ring-left" class="absolute -top-3 left-6 w-4 h-4 rounded-full border-2 border-cyberLime bg-black"></div>
+                            <div id="ring-right" class="absolute -top-3 right-6 w-4 h-4 rounded-full border-2 border-cyberLime bg-black"></div>
+
+                            <!-- Picture Window (Fixed Developer Photo) -->
+                            <div class="relative w-full h-72 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex flex-col items-center justify-center">
+                                <!-- Developer Controlled Profile Image (Set URL/path here) -->
+                                <img id="profile-img-preview" src="assets/images/Ardian Rahman.jpeg" alt="Ardian Rahman Profile" class="w-full h-full object-cover">
+                            </div>
+
+                            <!-- Photo Label Details -->
+                            <div class="mt-4 text-center font-mono space-y-1">
+                                <h3 class="text-base font-bold text-black dark:text-white">Ardian Rahman</h3>
+                                <p class="text-xs text-cyberLime">Network Engineer &amp; IT Student</p>
+                                <div class="pt-2 flex justify-center gap-2">
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-800 text-gray-600 dark:text-gray-400">UBSI</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-800 text-gray-600 dark:text-gray-400">TKJ</span>
+                                </div>
+                            </div>
+
+                            <!-- Interaction Hint Badge -->
+                            <div class="mt-3 py-1 px-3 bg-cyberLime/10 border border-cyberLime/30 rounded-lg text-center font-mono text-[10px] text-cyberLime flex items-center justify-center gap-1.5">
+                                <i data-lucide="move" class="w-3 h-3 animate-pulse"></i>
+                                <span>Drag me anywhere on screen!</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: ABOUT TEXT & SPECIFICATIONS -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="p-8 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 space-y-4 shadow-xl">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2.5 rounded-lg bg-cyberLime/10 text-cyberLime">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-black dark:text-white font-sans">Universitas Bina Sarana Informatika (UBSI)</h3>
+                                <p class="text-xs font-mono text-cyberLime">Computer Network Engineering Student</p>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-base">
+                            I am an IT Undergraduate specializing in <span class="font-semibold text-black dark:text-white">Computer Network Engineering (Teknik Komputer Jaringan)</span>. My passion revolves around designing scalable network architectures, configuring dynamic routing protocols (OSPF, BGP), implementing strict VLAN security, and building automated network management tools.
+                        </p>
+
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm">
+                            Combining hands-on physical hardware experience—including fiber optic fusion splicing and OTDR testing—with modern software-defined network automation (Python, Netmiko), I bring a well-rounded skill set ready for real-world enterprise infrastructure and Network Operation Center (NOC) environments.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Grid -->
+                    <div class="grid grid-cols-3 gap-4 font-mono text-center">
+                        <div class="p-4 rounded-xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800">
+                            <span class="block text-2xl font-bold text-cyberLime">UBSI</span>
+                            <span class="text-[10px] text-gray-500">Institution</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800">
+                            <span class="block text-2xl font-bold text-electricViolet">TKJ</span>
+                            <span class="text-[10px] text-gray-500">Specialization</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800">
+                            <span class="block text-2xl font-bold text-warmYellow">100%</span>
+                            <span class="text-[10px] text-gray-500">Lab Performance</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div>
-          <span class="modal-org" id="modal-org">Penerbit Sertifikat</span>
-          <h3 class="modal-title" id="modal-title">Nama Sertifikasi</h3>
-        </div>
-      </div>
+    </section>
 
-      <div class="modal-body">
-        <div class="modal-info-grid">
-          <div class="info-cell">
-            <span class="cell-label">Status Validasi</span>
-            <span class="cell-status"><i data-lucide="check-circle-2"></i> Resmi & Terverifikasi</span>
-          </div>
-          <div class="info-cell">
-            <span class="cell-label">Credential ID</span>
-            <code class="cell-code" id="modal-id">-</code>
-          </div>
-          <div class="info-cell full-span">
-            <span class="cell-label">Tanggal / Masa Berlaku</span>
-            <span class="cell-val" id="modal-date">-</span>
-          </div>
+    <!-- SECTION 3: TECH EXPERTISE (ELEGANT & CARDLESS INTERACTIVE MATRIX) -->
+    <section id="tech" class="py-28 relative bg-white dark:bg-pitchBlack transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="font-mono text-electricViolet text-xs tracking-widest block mb-2">// 02. TECHNICAL MATRIX</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-black dark:text-white font-sans tracking-tight">Tech &amp; Infrastructure Cluster</h2>
+                <p class="font-mono text-xs text-gray-500 dark:text-gray-400 mt-2">Hover or tap any tech node to inspect syntax &amp; protocol specs (Cardless Constellation Layout)</p>
+                <div class="w-16 h-1 bg-electricViolet mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Cardless Node Matrix Layout -->
+            <div class="relative py-12 px-6 rounded-3xl border border-gray-200 dark:border-gray-900 bg-gray-50/50 dark:bg-gray-950/50 overflow-hidden">
+                
+                <!-- Interactive Constellation Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 relative z-10">
+                    
+                    <!-- Tech Node 1: Cisco -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('Cisco Systems', 'IOS XE, Packet Tracer, GNS3, OSPF, BGP, VTP, STP, HSRP, Access Control Lists', 'Router(config)# router ospf 1\nRouter(config-router)# network 192.168.1.0 0.0.0.255 area 0')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-cyberLime flex items-center justify-center text-cyberLime group-hover:scale-110 group-hover:shadow-[0_0_20px_#00FF87] transition-all">
+                            <i data-lucide="router" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-cyberLime">Cisco Systems</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Routing &amp; Switching</span>
+                    </div>
+
+                    <!-- Tech Node 2: Huawei -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('Huawei Enterprise', 'VRP OS, eNSP Simulator, S5700 Switches, AR Series Routers, VLAN Trunking', 'system-view\n[Huawei] sysname Core-Switch-01\n[Huawei] vlan batch 10 20 30')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-electricViolet flex items-center justify-center text-electricViolet group-hover:scale-110 group-hover:shadow-[0_0_20px_#9D4EDD] transition-all">
+                            <i data-lucide="server" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-electricViolet">Huawei VRP</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Core Switches</span>
+                    </div>
+
+                    <!-- Tech Node 3: MikroTik -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('MikroTik RouterOS', 'WinBox, RouterBOARD, PPPoE Server, Bandwidth Queues, Firewall NAT, MTCNA Knowledge', '/ip firewall nat\nadd chain=srcnat action=masquerade out-interface=ether1-gateway')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-warmYellow flex items-center justify-center text-warmYellow group-hover:scale-110 group-hover:shadow-[0_0_20px_#FFB703] transition-all">
+                            <i data-lucide="shield" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-warmYellow">MikroTik RouterOS</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Gateway &amp; Firewall</span>
+                    </div>
+
+                    <!-- Tech Node 4: Juniper -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('Juniper Junos OS', 'Junos CLI, vSRX, SRX Series, Operational & Configuration modes, Static Routing', 'set interfaces ge-0/0/0 unit 0 family inet address 10.0.0.1/24\ncommit check && commit')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-cyberLime flex items-center justify-center text-cyberLime group-hover:scale-110 group-hover:shadow-[0_0_20px_#00FF87] transition-all">
+                            <i data-lucide="cpu" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-cyberLime">Juniper Junos</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Enterprise CLI</span>
+                    </div>
+
+                    <!-- Tech Node 5: Python Automation -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('Python Network Automation', 'Netmiko, Paramiko, NAPALM, Jinja2 Templates, Automated Backup Scripts', 'from netmiko import ConnectHandler\ndevice = {\'device_type\': \'cisco_ios\', \'ip\': \'192.168.1.1\'}\nnet_connect = ConnectHandler(**device)')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-electricViolet flex items-center justify-center text-electricViolet group-hover:scale-110 group-hover:shadow-[0_0_20px_#9D4EDD] transition-all">
+                            <i data-lucide="code-2" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-electricViolet">Python Netmiko</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Automation Scripting</span>
+                    </div>
+
+                    <!-- Tech Node 6: Fiber Optics -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('Fiber Optics Infrastructure', 'Fusion Splicer, OTDR Loss Testing, Optical Power Meter, Single-mode & Multi-mode Fiber', 'Loss = (Power_In - Power_Out) / Distance_km\nTarget Attenuation: < 0.35 dB/km @ 1310nm')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-warmYellow flex items-center justify-center text-warmYellow group-hover:scale-110 group-hover:shadow-[0_0_20px_#FFB703] transition-all">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-warmYellow">Fiber Optics</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Splicing &amp; OTDR</span>
+                    </div>
+
+                    <!-- Tech Node 7: Protocols (OSPF & BGP) -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('Routing Protocols (OSPF & BGP)', 'Link-State Routing, Path Vector, Autonomous Systems (AS), Route Redistribution, Metric Calculation', 'BGP AS 65001 <-> AS 65002\nNeighbor 203.0.113.1 remote-as 65002')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-cyberLime flex items-center justify-center text-cyberLime group-hover:scale-110 group-hover:shadow-[0_0_20px_#00FF87] transition-all">
+                            <i data-lucide="git-merge" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-cyberLime">OSPF &amp; BGP</h4>
+                        <span class="text-[10px] font-mono text-gray-500">Dynamic Routing</span>
+                    </div>
+
+                    <!-- Tech Node 8: NOC Tools -->
+                    <div class="tech-node group flex flex-col items-center text-center cursor-pointer p-4 transition-all" onclick="inspectTechNode('NOC Monitoring Tools', 'LibreNMS, SmokePing, Cacti, Zabbix, Wireshark Packet Sniffing, SNMP Traps', 'SNMP v2c/v3 Community Polling Active\nLatency Probe: SmokePing 20 pings / 300s')">
+                        <div class="w-16 h-16 rounded-2xl bg-black dark:bg-black border border-electricViolet flex items-center justify-center text-electricViolet group-hover:scale-110 group-hover:shadow-[0_0_20px_#9D4EDD] transition-all">
+                            <i data-lucide="activity" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="mt-3 font-mono font-bold text-sm text-black dark:text-white group-hover:text-electricViolet">NOC Suite</h4>
+                        <span class="text-[10px] font-mono text-gray-500">LibreNMS &amp; SmokePing</span>
+                    </div>
+
+                </div>
+
+                <!-- Live Node Inspector Console Box -->
+                <div class="mt-8 p-6 rounded-2xl bg-black border border-gray-800 font-mono text-xs text-gray-300">
+                    <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-800 text-gray-500">
+                        <span class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyberLime animate-ping"></span>
+                            <span class="text-cyberLime font-bold">ACTIVE NODE INSPECTOR</span>
+                        </span>
+                        <span id="tech-inspector-title" class="text-white font-bold">Click any node above</span>
+                    </div>
+                    <div id="tech-inspector-details" class="space-y-2">
+                        <p class="text-gray-400">Select a technology node above to display real-time configuration specs and syntax execution commands.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: PROJECTS (SHOWCASE DECK WITH MODALS & GITHUB REPO LINKS) -->
+    <section id="projects" class="py-28 relative bg-gray-50 dark:bg-black/95 transition-colors border-t border-b border-gray-200 dark:border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="font-mono text-cyberLime text-xs tracking-widest block mb-2">// 03. LAB &amp; PROJECTS DECK</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-black dark:text-white font-sans tracking-tight">Featured Network Projects</h2>
+                <p class="font-mono text-xs text-gray-500 mt-2">Click any project to inspect topology details and launch GitHub Repository link</p>
+                <div class="w-16 h-1 bg-cyberLime mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Projects Layout Deck (1-6 Projects) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="group rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-cyberLime transition-all p-6 cursor-pointer relative overflow-hidden flex flex-col justify-between" onclick="openProjectModal(1)">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center font-mono text-xs">
+                            <span class="text-cyberLime font-bold">PROJECT #01</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-gray-500 border border-gray-300 dark:border-gray-800">Cisco Packet Tracer</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-cyberLime transition-colors">Enterprise Multi-VLAN Campus Network</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            Full-scale campus network architecture with Core, Distribution, and Access layers. Features OSPF dynamic routing, HSRP redundancy, and Inter-VLAN routing.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-900 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-500">Details &amp; Topology</span>
+                        <span class="text-cyberLime flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Inspect <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-electricViolet transition-all p-6 cursor-pointer relative overflow-hidden flex flex-col justify-between" onclick="openProjectModal(2)">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center font-mono text-xs">
+                            <span class="text-electricViolet font-bold">PROJECT #02</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-gray-500 border border-gray-300 dark:border-gray-800">Python Netmiko</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-electricViolet transition-colors">Automated Router Config Backup Engine</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            Python CLI utility utilizing Netmiko and Paramiko to perform asynchronous multi-vendor running configuration backups and git auto-commits.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-900 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-500">Details &amp; Topology</span>
+                        <span class="text-electricViolet flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Inspect <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-warmYellow transition-all p-6 cursor-pointer relative overflow-hidden flex flex-col justify-between" onclick="openProjectModal(3)">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center font-mono text-xs">
+                            <span class="text-warmYellow font-bold">PROJECT #03</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-gray-500 border border-gray-300 dark:border-gray-800">Fiber Optics</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-warmYellow transition-colors">FTTH Splicing &amp; OTDR Attenuation Report</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            Practical FTTH network installation and fusion splicing documentation with real OTDR trace analysis, power budget calculations, and fault localization.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-900 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-500">Details &amp; Topology</span>
+                        <span class="text-warmYellow flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Inspect <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-cyberLime transition-all p-6 cursor-pointer relative overflow-hidden flex flex-col justify-between" onclick="openProjectModal(4)">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center font-mono text-xs">
+                            <span class="text-cyberLime font-bold">PROJECT #04</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-gray-500 border border-gray-300 dark:border-gray-800">MikroTik RouterOS</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-cyberLime transition-colors">ISP Edge Gateway &amp; PPPoE Server</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            MikroTik edge firewall setup with PPPoE user authentication, bandwidth queueing, Layer 7 protocols filter rules, and Dual-WAN failover.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-900 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-500">Details &amp; Topology</span>
+                        <span class="text-cyberLime flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Inspect <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="group rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-electricViolet transition-all p-6 cursor-pointer relative overflow-hidden flex flex-col justify-between" onclick="openProjectModal(5)">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center font-mono text-xs">
+                            <span class="text-electricViolet font-bold">PROJECT #05</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-gray-500 border border-gray-300 dark:border-gray-800">NOC &amp; LibreNMS</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-electricViolet transition-colors">NOC Infrastructure Surveillance System</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            Centralized network monitoring stack using LibreNMS and SmokePing to track latency jitter, SNMP traps, and generate automated Telegram alerts.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-900 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-500">Details &amp; Topology</span>
+                        <span class="text-electricViolet flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Inspect <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="group rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-warmYellow transition-all p-6 cursor-pointer relative overflow-hidden flex flex-col justify-between" onclick="openProjectModal(6)">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center font-mono text-xs">
+                            <span class="text-warmYellow font-bold">PROJECT #06</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-gray-500 border border-gray-300 dark:border-gray-800">Huawei eNSP</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-black dark:text-white group-hover:text-warmYellow transition-colors">Huawei Data Center Core Switching</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-3">
+                            Simulated data center network topology on Huawei eNSP featuring S5700 switches, Eth-Trunk link aggregation, and OSPF backbone routing.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 dark:border-gray-900 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-500">Details &amp; Topology</span>
+                        <span class="text-warmYellow flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                            Inspect <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: CERTIFICATION (11 CERTIFICATES MESH WITH DIRECT EXTERNAL LINKS) -->
+    <section id="certification" class="py-28 relative bg-white dark:bg-pitchBlack transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="font-mono text-warmYellow text-xs tracking-widest block mb-2">// 04. CREDENTIAL MESH</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-black dark:text-white font-sans tracking-tight">Certifications &amp; Badges (11)</h2>
+                <p class="font-mono text-xs text-gray-500 mt-2">Click any certificate to inspect credential details or navigate directly to external verification URL</p>
+                <div class="w-16 h-1 bg-warmYellow mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Honeycomb Hexagonal Matrix Grid -->
+            <div id="cert-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Javascript will populate 11 certificate items dynamically -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 6: SIMPLE CONTACT & ANIMATED FLUID WAVE CANVAS FOOTER -->
+    <section id="contact" class="py-28 relative bg-gray-50 dark:bg-black transition-colors border-t border-gray-200 dark:border-gray-900">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+            
+            <div class="space-y-3">
+                <span class="font-mono text-cyberLime text-xs tracking-widest block">// 05. DIRECT TRANSMISSION</span>
+                <h2 class="text-3xl sm:text-5xl font-black text-black dark:text-white font-sans">Let's Connect</h2>
+                <p class="text-gray-600 dark:text-gray-400 font-mono text-sm max-w-xl mx-auto">
+                    Interested in internship opportunities, enterprise networking collaborations, or network automation? Drop me an email!
+                </p>
+            </div>
+
+            <!-- Simple Email Card with Copy Tool -->
+            <div class="p-6 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 max-w-lg mx-auto shadow-2xl space-y-4">
+                <div class="text-xs font-mono text-gray-500 uppercase tracking-wider">Official Student Email</div>
+                
+                <div class="flex items-center justify-between p-3 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-gray-800 font-mono text-sm">
+                    <span id="email-address" class="text-black dark:text-white font-bold truncate">ardian.rahman@student.ubsi.ac.id</span>
+                    <button onclick="copyEmail()" class="ml-2 px-3 py-1.5 rounded-lg bg-cyberLime text-black font-bold text-xs hover:bg-emerald-400 transition-colors flex items-center gap-1.5 flex-shrink-0">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>Copy</span>
+                    </button>
+                </div>
+
+                <div class="pt-2 flex justify-center gap-4">
+                    <a href="mailto:ardian.rahman@student.ubsi.ac.id" class="px-6 py-2.5 rounded-xl bg-electricViolet text-white font-mono text-xs font-bold hover:bg-purple-600 transition-colors flex items-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span>Direct Mailto</span>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 rounded-xl bg-gray-200 dark:bg-gray-900 text-black dark:text-white font-mono text-xs border border-gray-300 dark:border-gray-800 hover:border-cyberLime transition-colors flex items-center gap-2">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>GitHub</span>
+                    </a>
+                </div>
+
+                <div id="copy-toast" class="hidden text-xs font-mono text-cyberLime">
+                    ✓ Email address copied to clipboard!
+                </div>
+            </div>
+
         </div>
 
-        <div class="modal-description">
-          <span class="cell-label">Deskripsi & Cakupan Materi</span>
-          <p id="modal-desc">-</p>
+        <!-- Flowing Fluid Wave Canvas Footer Banner -->
+        <div class="mt-20 relative w-full overflow-hidden leading-none">
+            <canvas id="waveCanvas" class="w-full h-32 block"></canvas>
+            
+            <div class="bg-black py-8 border-t border-gray-900 text-center font-mono text-xs text-gray-500 space-y-2">
+                <p>&copy; 2026 Ardian Rahman. All rights reserved.</p>
+                <p class="text-cyberLime text-[11px]">Universitas Bina Sarana Informatika (UBSI) — Teknik Komputer Jaringan</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="modal-footer">
-        <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modal-link">
-          <span>Verifikasi di Situs Penerbit</span>
-          <i data-lucide="external-link"></i>
-        </a>
-      </div>
+    <!-- GENERIC MODAL FOR PROJECTS & CERTIFICATIONS -->
+    <div id="modal-overlay" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl font-mono text-sm space-y-6 max-h-[90vh] overflow-y-auto">
+            
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 rounded-full bg-gray-100 dark:bg-gray-900 text-gray-500 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div id="modal-content">
+                <!-- Modal Body Inject Here -->
+            </div>
+
+        </div>
     </div>
-  </div>
 
-  <!-- TOAST NOTIFICATION FOR COPY EMAIL -->
-  <div class="toast-notification" id="toast-notify" role="alert" aria-live="polite">
-    <i data-lucide="check" class="toast-icon"></i>
-    <span class="toast-text">Email berhasil disalin ke clipboard!</span>
-  </div>
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-  <script src="script.js"></script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+
+        // Navbar Blur on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                navbar.classList.add('nav-blur-active');
+            } else {
+                navbar.classList.remove('nav-blur-active');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // BASH PROMPT TYPING EFFECT
+        const promptLines = [
+            "Hi... I'm Ardian Rahman",
+            "Welcome to my Network Portfolio",
+            "Student @ UBSI Jakarta"
+        ];
+        let lineIdx = 0;
+        let charIdx = 0;
+        let isDeleting = false;
+        const promptEl = document.getElementById('bash-prompt');
+
+        function typeBashPrompt() {
+            const currentLine = promptLines[lineIdx];
+            if (isDeleting) {
+                promptEl.textContent = currentLine.substring(0, charIdx - 1);
+                charIdx--;
+            } else {
+                promptEl.textContent = currentLine.substring(0, charIdx + 1);
+                charIdx++;
+            }
+
+            let speed = isDeleting ? 30 : 70;
+
+            if (!isDeleting && charIdx === currentLine.length) {
+                speed = 2200;
+                isDeleting = true;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                lineIdx = (lineIdx + 1) % promptLines.length;
+                speed = 400;
+            }
+
+            setTimeout(typeBashPrompt, speed);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            typeBashPrompt();
+        });
+
+        // REALISTIC ULTRA-FLEXIBLE UNBOUNDED HANGING CARD PHYSICS
+        const frame = document.getElementById('hanging-frame');
+        const canvas = document.getElementById('ropeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const hookL = document.getElementById('hook-left');
+        const hookR = document.getElementById('hook-right');
+        const ringL = document.getElementById('ring-left');
+        const ringR = document.getElementById('ring-right');
+
+        function resizeCanvas() {
+            const container = document.getElementById('about-container');
+            if (container) {
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let isDragging = false;
+        let startX = 0, startY = 0;
+        let currentX = 0, currentY = 0; // translation
+        let targetX = 0, targetY = 0;
+
+        frame.addEventListener('mousedown', startDrag);
+        frame.addEventListener('touchstart', startDrag, { passive: false });
+
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('touchmove', drag, { passive: false });
+
+        window.addEventListener('mouseup', endDrag);
+        window.addEventListener('touchend', endDrag);
+
+        function startDrag(e) {
+            isDragging = true;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            startX = clientX - currentX;
+            startY = clientY - currentY;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            if (e.cancelable) e.preventDefault();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            targetX = clientX - startX;
+            targetY = clientY - startY;
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        // Render Rope Physics Loop
+        function animatePhysics() {
+            if (!isDragging) {
+                // Spring bounce back towards 0,0
+                targetX += (0 - targetX) * 0.1;
+                targetY += (0 - targetY) * 0.1;
+            }
+
+            currentX += (targetX - currentX) * 0.2;
+            currentY += (targetY - currentY) * 0.2;
+
+            const tilt = currentX * 0.05;
+            frame.style.transform = `translate3d(${currentX}px, ${currentY}px, 0px) rotate(${tilt}deg)`;
+
+            // Draw Ropes
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const containerRect = document.getElementById('about-container').getBoundingClientRect();
+            const hLRect = hookL.getBoundingClientRect();
+            const hRRect = hookR.getBoundingClientRect();
+            const rLRect = ringL.getBoundingClientRect();
+            const rRRect = ringR.getBoundingClientRect();
+
+            // Calculate anchor positions relative to canvas
+            const p1 = {
+                x: hLRect.left + hLRect.width / 2 - containerRect.left,
+                y: hLRect.top + hLRect.height / 2 - containerRect.top
+            };
+            const p2 = {
+                x: rLRect.left + rLRect.width / 2 - containerRect.left,
+                y: rLRect.top + rLRect.height / 2 - containerRect.top
+            };
+
+            const p3 = {
+                x: hRRect.left + hRRect.width / 2 - containerRect.left,
+                y: hRRect.top + hRRect.height / 2 - containerRect.top
+            };
+            const p4 = {
+                x: rRRect.left + rRRect.width / 2 - containerRect.left,
+                y: rRRect.top + rRRect.height / 2 - containerRect.top
+            };
+
+            // Draw left rope with curve sag
+            drawRope(p1.x, p1.y, p2.x, p2.y);
+            // Draw right rope
+            drawRope(p3.x, p3.y, p4.x, p4.y);
+
+            requestAnimationFrame(animatePhysics);
+        }
+        requestAnimationFrame(animatePhysics);
+
+        function drawRope(x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            // Dynamic sag control point
+            const midX = (x1 + x2) / 2;
+            const midY = (y1 + y2) / 2 + Math.abs(x2 - x1) * 0.15;
+            ctx.quadraticCurveTo(midX, midY, x2, y2);
+            ctx.strokeStyle = '#00FF87';
+            ctx.lineWidth = 2.5;
+            ctx.shadowColor = '#00FF87';
+            ctx.shadowBlur = 8;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        // CARDLESS TECH INSPECTOR FUNCTION
+        function inspectTechNode(title, specs, syntax) {
+            document.getElementById('tech-inspector-title').textContent = title;
+            document.getElementById('tech-inspector-details').innerHTML = `
+                <p><span class="text-cyberLime font-bold">[SPECS]:</span> ${specs}</p>
+                <div class="mt-2 p-3 bg-gray-900 rounded-lg border border-gray-800 font-mono text-[11px] text-emerald-300 whitespace-pre-wrap">${syntax}</div>
+            `;
+        }
+
+        // PROJECTS MODAL LOGIC
+        const projectsData = {
+            1: {
+                title: "Enterprise Multi-VLAN Campus Network",
+                stack: "Cisco Packet Tracer / OSPF / HSRP / VTP",
+                overview: "A redundant campus network topology featuring dual Core Switches operating HSRP for automatic gateway failover, Inter-VLAN routing, and OSPF link-state routing across distribution layer devices.",
+                repo: "https://github.com/ardian-rahman/enterprise-campus-network"
+            },
+            2: {
+                title: "Automated Router Config Backup Engine",
+                stack: "Python 3 / Netmiko / Paramiko / Git CLI",
+                overview: "Python script designed to iterate over IP inventory lists, authenticate via SSH across Cisco and Huawei routers, gather `show running-config`, and store version-controlled backups.",
+                repo: "https://github.com/ardian-rahman/python-netmiko-backup"
+            },
+            3: {
+                title: "FTTH Splicing & OTDR Attenuation Report",
+                stack: "Fusion Splicer / OTDR / OPM / Optical Cables",
+                overview: "Hands-on lab project documenting single-mode fiber optic fusion splicing, calculating link loss budget, and diagnosing attenuation defects using OTDR trace charts.",
+                repo: "https://github.com/ardian-rahman/fiber-optics-otdr-lab"
+            },
+            4: {
+                title: "ISP Edge Gateway & PPPoE Server",
+                stack: "MikroTik RouterOS / WinBox / Firewall NAT / Simple Queues",
+                overview: "Configured edge router providing PPPoE user server authentication, rate-limiting bandwidth queues, and Layer 7 firewall rule filtration against unauthorized traffic.",
+                repo: "https://github.com/ardian-rahman/mikrotik-edge-pppoe"
+            },
+            5: {
+                title: "NOC Infrastructure Surveillance System",
+                stack: "LibreNMS / SmokePing / SNMP v3 / Zabbix",
+                overview: "Network Operation Center monitoring system with automated SNMP trap polling, link status dashboards, and instant latency threshold notifications sent directly to Telegram.",
+                repo: "https://github.com/ardian-rahman/noc-librenms-monitoring"
+            },
+            6: {
+                title: "Huawei Data Center Core Switching",
+                stack: "Huawei eNSP / VRP OS / Eth-Trunk / OSPF",
+                overview: "Data center topology utilizing Huawei core switches configured with Eth-Trunk link aggregation for bandwidth multiplication and robust OSPF backbone routing.",
+                repo: "https://github.com/ardian-rahman/huawei-ensp-datacenter"
+            }
+        };
+
+        function openProjectModal(id) {
+            const data = projectsData[id];
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <span class="text-xs text-cyberLime font-bold">// PROJECT SPECIFICATION</span>
+                <h3 class="text-2xl font-bold text-black dark:text-white mt-1">${data.title}</h3>
+                <p class="text-xs text-gray-500 font-mono mt-1">${data.stack}</p>
+                <p class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mt-4">${data.overview}</p>
+                <div class="pt-6 flex justify-end gap-3">
+                    <button onclick="closeModal()" class="px-5 py-2 rounded-xl bg-gray-200 dark:bg-gray-800 text-black dark:text-white text-xs font-bold">Close</button>
+                    <a href="${data.repo}" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl bg-cyberLime text-black font-bold text-xs flex items-center gap-2 hover:bg-emerald-400">
+                        <i data-lucide="github" class="w-4 h-4"></i>
+                        <span>Repository Link</span>
+                    </a>
+                </div>
+            `;
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        // CERTIFICATION DYNAMIC DATA (11 CERTIFICATES)
+        const certsData = [
+            { name: "Cisco Certified Network Associate (CCNA Prep)", issuer: "Cisco Networking Academy", badge: "CCNA", link: "https://www.cisco.com" },
+            { name: "MikroTik Certified Network Associate (MTCNA)", issuer: "MikroTik Training", badge: "MTCNA", link: "https://mikrotik.com" },
+            { name: "Huawei Certified ICT Associate (HCIA Datacom)", issuer: "Huawei Talent", badge: "HCIA", link: "https://e.huawei.com" },
+            { name: "Python for Network Engineers", issuer: "NetworkLessons / Coursera", badge: "PYTHON", link: "https://www.python.org" },
+            { name: "Fiber Optic Technician & Splicing Certification", issuer: "FTTH Council / UBSI", badge: "FIBER", link: "https://ubsi.ac.id" },
+            { name: "Network Security & Firewall Fundamentals", issuer: "Fortinet Training", badge: "NSE 1", link: "https://training.fortinet.com" },
+            { name: "Enterprise Routing & Switching Infrastructure", issuer: "UBSI Academic Credentials", badge: "UBSI-TKJ", link: "https://ubsi.ac.id" },
+            { name: "Juniper Junos OS Fundamentals", issuer: "Juniper Open Learning", badge: "JUNOS", link: "https://www.juniper.net" },
+            { name: "Linux System Administration & CLI", issuer: "NDG Linux Unhatched", badge: "LINUX", link: "https://www.netacad.com" },
+            { name: "NOC Infrastructure Surveillance Specialist", issuer: "IT Networking Association", badge: "NOC", link: "https://ubsi.ac.id" },
+            { name: "Computer Network Engineering Competency", issuer: "BNSP / National Certification", badge: "BNSP", link: "https://bnsp.go.id" }
+        ];
+
+        function renderCertifications() {
+            const grid = document.getElementById('cert-grid');
+            grid.innerHTML = certsData.map((c, i) => `
+                <div class="group p-5 rounded-2xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 hover:border-warmYellow transition-all cursor-pointer flex flex-col justify-between" onclick="openCertModal(${i})">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center font-mono text-[10px]">
+                            <span class="px-2 py-0.5 rounded bg-warmYellow/10 text-warmYellow border border-warmYellow/30 font-bold">${c.badge}</span>
+                            <span class="text-gray-500">CERT #${i+1}</span>
+                        </div>
+                        <h4 class="text-sm font-bold text-black dark:text-white group-hover:text-warmYellow transition-colors">${c.name}</h4>
+                        <p class="text-[11px] font-mono text-gray-500">${c.issuer}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-900 flex justify-end">
+                        <span class="text-[10px] font-mono text-warmYellow flex items-center gap-1">
+                            Verify <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+        renderCertifications();
+
+        function openCertModal(idx) {
+            const c = certsData[idx];
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <span class="text-xs text-warmYellow font-bold">// CERTIFICATE VERIFICATION</span>
+                <h3 class="text-2xl font-bold text-black dark:text-white mt-1">${c.name}</h3>
+                <p class="text-xs text-gray-500 font-mono mt-1">Issued by: ${c.issuer}</p>
+                <p class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mt-4">Verified credential demonstrating technical proficiency in enterprise networking, routing protocols, and IT infrastructure administration.</p>
+                <div class="pt-6 flex justify-end gap-3">
+                    <button onclick="closeModal()" class="px-5 py-2 rounded-xl bg-gray-200 dark:bg-gray-800 text-black dark:text-white text-xs font-bold">Close</button>
+                    <a href="${c.link}" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl bg-warmYellow text-black font-bold text-xs flex items-center gap-2 hover:bg-yellow-400">
+                        <i data-lucide="external-link" class="w-4 h-4"></i>
+                        <span>Direct Certificate Link</span>
+                    </a>
+                </div>
+            `;
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.add('hidden');
+        }
+
+        // COPY EMAIL UTILITY
+        function copyEmail() {
+            const emailText = document.getElementById('email-address').innerText;
+            const tempInput = document.createElement('input');
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('hidden')
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        // ANIMATED FLUID WAVE CANVAS FOOTER
+        const waveCanvas = document.getElementById('waveCanvas');
+        const wCtx = waveCanvas.getContext('2d');
+        let waveAngle = 0;
+
+        function animateWave() {
+            waveCanvas.width = waveCanvas.clientWidth;
+            waveCanvas.height = waveCanvas.clientHeight;
+
+            wCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+
+            wCtx.fillStyle = '#000000';
+            wCtx.beginPath();
+            wCtx.moveTo(0, waveCanvas.height);
+
+            for (let x = 0; x <= waveCanvas.width; x += 10) {
+                const y = Math.sin(x * 0.008 + waveAngle) * 15 + Math.cos(x * 0.005 + waveAngle) * 10 + 35;
+                wCtx.lineTo(x, y);
+            }
+
+            wCtx.lineTo(waveCanvas.width, waveCanvas.height);
+            wCtx.closePath();
+            wCtx.fill();
+
+            waveAngle += 0.03;
+            requestAnimationFrame(animateWave);
+        }
+        animateWave();
+    </script>
 </body>
 </html>
