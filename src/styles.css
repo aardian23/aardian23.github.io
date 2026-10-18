@@ -282,6 +282,10 @@ input:focus,textarea:focus { border-color:var(--accent); box-shadow:0 0 0 4px co
 .wheel .chip { animation:counter 36s linear infinite; animation-delay:0s }
 @keyframes counter { to { transform:translate(-50%,-50%) rotate(-360deg) } }
 @media (hover:hover) and (pointer:fine) { .orbit:hover .wheel,.orbit:hover .wheel .chip { animation-play-state:paused } }
+/* Tombol Pause: mematikan semua animasi dan transisi secara nyata */
+:root[data-motion="off"] *,:root[data-motion="off"] *::before,:root[data-motion="off"] *::after { transition-duration:.01ms!important; animation:none!important; scroll-behavior:auto!important }
+:root[data-motion="off"] .rv { opacity:1 } :root[data-motion="off"] .orbit-in { transform:none }
+:root[data-motion="off"] .card.glass-i:hover { transform:none }
 @media (prefers-reduced-motion:reduce) {
   :root:not([data-motion="on"]) *,:root:not([data-motion="on"]) *::before,:root:not([data-motion="on"]) *::after { transition-duration:.01ms!important; animation:none!important; scroll-behavior:auto!important }
   :root:not([data-motion="on"]) .rv { opacity:1 } :root:not([data-motion="on"]) .orbit-in { transform:none }

@@ -306,13 +306,15 @@ function Socials() {
  
 export default function App() {
   const { theme, toggle } = useTheme()
-  // Default mengikuti pengaturan sistem (reduce motion). Tombol Play memaksa animasi menyala.
-  const [motionOn, setMotionOn] = useState(() => document.documentElement.dataset.motion === 'on')
+  // Default mengikuti pengaturan sistem (reduce motion). Tombol Play/Pause menimpa pilihan itu dan disimpan.
+  const [motionOn, setMotionOn] = useState(() => {
+    const m = document.documentElement.dataset.motion
+    return m ? m === 'on' : !matchMedia('(prefers-reduced-motion: reduce)').matches
+  })
   const toggleMotion = () => {
     const next = !motionOn
     setMotionOn(next)
-    if (next) document.documentElement.dataset.motion = 'on'
-    else delete document.documentElement.dataset.motion
+    document.documentElement.dataset.motion = next ? 'on' : 'off'
     try { localStorage.setItem('motion', next ? 'on' : 'off') } catch { /* storage tidak tersedia */ }
   }
   useEffect(() => {
@@ -344,7 +346,7 @@ export default function App() {
       if (id && !t) return
       e.preventDefault()
       const y = t ? Math.max(0, t.getBoundingClientRect().top + window.scrollY - 76) : 0
-      if (reduce && root.dataset.motion !== 'on') { window.scrollTo(0, y); return }
+      if (root.dataset.motion === 'off' || (reduce && root.dataset.motion !== 'on')) { window.scrollTo(0, y); return }
       const y0 = window.scrollY, dist = y - y0, dur = Math.min(1200, Math.max(700, Math.abs(dist) * 0.55))
       let st = 0
       stop()
@@ -365,7 +367,7 @@ export default function App() {
     return () => { io.disconnect(); stop(); document.removeEventListener('click', onClick); window.removeEventListener('wheel', stop); window.removeEventListener('touchstart', stop); window.removeEventListener('scroll', onScroll); window.removeEventListener('pointermove', onMove) }
   }, [])
   return (
-    <MotionConfig reducedMotion={motionOn ? 'never' : 'user'}>
+    <MotionConfig reducedMotion={motionOn ? 'never' : 'always'}>
       <div className="page">
       <div className="progress" aria-hidden="true" />
       <Navbar theme={theme} toggle={toggle} motion={motionOn} onMotion={toggleMotion} />
