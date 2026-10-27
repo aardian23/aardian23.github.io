@@ -247,7 +247,15 @@ function tick(now) {
 }
 requestAnimationFrame(tick);
 const aImg = $("#aboutImg"); // jika foto tidak ditemukan, tampilkan placeholder
-if (aImg) aImg.addEventListener("error", () => aImg.remove());
+if (aImg) {
+  const dropBroken = () => { // tampilkan placeholder + path yang dicoba, supaya mudah dicek
+    console.warn("Foto About tidak ditemukan:", aImg.getAttribute("src"));
+    const ph = $("#phPath"); if (ph) ph.textContent = aImg.getAttribute("src");
+    aImg.remove();
+  };
+  aImg.addEventListener("error", dropBroken);
+  if (aImg.complete && aImg.naturalWidth === 0) dropBroken(); // error bisa terjadi sebelum listener terpasang
+}
 $("#yr").textContent = new Date().getFullYear();
 })();
  
