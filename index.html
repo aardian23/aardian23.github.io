@@ -102,11 +102,13 @@ try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.docu
 <!-- ABOUT -->
 <section id="about" data-nav>
   <div class="grid gap-10 md:grid-cols-[.8fr_1.2fr] items-center">
-    <div class="card reveal reveal-left" style="aspect-ratio:1;display:grid;place-items:center;text-align:center">
-      <div>
+    <!-- FOTO PROFIL: letakkan file di folder images/ dengan nama profile.jpg (atau ubah src di bawah) -->
+    <div class="card reveal about-photo">
+      <div class="ph">
         <div class="mono" style="width:96px;height:96px;font-size:2rem;margin:0 auto 1rem">AR</div>
-        <p class="muted" style="font-size:.85rem">Placeholder foto profil.<br>Ganti dengan <code>&lt;img src="foto.jpg"&gt;</code> milik Anda.</p>
+        <p class="muted" style="font-size:.85rem">Taruh foto di <code>images/profile.jpg</code></p>
       </div>
+      <img id="aboutImg" src="images/profile.jpg" alt="Foto Ardian Rahman" width="800" height="800" decoding="async">
     </div>
     <div class="reveal reveal-right" style="--i:2">
       <p class="eyebrow">About Me</p>
@@ -176,3 +178,4 @@ try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.docu
 <script src="script.js"></script>
 </body>
 </html>
+ 

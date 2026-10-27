@@ -28,8 +28,8 @@ section{position:relative;padding:6rem 1.25rem;max-width:1180px;margin:0 auto}
 .stop1{stop-color:var(--w3)}.stop2{stop-color:var(--w2)}.stop3{stop-color:var(--w1)}
 .wpath{stroke:var(--hl);stroke-width:1.5;transition:fill .5s}
 /* ===== NAV ===== */
-header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:all .4s}
-.nav{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:12px auto;padding:10px 18px;border-radius:999px;border:1px solid transparent;transition:all .4s}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px)}
+.nav{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:12px auto;padding:10px 18px;border-radius:999px;border:1px solid transparent;transition:background .4s,border-color .4s,box-shadow .4s}
 header.scrolled .nav{background:var(--glass);border-color:var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;color:var(--fg)}
 .mono{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--border);font-family:"Playfair Display",serif;font-weight:700;background:var(--card)}
@@ -144,4 +144,26 @@ footer{text-align:center;padding:2.5rem 1rem 3rem;color:var(--muted);font-size:.
 [hidden]{display:none!important}
 .cinfo{display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.1rem;margin:1.1rem 0;font-size:.9rem}
 .cinfo dt{color:var(--muted)}.cinfo dd{margin:0;font-weight:500}
+ 
+/* ===== About photo ===== */
+.about-photo{aspect-ratio:1;padding:0;display:grid;place-items:center;text-align:center}
+.about-photo .ph{padding:1rem}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+ 
+/* ===== Fix: background meloncat di mobile (address bar naik/turun) ===== */
+#waves{bottom:auto;height:100vh;height:100lvh;contain:paint}
+:root{--menubg2:rgba(5,5,5,.9)}
+:root[data-theme="light"]{--menubg2:rgba(250,250,250,.92)}
+ 
+/* ===== Mobile / touch performance ===== */
+@media(max-width:1023px),(pointer:coarse){
+  .card{backdrop-filter:none;-webkit-backdrop-filter:none}
+  #wheel{filter:none}
+  .wl.c{display:none}
+  .wl .run{animation-duration:90s!important}
+  .thumb::after{filter:none}
+  header.scrolled .nav{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:none}
+  #menu{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:var(--menubg2)}
+  html.menu-open .wl .run{animation-play-state:paused}
+}
  

@@ -184,14 +184,16 @@ let tlTarget = 0, tlP = 0, tlH = 1, tlTops = [];
 const measureTl = () => { tlH = tl.offsetHeight; tlTops = tlItems.map(i => i.offsetTop + 13); };
 measureTl(); addEventListener("resize", measureTl); addEventListener("load", measureTl);
 let px = 0, tpx = 0, sy = 0, tsy = 0;
-addEventListener("pointermove", e => { tpx = (e.clientX / innerWidth - .5) * 2; }, { passive: true });
+const lite = matchMedia("(max-width:1023px), (pointer:coarse)").matches; // mobile: tanpa parallax wave
+if (!lite) addEventListener("pointermove", e => { tpx = (e.clientX / innerWidth - .5) * 2; }, { passive: true });
 function onScroll() {
   header.classList.toggle("scrolled", scrollY > 20);
   tsy = clamp(scrollY / Math.max(1, document.body.scrollHeight - innerHeight), 0, 1);
   const r = tl.getBoundingClientRect();
   tlTarget = clamp((innerHeight * .7 - r.top) / r.height, 0, 1) * 100;
 }
-addEventListener("scroll", onScroll, { passive: true }); onScroll();
+let dirty = false; // kerjakan pembaruan scroll di rAF, bukan di setiap event scroll
+addEventListener("scroll", () => { dirty = true; }, { passive: true }); onScroll();
  
 /* ===== SMOOTH (inertia) WHEEL SCROLL — desktop mouse only ===== */
 if (!reduced && matchMedia("(pointer:fine)").matches) {
@@ -222,10 +224,11 @@ let last = performance.now();
 document.addEventListener("visibilitychange", () => { last = performance.now(); });
 function tick(now) {
   const dt = Math.min(64, now - last); last = now;
+  if (dirty) { dirty = false; onScroll(); }
   if (anim) {
     const k = clamp((now - anim.t0) / anim.dur, 0, 1);
     R = anim.f + (anim.to - anim.f) * (1 - Math.pow(1 - k, 4)); if (k === 1) anim = null;
-  } else if (!drag && !hov && !reduced) R += dt * 0.003;
+  } else if (!drag && !hov && !reduced && !root.classList.contains("menu-open")) R += dt * 0.003;
   if (R !== lastR) {
     rotG.setAttribute("transform", `rotate(${R} 200 200)`);
     const c = `rotate(${-R})`; labs.forEach(l => l.setAttribute("transform", c)); lastR = R;
@@ -236,13 +239,15 @@ function tick(now) {
     const head = 6 + tlH * tlP / 100;
     tlItems.forEach((it, k) => it.classList.toggle("reached", head >= tlTops[k]));
   }
-  if (!reduced) {
+  if (!reduced && !lite) {
     px += (tpx - px) * .05; sy += (tsy - sy) * .08;
     waves.style.setProperty("--px", px.toFixed(3)); waves.style.setProperty("--sy", sy.toFixed(3));
   }
   requestAnimationFrame(tick);
 }
 requestAnimationFrame(tick);
+const aImg = $("#aboutImg"); // jika foto tidak ditemukan, tampilkan placeholder
+if (aImg) aImg.addEventListener("error", () => aImg.remove());
 $("#yr").textContent = new Date().getFullYear();
 })();
  
