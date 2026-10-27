@@ -11,6 +11,29 @@ const setTheme = t => { root.setAttribute("data-theme", t); themeBtn.setAttribut
 themeBtn.setAttribute("aria-pressed", root.dataset.theme === "light");
 themeBtn.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark"));
  
+/* ===== WELCOME SCREEN ===== */
+const welcome = $("#welcome");
+if (welcome) {
+  const minMs = reduced ? 700 : 2800;           // durasi minimum tampil
+  welcome.style.setProperty("--wdur", minMs + "ms");
+  let closed = false;
+  const skipKey = e => { if (e.key === "Escape" || e.key === "Enter") closeWelcome(); };
+  function closeWelcome() {
+    if (closed) return; closed = true;
+    document.removeEventListener("keydown", skipKey);
+    welcome.classList.add("out");                                            // tirai naik
+    setTimeout(() => root.classList.remove("loading"), reduced ? 0 : 550);   // hero & navbar mulai masuk saat tirai naik
+    setTimeout(() => welcome.remove(), reduced ? 50 : 1300);
+  }
+  const pageReady = new Promise(r => document.readyState === "complete" ? r() : addEventListener("load", r, { once: true }));
+  const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+  Promise.all([new Promise(r => setTimeout(r, minMs)), pageReady, fontsReady]).then(closeWelcome);
+  setTimeout(closeWelcome, 7000);               // pengaman jika ada resource yang lambat
+  $("#wSkip").addEventListener("click", closeWelcome);
+  document.addEventListener("keydown", skipKey);
+  $("#wSkip").focus({ preventScroll: true });
+}
+ 
 /* ===== NAVBAR ===== */
 const header = $("header"), burger = $("#burger"), menu = $("#menu");
 const setMenu = open => {
@@ -205,7 +228,7 @@ if (!reduced && matchMedia("(pointer:fine)").matches) {
     scrollTo({ top: cur, behavior: "instant" });
   };
   addEventListener("wheel", e => {
-    if (e.ctrlKey || document.querySelector("dialog[open]") || root.classList.contains("menu-open")) return;
+    if (e.ctrlKey || root.classList.contains("loading") || document.querySelector("dialog[open]") || root.classList.contains("menu-open")) return;
     e.preventDefault();
     if (!own) cur = tgt = scrollY;
     own = true;
