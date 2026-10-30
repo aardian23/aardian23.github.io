@@ -94,25 +94,31 @@ $("#certGrid").innerHTML = certs.map((c, i) => `<button type="button" class="car
 $("#tl").insertAdjacentHTML("beforeend", experience.map((x, i) => `<div class="tl-item reveal"><div class="muted" style="font-size:.8rem">${x.date}</div><h3 style="font-size:1.25rem">${x.title}</h3><p class="muted">${x.text}</p>${slot(x.image, "wide exp", "Add image", x.title)}</div>`).join(""));
  
 /* ===== REVEAL ON SCROLL ===== */
+const desk = matchMedia("(min-width:1024px) and (pointer:fine)").matches; // desktop: ritme lebih lambat & lembut
 const revObs = new IntersectionObserver(es => {
   // elemen yang muncul bersamaan dianimasikan berurutan (atas -> bawah, kiri -> kanan)
   es.filter(e => e.isIntersecting)
     .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
     .forEach((e, i) => {
-      const el = e.target, d = i * 120; revObs.unobserve(el);
+      const el = e.target, d = i * (desk ? 130 : 120); revObs.unobserve(el);
       el.style.transitionDelay = d + "ms"; el.classList.add("in");
-      setTimeout(() => { el.style.transitionDelay = ""; el.classList.add("done"); }, d + 1050);
+      setTimeout(() => { el.style.transitionDelay = ""; el.classList.add("done"); }, d + (desk ? 1500 : 1050));
     });
-}, { threshold: .15, rootMargin: "0px 0px -6% 0px" });
+}, { threshold: desk ? .12 : .15, rootMargin: desk ? "0px 0px -10% 0px" : "0px 0px -6% 0px" });
 $$(".reveal").forEach(el => revObs.observe(el));
  
 /* ===== CARDS: pointer glow + 3D tilt (hanya mouse) ===== */
 $$(".card").forEach(c => {
-  c.addEventListener("pointermove", e => {
-    if (e.pointerType !== "mouse") return;
-    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+  let pe = null, pending = false;
+  const apply = () => {
+    pending = false; if (!pe) return;
+    const r = c.getBoundingClientRect(), x = (pe.clientX - r.left) / r.width, y = (pe.clientY - r.top) / r.height;
     c.style.setProperty("--mx", x * 100 + "%"); c.style.setProperty("--my", y * 100 + "%");
     if (c.classList.contains("tilt") && !reduced) { c.style.setProperty("--ry", (x - .5) * 10 + "deg"); c.style.setProperty("--rx", (.5 - y) * 10 + "deg"); }
+  };
+  c.addEventListener("pointermove", e => { // maksimal 1x per frame
+    if (e.pointerType !== "mouse") return;
+    pe = e; if (!pending) { pending = true; requestAnimationFrame(apply); }
   });
   c.addEventListener("pointerleave", () => { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); });
 });
@@ -237,7 +243,7 @@ const waves = $("#waves"), tl = $("#tl"), tlItems = $$(".tl-item");
 let tlTarget = 0, tlP = 0, tlH = 1, tlTops = [];
 const measureTl = () => { tlH = tl.offsetHeight; tlTops = tlItems.map(i => i.offsetTop + 13); };
 measureTl(); addEventListener("resize", measureTl); addEventListener("load", measureTl);
-let px = 0, tpx = 0, sy = 0, tsy = 0;
+let px = 0, tpx = 0, sy = 0, tsy = 0, ppx = -1, psy = -1;
 const lite = matchMedia("(max-width:1023px), (pointer:coarse)").matches; // mobile: tanpa parallax wave
 if (!lite) addEventListener("pointermove", e => { tpx = (e.clientX / innerWidth - .5) * 2; }, { passive: true });
 function onScroll() {
@@ -249,29 +255,7 @@ function onScroll() {
 let dirty = false; // kerjakan pembaruan scroll di rAF, bukan di setiap event scroll
 addEventListener("scroll", () => { dirty = true; }, { passive: true }); onScroll();
  
-/* ===== SMOOTH (inertia) WHEEL SCROLL — desktop mouse only ===== */
-if (!reduced && matchMedia("(pointer:fine)").matches) {
-  let cur = scrollY, tgt = scrollY, raf = 0, own = false;
-  const maxY = () => document.documentElement.scrollHeight - innerHeight;
-  const run = () => {
-    cur += (tgt - cur) * .1;
-    if (Math.abs(tgt - cur) < .5) { cur = tgt; own = false; raf = 0; } else raf = requestAnimationFrame(run);
-    scrollTo({ top: cur, behavior: "instant" });
-  };
-  addEventListener("wheel", e => {
-    if (e.ctrlKey || root.classList.contains("loading") || document.querySelector("dialog[open]") || root.classList.contains("menu-open")) return;
-    e.preventDefault();
-    if (!own) cur = tgt = scrollY;
-    own = true;
-    tgt = clamp(tgt + e.deltaY * (e.deltaMode === 1 ? 16 : 1), 0, maxY());
-    if (!raf) raf = requestAnimationFrame(run);
-  }, { passive: false });
-  addEventListener("scroll", () => { if (!own) cur = tgt = scrollY; }, { passive: true });
-  // klik anchor/tombol navigasi: hentikan inertia agar tidak bentrok dengan smooth anchor scroll
-  document.addEventListener("click", e => {
-    if (e.target.closest('a[href^="#"], #iOpen')) { cancelAnimationFrame(raf); raf = 0; own = false; }
-  });
-}
+/* Scroll memakai scroll native browser (dipercepat GPU, paling halus). Anchor tetap halus lewat CSS scroll-behavior. */
  
 /* ===== SINGLE RENDER LOOP ===== */
 let last = performance.now();
@@ -282,7 +266,7 @@ function tick(now) {
   if (anim) {
     const k = clamp((now - anim.t0) / anim.dur, 0, 1);
     R = anim.f + (anim.to - anim.f) * (1 - Math.pow(1 - k, 4)); if (k === 1) anim = null;
-  } else if (!drag && !hov && !reduced && !root.classList.contains("menu-open")) R += dt * 0.003;
+  } else if (!drag && !hov && !reduced && !root.classList.contains("menu-open") && !root.classList.contains("loading")) R += dt * 0.003;
   if (R !== lastR) {
     rotG.setAttribute("transform", `rotate(${R} 200 200)`);
     const c = `rotate(${-R})`; labs.forEach(l => l.setAttribute("transform", c)); lastR = R;
@@ -295,7 +279,9 @@ function tick(now) {
   }
   if (!reduced && !lite) {
     px += (tpx - px) * .05; sy += (tsy - sy) * .08;
-    waves.style.setProperty("--px", px.toFixed(3)); waves.style.setProperty("--sy", sy.toFixed(3));
+    if (Math.abs(px - ppx) > .002 || Math.abs(sy - psy) > .002) { // hanya saat nilai benar-benar berubah
+      waves.style.setProperty("--px", px.toFixed(3)); waves.style.setProperty("--sy", sy.toFixed(3)); ppx = px; psy = sy;
+    }
   }
   requestAnimationFrame(tick);
 }

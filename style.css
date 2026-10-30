@@ -155,16 +155,35 @@ footer{text-align:center;padding:2.5rem 1rem 3rem;color:var(--muted);font-size:.
 :root{--menubg2:rgba(5,5,5,.9)}
 :root[data-theme="light"]{--menubg2:rgba(250,250,250,.92)}
  
-/* ===== Mobile / touch performance ===== */
+/* ===== Performa: efek penuh tetapi dibuat ringan (GPU-friendly) ===== */
+:root{--cardglass:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));--hi:rgba(255,255,255,.09)}
+:root[data-theme="light"]{--cardglass:linear-gradient(145deg,rgba(255,255,255,.92),rgba(255,255,255,.55));--hi:rgba(255,255,255,.95)}
+/* "Kaca" tanpa backdrop-filter: gradien + highlight tipis, tampilannya mirip tapi tidak memberatkan */
+.card{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--cardglass);box-shadow:inset 0 1px 0 var(--hi)}
+.card:hover{box-shadow:var(--shadow),inset 0 1px 0 var(--hi)}
+/* Bayangan wheel statis (menggantikan drop-shadow filter yang dihitung ulang tiap frame putaran) */
+.wheel-wrap{isolation:isolate}
+.wheel-wrap::before{content:"";position:absolute;inset:7%;border-radius:50%;z-index:-1;box-shadow:0 30px 70px rgba(0,0,0,.4),0 0 90px var(--segh)}
+:root[data-theme="light"] .wheel-wrap::before{box-shadow:0 26px 60px rgba(30,30,40,.18),0 0 80px var(--segh)}
+#wheel{filter:none}
+.wl,.wl .run{will-change:transform}                 /* gelombang dianimasikan di GPU */
+.reveal:not(.done){will-change:opacity,transform}
+.loading .wl .run{animation-play-state:paused}      /* hemat tenaga saat layar Welcome tampil */
+ 
+/* Mobile / layar sentuh: pengaturan yang sudah halus dipertahankan */
 @media(max-width:1023px),(pointer:coarse){
-  .card{backdrop-filter:none;-webkit-backdrop-filter:none}
-  #wheel{filter:none}
   .wl.c{display:none}
   .wl .run{animation-duration:90s!important}
-  .thumb::after{filter:none}
   header.scrolled .nav{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:none}
   #menu{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:var(--menubg2)}
   html.menu-open .wl .run{animation-play-state:paused}
+}
+ 
+/* Desktop: animasi masuk lebih panjang & lembut (ease-out expo) */
+@media(min-width:1024px) and (pointer:fine){
+  .reveal{transform:translateY(34px);transition:opacity 1.4s cubic-bezier(.16,1,.3,1),transform 1.4s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{transform:none}
+  .enter{animation-duration:1.3s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
 }
  
 /* ===== Welcome screen ===== */
