@@ -14,7 +14,7 @@ themeBtn.addEventListener("click", () => setTheme(root.dataset.theme === "dark" 
 /* ===== WELCOME SCREEN ===== */
 const welcome = $("#welcome");
 if (welcome) {
-  const minMs = reduced ? 700 : matchMedia("(min-width:1024px)").matches ? 5200 : 2800; // desktop lebih lama, mobile lebih singkat
+  const minMs = reduced ? 700 : matchMedia("(min-width:1024px)").matches ? 16200 : 2800; // desktop lebih lama, mobile lebih singkat
   welcome.style.setProperty("--wdur", minMs + "ms");
   let closed = false;
   const skipKey = e => { if (e.key === "Escape" || e.key === "Enter") closeWelcome(); };
