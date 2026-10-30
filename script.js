@@ -14,7 +14,8 @@ themeBtn.addEventListener("click", () => setTheme(root.dataset.theme === "dark" 
 /* ===== WELCOME SCREEN ===== */
 const welcome = $("#welcome");
 if (welcome) {
-  const minMs = reduced ? 700 : matchMedia("(min-width:1024px)").matches ? 16200 : 2800; // desktop lebih lama, mobile lebih singkat
+  const WELCOME_MS = { desktop: 16200, mobile: 2800 }; // durasi dalam milidetik (1000 = 1 detik)
+  const minMs = reduced ? 700 : matchMedia("(min-width:1024px)").matches ? WELCOME_MS.desktop : WELCOME_MS.mobile;
   welcome.style.setProperty("--wdur", minMs + "ms");
   let closed = false;
   const skipKey = e => { if (e.key === "Escape" || e.key === "Enter") closeWelcome(); };
@@ -28,7 +29,7 @@ if (welcome) {
   const pageReady = new Promise(r => document.readyState === "complete" ? r() : addEventListener("load", r, { once: true }));
   const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
   Promise.all([new Promise(r => setTimeout(r, minMs)), pageReady, fontsReady]).then(closeWelcome);
-  setTimeout(closeWelcome, 9500);               // pengaman jika ada resource yang lambat
+  setTimeout(closeWelcome, minMs + 4000);               // pengaman jika ada resource yang lambat
   $("#wSkip").addEventListener("click", closeWelcome);
   document.addEventListener("keydown", skipKey);
   $("#wSkip").focus({ preventScroll: true });
