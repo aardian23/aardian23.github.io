@@ -14,7 +14,7 @@ themeBtn.addEventListener("click", () => setTheme(root.dataset.theme === "dark" 
 /* ===== WELCOME SCREEN ===== */
 const welcome = $("#welcome");
 if (welcome) {
-  const minMs = reduced ? 700 : 2800;           // durasi minimum tampil
+  const minMs = reduced ? 700 : matchMedia("(min-width:1024px)").matches ? 5200 : 2800; // desktop lebih lama, mobile lebih singkat
   welcome.style.setProperty("--wdur", minMs + "ms");
   let closed = false;
   const skipKey = e => { if (e.key === "Escape" || e.key === "Enter") closeWelcome(); };
@@ -28,7 +28,7 @@ if (welcome) {
   const pageReady = new Promise(r => document.readyState === "complete" ? r() : addEventListener("load", r, { once: true }));
   const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
   Promise.all([new Promise(r => setTimeout(r, minMs)), pageReady, fontsReady]).then(closeWelcome);
-  setTimeout(closeWelcome, 7000);               // pengaman jika ada resource yang lambat
+  setTimeout(closeWelcome, 9500);               // pengaman jika ada resource yang lambat
   $("#wSkip").addEventListener("click", closeWelcome);
   document.addEventListener("keydown", skipKey);
   $("#wSkip").focus({ preventScroll: true });
@@ -51,26 +51,46 @@ const navObs = new IntersectionObserver(es => es.forEach(e => {
 }), { rootMargin: "-45% 0px -50% 0px" });
 $$("section[data-nav]").forEach(s => navObs.observe(s));
  
-/* ===== DATA (placeholder — ganti dengan data asli) ===== */
-const certs = [ // [title, issuer, year, credentialId, verifyUrl, about] — placeholder, ganti dengan data asli
-  ["Certificate Title 01", "Issuer Name", "YYYY", "CREDENTIAL-ID-01", "", "Short description of what this certification covers (replace)."],
-  ["Certificate 02", "Issuer", "YYYY", "CREDENTIAL-ID-02", "", "Short description (replace)."],
-  ["Certificate 03", "Issuer", "YYYY", "CREDENTIAL-ID-03", "", "Short description (replace)."],
-  ["Certificate 04", "Issuer", "YYYY", "CREDENTIAL-ID-04", "", "Short description (replace)."],
-  ["Certificate Title 05", "Issuer", "YYYY", "CREDENTIAL-ID-05", "", "Short description (replace)."],
-  ["Certificate Title 06", "Issuer Name", "YYYY", "CREDENTIAL-ID-06", "", "Short description (replace)."],
-  ["Certificate 07", "Issuer", "YYYY", "CREDENTIAL-ID-07", "", "Short description (replace)."],
-  ["Certificate 08", "Issuer", "YYYY", "CREDENTIAL-ID-08", "", "Short description (replace)."],
-  ["Certificate Title 09", "Issuer Name", "YYYY", "CREDENTIAL-ID-09", "", "Short description (replace)."]
-];
+/* ===== IMAGE SLOT: ukuran tetap; gambar di-crop otomatis (cover). Jika file tidak ada -> placeholder ===== */
+const ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 8"/></svg>';
+const slot = (src, cls, ph, alt) =>
+  `<span class="slot ${cls}"><span class="slot-ph">${cls.includes("sm") ? ph : ICON + ph}</span>${src ? `<img src="${src}" alt="${alt || ""}" loading="lazy" decoding="async">` : ""}</span>`;
+document.addEventListener("error", e => { if (e.target.matches && e.target.matches(".slot img")) e.target.remove(); }, true);
+ 
+/* ===== DATA (placeholder — ganti dengan data asli) =====
+   Ukuran gambar yang disarankan:
+   - Work & Experience & detail dialog : 1280 x 800 px (16:10)
+   - Certification (thumbnail kotak)   : pakai file cert-XX.jpg yang sama, otomatis di-crop 1:1
+   Taruh semua gambar di folder images/. Kosongkan image: "" untuk menampilkan placeholder saja. */
 const projects = [
-  ["Fintra", "Finance dashboard concept", "Demo placeholder. Replace with a real project: describe the goal, your role, the tools used, and the result."],
-  ["Healora", "Health app landing concept", "Demo placeholder. Replace with a real project description."],
-  ["Shopzee", "E-commerce UI concept", "Demo placeholder. Replace with a real project description."],
-  ["Travello", "Travel booking UI concept", "Demo placeholder. Replace with a real project description."]
+  { title: "Fintra", sub: "Finance dashboard concept", year: "YYYY", role: "Your role", tools: "Tools used (replace)", demo: "", repo: "", image: "images/project-1.jpg",
+    desc: "Demo placeholder. Replace with a real project: describe the goal, your role, the tools used, and the result." },
+  { title: "Healora", sub: "Health app landing concept", year: "YYYY", role: "Your role", tools: "Tools used (replace)", demo: "", repo: "", image: "images/project-2.jpg",
+    desc: "Demo placeholder. Replace with a real project description." },
+  { title: "Shopzee", sub: "E-commerce UI concept", year: "YYYY", role: "Your role", tools: "Tools used (replace)", demo: "", repo: "", image: "images/project-3.jpg",
+    desc: "Demo placeholder. Replace with a real project description." },
+  { title: "Travello", sub: "Travel booking UI concept", year: "YYYY", role: "Your role", tools: "Tools used (replace)", demo: "", repo: "", image: "images/project-4.jpg",
+    desc: "Demo placeholder. Replace with a real project description." }
 ];
-$("#certGrid").innerHTML = certs.map((c, i) => `<button type="button" class="card tile t${i + 1} reveal" data-c="${i}" aria-haspopup="dialog" aria-label="${c[0]} — view validation info"><span class="ttop"><span class="tnum">0${i + 1}</span><span class="tchk">✓ Verify</span></span><span class="tbody"><span class="ttitle">${c[0]}</span><span class="tsub muted">${c[1]} · ${c[2]}</span></span></button>`).join("");
-$("#projects").innerHTML = projects.map((p, i) => `<div class="reveal reveal-zoom" style="--i:${i}"><button class="card tilt" data-p="${i}" aria-haspopup="dialog"><div class="thumb"></div><span class="tag">Demo placeholder</span><h3 style="font-size:1.4rem;margin:.6rem 0 .2rem">${p[0]}</h3><p class="muted" style="font-size:.9rem">${p[1]}</p></button></div>`).join("");
+const cert = (n, title, issuer) => ({ title, issuer, year: "YYYY", id: "CREDENTIAL-ID-" + n, verify: "", image: `images/cert-${n}.jpg`,
+  about: "Short description of what this certification covers (replace)." }); // verify: isi URL verifikasi asli
+const certs = [
+  cert("01", "Certificate Title 01", "Issuer Name"), cert("02", "Certificate 02", "Issuer"), cert("03", "Certificate 03", "Issuer"),
+  cert("04", "Certificate 04", "Issuer"), cert("05", "Certificate Title 05", "Issuer"), cert("06", "Certificate Title 06", "Issuer Name"),
+  cert("07", "Certificate 07", "Issuer"), cert("08", "Certificate 08", "Issuer"), cert("09", "Certificate Title 09", "Issuer Name")
+];
+const experience = [
+  { date: "DD MMM YYYY — DD MMM YYYY", title: "Praktik Kerja Lapangan — Network Operations Center", image: "images/experience-1.jpg",
+    text: "Company name (replace). Short summary of your internship at the NOC." },
+  { date: "Responsibilities", title: "What I worked on", image: "images/experience-2.jpg",
+    text: "Describe your main tasks at the NOC, for example monitoring, incident handling, or documentation (replace with your real tasks)." },
+  { date: "Learning outcomes", title: "What I learned", image: "images/experience-3.jpg",
+    text: "Describe the skills and lessons you gained during the internship (replace this text)." }
+];
+ 
+$("#projects").innerHTML = projects.map((p, i) => `<div class="reveal" style="--i:${i}"><button class="card tilt pcard" data-p="${i}" aria-haspopup="dialog">${slot(p.image, "wide", "Add image", p.title)}<span class="tag">Demo placeholder</span><h3 style="font-size:1.4rem;margin:.6rem 0 .2rem">${p.title}</h3><p class="muted" style="font-size:.9rem">${p.sub}</p></button></div>`).join("");
+$("#certGrid").innerHTML = certs.map((c, i) => `<button type="button" class="card tile t${i + 1} reveal" data-c="${i}" aria-haspopup="dialog" aria-label="${c.title} — view details"><span class="ttop">${slot(c.image, "sm", "0" + (i + 1), c.title)}<span class="tchk">✓ Verify</span></span><span class="tbody"><span class="ttitle">${c.title}</span><span class="tsub muted">${c.issuer} · ${c.year}</span></span></button>`).join("");
+$("#tl").insertAdjacentHTML("beforeend", experience.map((x, i) => `<div class="tl-item reveal"><div class="muted" style="font-size:.8rem">${x.date}</div><h3 style="font-size:1.25rem">${x.title}</h3><p class="muted">${x.text}</p>${slot(x.image, "wide exp", "Add image", x.title)}</div>`).join(""));
  
 /* ===== REVEAL ON SCROLL ===== */
 const revObs = new IntersectionObserver(es => {
@@ -102,30 +122,40 @@ if (!reduced) $$(".magnet").forEach(b => {
   b.addEventListener("pointerleave", () => b.style.transform = "");
 });
  
-/* ===== PROJECT MODAL (<dialog> aksesibel) ===== */
-const modal = $("#modal");
+/* ===== DETAIL DIALOGS (<dialog> aksesibel): Project & Certification ===== */
+const modal = $("#modal"), cm = $("#certModal");
+const chips = arr => arr.filter(Boolean).map(t => `<span class="tag">${t}</span>`).join("");
+const facts = rows => rows.map(r => `<div class="fact${r[2] ? " wide" : ""}"><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("");
+const linkBtns = (arr, note) => arr.filter(a => a[1]).map((a, i) => `<a class="btn${i ? "" : " primary"}" href="${a[1]}" target="_blank" rel="noopener">${a[0]}</a>`).join("") || `<p class="note">${note}</p>`;
+const openDlg = d => { d.querySelector(".dlg-scroll").scrollTop = 0; d.showModal(); };
+ 
 $("#projects").addEventListener("click", e => {
   const b = e.target.closest("[data-p]"); if (!b) return;
   const p = projects[+b.dataset.p];
-  $("#mTitle").textContent = p[0]; $("#mDesc").textContent = p[2]; modal.showModal();
+  $("#mMedia").innerHTML = slot(p.image, "wide", "Add image", p.title);
+  $("#mTitle").textContent = p.title;
+  $("#mChips").innerHTML = chips(["Demo placeholder", p.year]);
+  $("#mDesc").textContent = p.desc;
+  $("#mFacts").innerHTML = facts([["Role", p.role], ["Year", p.year], ["Tools", p.tools, true]]);
+  $("#mActions").innerHTML = linkBtns([["Live demo", p.demo], ["Repository", p.repo]], "Project links have not been added yet (placeholder).");
+  openDlg(modal);
 });
-$("#mClose").addEventListener("click", () => modal.close());
-modal.addEventListener("click", e => { if (e.target === modal) modal.close(); });
- 
-/* ===== CERTIFICATION VALIDATION DIALOG ===== */
-const cm = $("#certModal");
 $("#certGrid").addEventListener("click", e => {
   const b = e.target.closest("[data-c]"); if (!b) return;
   const c = certs[+b.dataset.c];
-  $("#cTitle").textContent = c[0];
-  $("#cInfo").innerHTML = [["Certificate", c[0]], ["Issued by", c[1]], ["Year", c[2]], ["Credential ID", c[3]],
-    ["Status", c[4] ? "Verifiable online" : "Verification link not added yet (placeholder)"]].map(r => `<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join("");
-  $("#cAbout").textContent = c[5];
-  const l = $("#cLink"); l.hidden = !c[4]; if (c[4]) l.href = c[4];
-  cm.showModal();
+  $("#cMedia").innerHTML = slot(c.image, "wide", "Add certificate image", c.title);
+  $("#cTitle").textContent = c.title;
+  $("#cChips").innerHTML = chips([c.issuer, c.year, c.verify ? "Verifiable online" : "Verification pending"]);
+  $("#cAbout").textContent = c.about;
+  $("#cFacts").innerHTML = facts([["Issued by", c.issuer], ["Year", c.year], ["Credential ID", c.id, true],
+    ["Status", c.verify ? "Verifiable online" : "Verification link not added yet (placeholder)", true]]);
+  $("#cActions").innerHTML = linkBtns([["Verify online", c.verify]], "Add a verification URL to enable the “Verify online” button.");
+  openDlg(cm);
 });
-$("#cClose").addEventListener("click", () => cm.close());
-cm.addEventListener("click", e => { if (e.target === cm) cm.close(); });
+[[modal, "#mClose"], [cm, "#cClose"]].forEach(([d, x]) => {
+  $(x).addEventListener("click", () => d.close());
+  d.addEventListener("click", e => { if (e.target === d) d.close(); }); // klik area gelap di luar kartu
+});
  
 /* ===== INTERACTIVE WHEEL ===== */
 const segsInfo = [
